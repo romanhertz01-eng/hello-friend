@@ -9,38 +9,353 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VideoRouteImport } from './routes/video'
+import { Route as ToolkitRouteImport } from './routes/toolkit'
+import { Route as TextRouteImport } from './routes/text'
+import { Route as StudiosRouteImport } from './routes/studios'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as DesignRouteImport } from './routes/design'
+import { Route as CreateRouteImport } from './routes/create'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AudioRouteImport } from './routes/audio'
+import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ToolsVideoGenerationRouteImport } from './routes/tools.video-generation'
+import { Route as ToolsTextGenerationRouteImport } from './routes/tools.text-generation'
+import { Route as ToolsNanoBananaRouteImport } from './routes/tools.nano-banana'
+import { Route as ToolsImageGenerationRouteImport } from './routes/tools.image-generation'
+import { Route as ToolsAudioGenerationRouteImport } from './routes/tools.audio-generation'
+import { Route as ToolsAgentsRouteImport } from './routes/tools.agents'
+import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
 
+const VideoRoute = VideoRouteImport.update({
+  id: '/video',
+  path: '/video',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolkitRoute = ToolkitRouteImport.update({
+  id: '/toolkit',
+  path: '/toolkit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TextRoute = TextRouteImport.update({
+  id: '/text',
+  path: '/text',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudiosRoute = StudiosRouteImport.update({
+  id: '/studios',
+  path: '/studios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignRoute = DesignRouteImport.update({
+  id: '/design',
+  path: '/design',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreateRoute = CreateRouteImport.update({
+  id: '/create',
+  path: '/create',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AudioRoute = AudioRouteImport.update({
+  id: '/audio',
+  path: '/audio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentsRoute = AgentsRouteImport.update({
+  id: '/agents',
+  path: '/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsVideoGenerationRoute = ToolsVideoGenerationRouteImport.update({
+  id: '/tools/video-generation',
+  path: '/tools/video-generation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsTextGenerationRoute = ToolsTextGenerationRouteImport.update({
+  id: '/tools/text-generation',
+  path: '/tools/text-generation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsNanoBananaRoute = ToolsNanoBananaRouteImport.update({
+  id: '/tools/nano-banana',
+  path: '/tools/nano-banana',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsImageGenerationRoute = ToolsImageGenerationRouteImport.update({
+  id: '/tools/image-generation',
+  path: '/tools/image-generation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsAudioGenerationRoute = ToolsAudioGenerationRouteImport.update({
+  id: '/tools/audio-generation',
+  path: '/tools/audio-generation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsAgentsRoute = ToolsAgentsRouteImport.update({
+  id: '/tools/agents',
+  path: '/tools/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsSlugRoute = ToolsSlugRouteImport.update({
+  id: '/tools/$slug',
+  path: '/tools/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agents': typeof AgentsRoute
+  '/audio': typeof AudioRoute
+  '/auth': typeof AuthRoute
+  '/create': typeof CreateRoute
+  '/design': typeof DesignRoute
+  '/history': typeof HistoryRoute
+  '/pricing': typeof PricingRoute
+  '/studios': typeof StudiosRoute
+  '/text': typeof TextRoute
+  '/toolkit': typeof ToolkitRoute
+  '/video': typeof VideoRoute
+  '/tools/$slug': typeof ToolsSlugRoute
+  '/tools/agents': typeof ToolsAgentsRoute
+  '/tools/audio-generation': typeof ToolsAudioGenerationRoute
+  '/tools/image-generation': typeof ToolsImageGenerationRoute
+  '/tools/nano-banana': typeof ToolsNanoBananaRoute
+  '/tools/text-generation': typeof ToolsTextGenerationRoute
+  '/tools/video-generation': typeof ToolsVideoGenerationRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agents': typeof AgentsRoute
+  '/audio': typeof AudioRoute
+  '/auth': typeof AuthRoute
+  '/create': typeof CreateRoute
+  '/design': typeof DesignRoute
+  '/history': typeof HistoryRoute
+  '/pricing': typeof PricingRoute
+  '/studios': typeof StudiosRoute
+  '/text': typeof TextRoute
+  '/toolkit': typeof ToolkitRoute
+  '/video': typeof VideoRoute
+  '/tools/$slug': typeof ToolsSlugRoute
+  '/tools/agents': typeof ToolsAgentsRoute
+  '/tools/audio-generation': typeof ToolsAudioGenerationRoute
+  '/tools/image-generation': typeof ToolsImageGenerationRoute
+  '/tools/nano-banana': typeof ToolsNanoBananaRoute
+  '/tools/text-generation': typeof ToolsTextGenerationRoute
+  '/tools/video-generation': typeof ToolsVideoGenerationRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agents': typeof AgentsRoute
+  '/audio': typeof AudioRoute
+  '/auth': typeof AuthRoute
+  '/create': typeof CreateRoute
+  '/design': typeof DesignRoute
+  '/history': typeof HistoryRoute
+  '/pricing': typeof PricingRoute
+  '/studios': typeof StudiosRoute
+  '/text': typeof TextRoute
+  '/toolkit': typeof ToolkitRoute
+  '/video': typeof VideoRoute
+  '/tools/$slug': typeof ToolsSlugRoute
+  '/tools/agents': typeof ToolsAgentsRoute
+  '/tools/audio-generation': typeof ToolsAudioGenerationRoute
+  '/tools/image-generation': typeof ToolsImageGenerationRoute
+  '/tools/nano-banana': typeof ToolsNanoBananaRoute
+  '/tools/text-generation': typeof ToolsTextGenerationRoute
+  '/tools/video-generation': typeof ToolsVideoGenerationRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/agents'
+    | '/audio'
+    | '/auth'
+    | '/create'
+    | '/design'
+    | '/history'
+    | '/pricing'
+    | '/studios'
+    | '/text'
+    | '/toolkit'
+    | '/video'
+    | '/tools/$slug'
+    | '/tools/agents'
+    | '/tools/audio-generation'
+    | '/tools/image-generation'
+    | '/tools/nano-banana'
+    | '/tools/text-generation'
+    | '/tools/video-generation'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/agents'
+    | '/audio'
+    | '/auth'
+    | '/create'
+    | '/design'
+    | '/history'
+    | '/pricing'
+    | '/studios'
+    | '/text'
+    | '/toolkit'
+    | '/video'
+    | '/tools/$slug'
+    | '/tools/agents'
+    | '/tools/audio-generation'
+    | '/tools/image-generation'
+    | '/tools/nano-banana'
+    | '/tools/text-generation'
+    | '/tools/video-generation'
+  id:
+    | '__root__'
+    | '/'
+    | '/agents'
+    | '/audio'
+    | '/auth'
+    | '/create'
+    | '/design'
+    | '/history'
+    | '/pricing'
+    | '/studios'
+    | '/text'
+    | '/toolkit'
+    | '/video'
+    | '/tools/$slug'
+    | '/tools/agents'
+    | '/tools/audio-generation'
+    | '/tools/image-generation'
+    | '/tools/nano-banana'
+    | '/tools/text-generation'
+    | '/tools/video-generation'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgentsRoute: typeof AgentsRoute
+  AudioRoute: typeof AudioRoute
+  AuthRoute: typeof AuthRoute
+  CreateRoute: typeof CreateRoute
+  DesignRoute: typeof DesignRoute
+  HistoryRoute: typeof HistoryRoute
+  PricingRoute: typeof PricingRoute
+  StudiosRoute: typeof StudiosRoute
+  TextRoute: typeof TextRoute
+  ToolkitRoute: typeof ToolkitRoute
+  VideoRoute: typeof VideoRoute
+  ToolsSlugRoute: typeof ToolsSlugRoute
+  ToolsAgentsRoute: typeof ToolsAgentsRoute
+  ToolsAudioGenerationRoute: typeof ToolsAudioGenerationRoute
+  ToolsImageGenerationRoute: typeof ToolsImageGenerationRoute
+  ToolsNanoBananaRoute: typeof ToolsNanoBananaRoute
+  ToolsTextGenerationRoute: typeof ToolsTextGenerationRoute
+  ToolsVideoGenerationRoute: typeof ToolsVideoGenerationRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/video': {
+      id: '/video'
+      path: '/video'
+      fullPath: '/video'
+      preLoaderRoute: typeof VideoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/toolkit': {
+      id: '/toolkit'
+      path: '/toolkit'
+      fullPath: '/toolkit'
+      preLoaderRoute: typeof ToolkitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/text': {
+      id: '/text'
+      path: '/text'
+      fullPath: '/text'
+      preLoaderRoute: typeof TextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/studios': {
+      id: '/studios'
+      path: '/studios'
+      fullPath: '/studios'
+      preLoaderRoute: typeof StudiosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design': {
+      id: '/design'
+      path: '/design'
+      fullPath: '/design'
+      preLoaderRoute: typeof DesignRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/create': {
+      id: '/create'
+      path: '/create'
+      fullPath: '/create'
+      preLoaderRoute: typeof CreateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audio': {
+      id: '/audio'
+      path: '/audio'
+      fullPath: '/audio'
+      preLoaderRoute: typeof AudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agents': {
+      id: '/agents'
+      path: '/agents'
+      fullPath: '/agents'
+      preLoaderRoute: typeof AgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +363,78 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools/video-generation': {
+      id: '/tools/video-generation'
+      path: '/tools/video-generation'
+      fullPath: '/tools/video-generation'
+      preLoaderRoute: typeof ToolsVideoGenerationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/text-generation': {
+      id: '/tools/text-generation'
+      path: '/tools/text-generation'
+      fullPath: '/tools/text-generation'
+      preLoaderRoute: typeof ToolsTextGenerationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/nano-banana': {
+      id: '/tools/nano-banana'
+      path: '/tools/nano-banana'
+      fullPath: '/tools/nano-banana'
+      preLoaderRoute: typeof ToolsNanoBananaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/image-generation': {
+      id: '/tools/image-generation'
+      path: '/tools/image-generation'
+      fullPath: '/tools/image-generation'
+      preLoaderRoute: typeof ToolsImageGenerationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/audio-generation': {
+      id: '/tools/audio-generation'
+      path: '/tools/audio-generation'
+      fullPath: '/tools/audio-generation'
+      preLoaderRoute: typeof ToolsAudioGenerationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/agents': {
+      id: '/tools/agents'
+      path: '/tools/agents'
+      fullPath: '/tools/agents'
+      preLoaderRoute: typeof ToolsAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/$slug': {
+      id: '/tools/$slug'
+      path: '/tools/$slug'
+      fullPath: '/tools/$slug'
+      preLoaderRoute: typeof ToolsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgentsRoute: AgentsRoute,
+  AudioRoute: AudioRoute,
+  AuthRoute: AuthRoute,
+  CreateRoute: CreateRoute,
+  DesignRoute: DesignRoute,
+  HistoryRoute: HistoryRoute,
+  PricingRoute: PricingRoute,
+  StudiosRoute: StudiosRoute,
+  TextRoute: TextRoute,
+  ToolkitRoute: ToolkitRoute,
+  VideoRoute: VideoRoute,
+  ToolsSlugRoute: ToolsSlugRoute,
+  ToolsAgentsRoute: ToolsAgentsRoute,
+  ToolsAudioGenerationRoute: ToolsAudioGenerationRoute,
+  ToolsImageGenerationRoute: ToolsImageGenerationRoute,
+  ToolsNanoBananaRoute: ToolsNanoBananaRoute,
+  ToolsTextGenerationRoute: ToolsTextGenerationRoute,
+  ToolsVideoGenerationRoute: ToolsVideoGenerationRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
