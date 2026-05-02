@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown, Check, Zap, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 
 export interface PickerSubModel {
   id: string;
@@ -130,7 +131,7 @@ export function ModelPickerPill({
           e.currentTarget.style.borderColor = "var(--c-line)";
         }}
       >
-        <span className="text-base leading-none">{selectedProvider.icon}</span>
+        <ModelGlyph name={selectedProvider.name} size={20} />
         <span>{selectedSub.name}</span>
         <ChevronDown size={12} strokeWidth={1.8} style={{ opacity: 0.6 }} />
       </button>
@@ -186,7 +187,7 @@ export function ModelPickerPill({
                       : "2px solid transparent",
                   }}
                 >
-                  <span className="text-base leading-none shrink-0">{p.icon}</span>
+                  <ModelGlyph name={p.name} size={20} />
                   <span className="text-[13px] font-medium flex-1 truncate">{p.name}</span>
                   {p.badge && (
                     <span
