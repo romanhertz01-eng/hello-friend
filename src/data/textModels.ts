@@ -99,7 +99,7 @@ export const textProviders: TextProvider[] = [
   {
     id: "qwen",
     name: "Qwen",
-    icon: "⚙️",
+    icon: "",
     subModels: [
       { id: "qwen-3", name: "Qwen 3", credits: 1, description: "Флагманская языковая модель Alibaba" },
       { id: "qwen-3-thinking", name: "Qwen 3 Thinking", credits: 2, badge: "THINK", description: "Версия с пошаговым рассуждением", hasThinking: true },
