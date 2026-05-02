@@ -116,12 +116,22 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
         {isAuthed ? (
           <UserDropdown />
         ) : (
-          <Link
-            to="/auth"
-            className="inline-flex items-center h-9 px-4 rounded-full text-sm font-medium bg-primary text-primary-foreground hover:bg-[#ff7a3d] transition-colors"
-          >
-            Войти
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              to="/auth"
+              className="inline-flex items-center h-9 px-4 rounded-full text-sm font-medium border transition-colors"
+              style={{ borderColor: "var(--c-line)", color: "var(--c-fg)", background: "transparent" }}
+            >
+              Войти
+            </Link>
+            <Link
+              to="/auth"
+              className="inline-flex items-center h-9 px-5 rounded-full text-sm font-medium text-white transition-colors"
+              style={{ background: "var(--c-accent)", boxShadow: "0 4px 16px -4px rgba(232, 84, 32, 0.5)" }}
+            >
+              Начать
+            </Link>
+          </div>
         )}
       </div>
     </header>
