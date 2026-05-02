@@ -7,6 +7,28 @@ import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
+import { ModelCarousel, type CarouselModel } from "@/components/workspace/ModelCarousel";
+
+const textCarouselModels: CarouselModel[] = [
+  { name: "ChatGPT", desc: "Универсальный ИИ от OpenAI", gradient: "linear-gradient(135deg, #10a37f, #1a7f5a)", badge: "TOP" },
+  { name: "Claude", desc: "Глубокий анализ от Anthropic", gradient: "linear-gradient(135deg, #d4a27f, #8b5e3c)", badge: "TOP" },
+  { name: "Gemini", desc: "Мультимодальный ИИ от Google", gradient: "linear-gradient(135deg, #4285f4, #1a73e8)", badge: "NEW" },
+  { name: "DeepSeek", desc: "Reasoning модель", gradient: "linear-gradient(135deg, #536dfe, #304ffe)", badge: "NEW" },
+  { name: "Grok", desc: "ИИ от xAI с поиском", gradient: "linear-gradient(135deg, #1d1d1f, #3a3a3c)" },
+  { name: "Perplexity", desc: "Поиск с источниками", gradient: "linear-gradient(135deg, #20b2aa, #008080)" },
+  { name: "Qwen", desc: "Мощный китайский ИИ", gradient: "linear-gradient(135deg, #7c3aed, #5b21b6)" },
+];
+
+const textUseCases = [
+  "Написать пост для Telegram",
+  "Составить бизнес-план",
+  "Перевести документ",
+  "Проанализировать данные",
+  "Написать код на Python",
+  "Составить резюме",
+  "Рерайт статьи",
+  "Генерация идей для стартапа",
+];
 
 interface Message {
   id: string;
