@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Camera, Palette, Sparkles, Image as ImageIcon, Zap, Paintbrush, ChevronDown } from "lucide-react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
+import { cn } from "@/lib/utils";
 
 import { PromptBlock } from "@/components/workspace/ImagePromptBlock";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
