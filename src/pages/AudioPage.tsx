@@ -128,8 +128,9 @@ const AudioPage = () => {
           <MediaChatFeed generations={generations} />
         )}
         <div ref={feedEndRef} />
+        {!hasGenerations && <div className="h-8" />}
 
-        <div className="px-4 lg:px-8 py-6 space-y-8">
+        <div className="px-4 lg:px-8 py-6 space-y-8 border-t border-border">
 
         {/* ─── ElevenLabs content ─── */}
         {isEL && (
