@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
+import type { LucideIcon } from "lucide-react";
 
 export interface ToolItem {
-  emoji: string;
+  Icon?: LucideIcon;
   label: string;
 }
 
@@ -24,7 +25,7 @@ export function ToolsCarousel({ title, tools, moreLink = "/toolkit" }: ToolsCaro
             key={t.label}
             className="shrink-0 w-[160px] h-[100px] border border-border rounded-xl flex flex-col items-center justify-center gap-2 hover:border-primary/30 hover:bg-accent/50 transition-colors cursor-pointer"
           >
-            <span className="text-2xl">{t.emoji}</span>
+            {t.Icon ? <t.Icon size={24} strokeWidth={1.75} style={{ color: "hsl(var(--primary))" }} /> : null}
             <span className="text-xs text-center px-2">{t.label}</span>
           </div>
         ))}
