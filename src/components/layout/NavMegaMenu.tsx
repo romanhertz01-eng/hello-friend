@@ -25,6 +25,7 @@ interface TabConfig {
   route: string;
   features?: FeatureItem[];
   models?: ModelItem[];
+  modelsTitle?: string;
 }
 
 const TABS: TabConfig[] = [
@@ -104,7 +105,24 @@ const TABS: TabConfig[] = [
       { name: "Suno", desc: "Генерация музыки" },
     ],
   },
-  { key: "agents", label: "Агенты", route: "/agents" },
+  {
+    key: "agents", label: "Агенты", route: "/agents",
+    modelsTitle: "РАБОТАЮТ НА",
+    features: [
+      { icon: TrendingUp, title: "Маркетолог", desc: "Стратегия и продвижение" },
+      { icon: PenLine, title: "Копирайтер", desc: "Тексты и SEO" },
+      { icon: Code, title: "Программист", desc: "Код и отладка" },
+      { icon: Languages, title: "Переводчик", desc: "50+ языков" },
+      { icon: FileSearch, title: "Юрист", desc: "Анализ документов" },
+      { icon: Lightbulb, title: "Генерация идей", desc: "Концепции и слоганы" },
+    ],
+    models: [
+      { name: "ChatGPT", desc: "Универсальный ИИ" },
+      { name: "Claude", desc: "Глубокий анализ" },
+      { name: "Gemini", desc: "От Google" },
+      { name: "DeepSeek", desc: "Reasoning модель" },
+    ],
+  },
 ];
 
 export function NavMegaMenu() {
@@ -209,7 +227,7 @@ export function NavMegaMenu() {
             {/* Models */}
             <div className="flex flex-col">
               <div className="font-mono text-[11px] uppercase tracking-[0.14em] mb-3" style={{ color: "var(--c-fg-mute)" }}>
-                Модели
+                {activeTab.modelsTitle || "Модели"}
               </div>
               <div className="flex flex-col gap-0.5">
                 {activeTab.models!.map((m) => (
