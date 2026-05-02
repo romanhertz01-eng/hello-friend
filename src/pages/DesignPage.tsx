@@ -139,7 +139,7 @@ const DesignPage = () => {
 
       {/* Sticky input area */}
       <div className="shrink-0 px-4 lg:px-8 pb-5 pt-2 bg-[var(--bg-primary)]">
-        <div className="max-w-[980px] mx-auto">
+        <div className="max-w-[780px] mx-auto">
           <WorkspaceTabs variant="attached" />
           <PromptBlock
             prompt={prompt}
