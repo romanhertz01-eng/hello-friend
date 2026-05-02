@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Zap, X, Sparkles, Square, Clock, Monitor, MoreHorizontal, Film, Music, User, Clapperboard, Smartphone, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SegmentedToolbar, SegmentedItem, AttachmentButton } from "@/components/ui/era";
@@ -11,6 +11,7 @@ import { ModelsGrid3x3 } from "@/components/workspace/ModelsGrid3x3";
 import { TwoPanelModelSelector } from "@/components/workspace/TwoPanelModelSelector";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 import { WelcomeBlock, type WelcomeScenario } from "@/components/workspace/WelcomeBlock";
+import { MediaChatFeed, type MediaGeneration } from "@/components/workspace/MediaChatFeed";
 import {
   videoProviders,
   videoCarouselCards,
@@ -163,12 +164,33 @@ const VideoPage = () => {
   const [quality, setQuality] = useState("Стандарт");
   const [, setSelectedFunc] = useState("Текст в видео");
   const [moreOpen, setMoreOpen] = useState(false);
+  const [generations, setGenerations] = useState<MediaGeneration[]>([]);
+  const feedEndRef = useRef<HTMLDivElement>(null);
 
   const provider = videoProviders.find((p) => p.id === selectedProviderId);
   const subModel = provider?.subModels.find((s) => s.id === selectedSubModelId);
   const credits = subModel?.credits ?? 0;
+  const hasGenerations = generations.length > 0;
 
   useEffect(() => { document.title = "ERA2 — Генерация видео"; }, []);
+  useEffect(() => { feedEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [generations]);
+
+  const handleGenerate = () => {
+    const text = prompt.trim();
+    if (!text) return;
+    setGenerations((prev) => [...prev, {
+      id: Date.now().toString(),
+      prompt: text,
+      model: provider?.name || "Video",
+      subModel: subModel?.name || "",
+      createdAt: new Date(),
+      type: "video",
+      aspect: aspectRatio,
+      duration,
+      resolution,
+    }]);
+    setPrompt("");
+  };
 
   const handleModelSelect = (providerId: string, subModelId: string) => {
     setSelectedProviderId(providerId);
