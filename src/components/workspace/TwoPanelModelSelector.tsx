@@ -25,6 +25,7 @@ interface TwoPanelModelSelectorProps {
   selectedProviderId: string;
   selectedSubModelId: string;
   onSelect: (providerId: string, subModelId: string) => void;
+  triggerButtonRef?: React.RefObject<HTMLButtonElement | null>;
 }
 
 /* Badge color mapping */
@@ -78,7 +79,7 @@ function getProviderDotColor(providerId: string): string {
 }
 
 export function TwoPanelModelSelector({
-  providers, selectedProviderId, selectedSubModelId, onSelect,
+  providers, selectedProviderId, selectedSubModelId, onSelect, triggerButtonRef,
 }: TwoPanelModelSelectorProps) {
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState<{ left: number; top?: number; bottom?: number }>({ left: 0, top: 0 });
@@ -137,7 +138,10 @@ export function TwoPanelModelSelector({
         const PillIcon = getModelIcon(currentProvider?.name || "");
         return (
           <button
-            ref={triggerRef}
+            ref={(node) => {
+              triggerRef.current = node;
+              if (triggerButtonRef) triggerButtonRef.current = node;
+            }}
             onClick={() => setOpen(!open)}
             className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full text-[13px] whitespace-nowrap transition-colors"
             style={{ background: "var(--bg-pill)", color: "var(--text-primary)", border: "1px solid var(--border-primary)" }}

@@ -168,7 +168,11 @@ const VideoPage = () => {
   const [generations, setGenerations] = useState<MediaGeneration[]>([]);
   const feedEndRef = useRef<HTMLDivElement>(null);
   const inputAreaRef = useRef<HTMLDivElement>(null);
-  const handleCapsuleClick = () => inputAreaRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  const modelTriggerRef = useRef<HTMLButtonElement>(null);
+  const handleCapsuleClick = () => {
+    inputAreaRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    window.setTimeout(() => modelTriggerRef.current?.click(), 250);
+  };
 
   const provider = videoProviders.find((p) => p.id === selectedProviderId);
   const subModel = provider?.subModels.find((s) => s.id === selectedSubModelId);
@@ -311,6 +315,7 @@ const VideoPage = () => {
                 selectedProviderId={selectedProviderId}
                 selectedSubModelId={selectedSubModelId}
                 onSelect={handleModelSelect}
+                triggerButtonRef={modelTriggerRef}
               />
 
               <SegmentedToolbar>
