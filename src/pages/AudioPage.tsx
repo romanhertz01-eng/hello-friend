@@ -146,8 +146,10 @@ const AudioPage = () => {
           <>
             <MediaChatFeed generations={generations} />
             <div ref={feedEndRef} />
+          </>
+        )}
 
-            <div className="px-4 lg:px-8 py-6 space-y-8 border-t border-border mt-6">
+        <div className="px-4 lg:px-8 py-6 space-y-8 border-t border-border mt-4">
 
         {/* ─── ElevenLabs content ─── */}
         {isEL && (
@@ -327,9 +329,7 @@ const AudioPage = () => {
             ))}
           </div>
         </div>
-            </div>
-          </>
-        )}
+        </div>
       </div>
 
       {/* ─── Sticky input area ─── */}
