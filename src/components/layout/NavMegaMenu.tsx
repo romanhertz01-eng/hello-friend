@@ -133,7 +133,10 @@ export function NavMegaMenu() {
         const isHot = active === tab.key && tab.features;
         const handleEnter = () => {
           if (tab.features) open(tab.key);
-          else setActive(null);
+          else {
+            if (closeTimer.current) clearTimeout(closeTimer.current);
+            setActive(null);
+          }
         };
         return (
           <Link
@@ -156,7 +159,7 @@ export function NavMegaMenu() {
         <div
           onMouseEnter={() => open(activeTab.key)}
           onMouseLeave={scheduleClose}
-          className="absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2"
+          className="absolute left-0 top-full z-50 mt-2"
           style={{ width: "min(720px, 92vw)" }}
         >
           <div
