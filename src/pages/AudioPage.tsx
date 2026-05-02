@@ -83,6 +83,8 @@ const AudioPage = () => {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [generations, setGenerations] = useState<MediaGeneration[]>([]);
   const feedEndRef = useRef<HTMLDivElement>(null);
+  const inputAreaRef = useRef<HTMLDivElement>(null);
+  const handleCapsuleClick = () => inputAreaRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
 
   useEffect(() => { document.title = "ERA2 — Генерация аудио"; }, []);
   useEffect(() => { feedEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [generations]);
@@ -127,7 +129,7 @@ const AudioPage = () => {
       {/* Scrollable area: chat (welcome OR feed) + catalog below */}
       <div className="flex-1 overflow-y-auto w-full">
         <div className="sticky top-0 z-20 flex justify-center py-3" style={{ background: "color-mix(in oklab, var(--c-bg) 85%, transparent)", backdropFilter: "blur(12px)" }}>
-          <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium" style={{ background: "var(--c-bg-1)", border: "1px solid var(--c-line)", color: "var(--c-fg)" }}>
+          <button onClick={handleCapsuleClick} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity" style={{ background: "var(--c-bg-1)", border: "1px solid var(--c-line)", color: "var(--c-fg)" }}>
             <ModelGlyph name={currentModelName} size={20} />
             <span>{currentModelName}</span>
             <span className="text-muted-foreground">·</span>
@@ -333,7 +335,7 @@ const AudioPage = () => {
       </div>
 
       {/* ─── Sticky input area ─── */}
-      <div className="shrink-0 px-4 lg:px-8 pb-5 pt-2 bg-[var(--bg-primary)]">
+      <div ref={inputAreaRef} className="shrink-0 px-4 lg:px-8 pb-5 pt-2 bg-[var(--bg-primary)]">
         <div className="max-w-[780px] mx-auto">
           <WorkspaceTabs variant="attached" />
           <div
