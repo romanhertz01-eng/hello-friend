@@ -73,7 +73,11 @@
   --sidebar-accent-foreground: 17 80% 38%;
   --sidebar-border: 30 25% 80%;
   --sidebar-ring: 15 82% 52%;
-  --header-height: 56px;
+  --header-height: 64px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-xl: 32px;
 
   /* Legacy tokens — repainted to warm beige */
   --bg-primary: #f7f3ef;
@@ -137,6 +141,11 @@
   --c-accent-soft: #fde3d3;
   --c-accent-glow: rgba(232,84,32,0.25);
   --c-accent-hi: #ffb27a;
+
+  /* Light shadows */
+  --shadow-1: 0 1px 0 rgba(0,0,0,0.04) inset, 0 0 0 1px var(--c-line);
+  --shadow-2: 0 30px 80px -30px rgba(0,0,0,0.12), 0 0 0 1px var(--c-line);
+  --shadow-glow: 0 0 0 1px var(--c-accent), 0 0 40px -5px var(--c-accent-glow);
 }
 
 /* ═══ ERA2 DARK THEME — warm coal (CANON) ═══ */
@@ -231,6 +240,11 @@
   --c-accent-soft: #3a1a0a;
   --c-accent-glow: rgba(232,84,32,0.35);
   --c-accent-hi: #ffb27a;
+
+  /* Dark shadows */
+  --shadow-1: 0 1px 0 rgba(255,255,255,0.04) inset, 0 0 0 1px var(--c-line);
+  --shadow-2: 0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px var(--c-line);
+  --shadow-glow: 0 0 0 1px var(--c-accent), 0 0 40px -5px var(--c-accent-glow);
 }
 
 @layer base {
@@ -243,6 +257,28 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
+  }
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+    font-weight: 600;
+  }
+  h1 {
+    font-size: clamp(44px, 6.4vw, 92px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+  h2 {
+    font-size: clamp(32px, 4.2vw, 56px);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+  h3 {
+    font-size: clamp(20px, 2vw, 24px);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+  p {
+    text-wrap: pretty;
   }
 }
 
