@@ -115,14 +115,21 @@ const AudioPage = () => {
 
   return (
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
-      {/* Scrollable area: welcome + catalog */}
-      <div className="flex-1 overflow-y-auto px-4 lg:px-8 py-6 space-y-8 w-full">
-        <WelcomeBlock
-          modelName={currentModelName}
-          subModelName={currentSubName}
-          scenarios={welcomeScenarios}
-          onScenarioClick={(p) => setPrompt(p)}
-        />
+      {/* Scrollable area: chat (welcome OR feed) + catalog below */}
+      <div className="flex-1 overflow-y-auto w-full">
+        {!hasGenerations ? (
+          <WelcomeBlock
+            modelName={currentModelName}
+            subModelName={currentSubName}
+            scenarios={welcomeScenarios}
+            onScenarioClick={(p) => setPrompt(p)}
+          />
+        ) : (
+          <MediaChatFeed generations={generations} />
+        )}
+        <div ref={feedEndRef} />
+
+        <div className="px-4 lg:px-8 py-6 space-y-8">
 
         {/* ─── ElevenLabs content ─── */}
         {isEL && (
