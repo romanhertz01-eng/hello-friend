@@ -13,17 +13,14 @@ interface Props {
 }
 
 const badgeStyles: Record<string, string> = {
-  "🏆 TOP": "bg-amber-500/15 text-amber-400",
-  "🏆 NEW": "bg-amber-500/15 text-amber-400",
-  "🏆 PRO": "bg-primary/15 text-primary",
-  "🏆": "bg-amber-500/15 text-amber-400",
+  "TOP": "bg-amber-500/15 text-amber-400",
   "NEW": "bg-emerald-500/15 text-emerald-400",
+  "PRO": "bg-primary/15 text-primary",
+  "MAX": "bg-primary/15 text-primary",
   "∞ FAST": "bg-sky-500/15 text-sky-400",
-  "🔍 WEB": "bg-blue-500/15 text-blue-400",
-  "🧠 THINK": "bg-primary/15 text-primary",
-  "🏆 🧠 THINK": "bg-primary/15 text-primary",
-  "🏆 🔍": "bg-blue-500/15 text-blue-400",
-  "🏆 🧠": "bg-primary/15 text-primary",
+  "FAST": "bg-sky-500/15 text-sky-400",
+  "WEB": "bg-blue-500/15 text-blue-400",
+  "THINK": "bg-primary/15 text-primary",
 };
 
 const providerDescriptions: Record<string, string> = {

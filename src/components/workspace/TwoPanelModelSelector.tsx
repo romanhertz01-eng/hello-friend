@@ -30,7 +30,7 @@ interface TwoPanelModelSelectorProps {
 /* Badge color mapping */
 function getBadgeStyle(badge: string): { bg: string; color: string } {
   const lower = badge.toLowerCase();
-  if (lower.includes("топ") || lower.includes("top") || lower.includes("🔥"))
+  if (lower.includes("топ") || lower.includes("top"))
     return { bg: "rgba(255, 122, 61,0.2)", color: "#ff7a3d" };
   if (lower.includes("off") || lower.includes("скидк"))
     return { bg: "rgba(52,211,153,0.2)", color: "#34d399" };
@@ -42,11 +42,11 @@ function getBadgeStyle(badge: string): { bg: string; color: string } {
     return { bg: "rgba(255,255,255,0.1)", color: "var(--text-secondary)" };
   if (lower.includes("open source"))
     return { bg: "rgba(74,222,128,0.2)", color: "#4ade80" };
-  if (lower.includes("premium") || lower.includes("💎"))
+  if (lower.includes("premium"))
     return { bg: "rgba(232, 84, 32,0.2)", color: "hsl(var(--primary))" };
   if (lower.includes("sota"))
     return { bg: "rgba(96,165,250,0.2)", color: "#60a5fa" };
-  if (lower.includes("creative") || lower.includes("🎨"))
+  if (lower.includes("creative"))
     return { bg: "rgba(255, 122, 61,0.2)", color: "#ff7a3d" };
   if (lower.includes("xai"))
     return { bg: "rgba(96,165,250,0.2)", color: "#60a5fa" };
@@ -208,7 +208,7 @@ export function TwoPanelModelSelector({
                       const s = getBadgeStyle(p.badge);
                       return (
                         <span className="shrink-0" style={{ fontSize: 9, padding: "1px 4px", borderRadius: 4, background: s.bg, color: s.color, fontWeight: 600 }}>
-                          {p.badge.replace(/^[🔥💎🎨⚡]\s*/, "")}
+                          {p.badge}
                         </span>
                       );
                     })()}

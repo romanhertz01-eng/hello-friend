@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -8,7 +8,7 @@ export interface PillOption {
 }
 
 interface PillDropdownProps {
-  icon?: string;
+  icon?: ReactNode;
   value: string;
   options: PillOption[];
   onSelect: (v: string) => void;

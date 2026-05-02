@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useLocation } from "@tanstack/react-router";
-import { Settings2, X, ChevronUp, ChevronDown, RotateCcw } from "lucide-react";
+import { Settings2, X, ChevronUp, ChevronDown, RotateCcw, Film, Image as ImageIcon, Clock, Palette } from "lucide-react";
 import { getModelsByCategory, type AIModel } from "@/data/models";
+import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 
 interface RightPanelProps {
@@ -105,7 +106,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
                     onClick={() => { setSelectedModel(m); setSelectedSubIndex(0); setModelDropdownOpen(false); }}
                     className={cn("w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm hover:bg-muted/60 transition-colors text-left", selectedModel.id === m.id && "bg-muted")}
                   >
-                    <span>{m.icon}</span>
+                    <ModelGlyph name={m.name} size={20} />
                     <span className="flex-1 truncate">{m.name}</span>
                     <span className="font-mono text-[11px] text-muted-foreground">{m.credits} cr</span>
                     {selectedModel.id === m.id && <span className="text-green-500 text-xs">✓</span>}
@@ -175,7 +176,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
         {/* Aspect ratio */}
         <div>
           <button onClick={() => setFormatOpen(!formatOpen)} className="flex items-center justify-between w-full text-sm font-medium mb-3">
-            <span className="flex items-center gap-2">{isVideo ? "📐" : "🖼"} {isVideo ? "Соотношение сторон" : "Формат"}</span>
+            <span className="flex items-center gap-2"><ImageIcon size={14} /> {isVideo ? "Соотношение сторон" : "Формат"}</span>
             {formatOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </button>
           {formatOpen && (
@@ -205,7 +206,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
         {isVideo && (
           <div>
             <button onClick={() => setDurationOpen(!durationOpen)} className="flex items-center justify-between w-full text-sm font-medium mb-3">
-              <span className="flex items-center gap-2">⏱ Длина видео</span>
+              <span className="flex items-center gap-2"><Clock size={14} /> Длина видео</span>
               {durationOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
             </button>
             {durationOpen && (
@@ -227,7 +228,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
         {/* Quality / Resolution */}
         <div>
           <button onClick={() => setQualityOpen(!qualityOpen)} className="flex items-center justify-between w-full text-sm font-medium mb-3">
-            <span className="flex items-center gap-2">🎨 {isVideo ? "Разрешение" : "Качество"}</span>
+            <span className="flex items-center gap-2"><Palette size={14} /> {isVideo ? "Разрешение" : "Качество"}</span>
             {qualityOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </button>
           {qualityOpen && (
@@ -292,7 +293,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
         {isVideo && (
           <div>
             <button onClick={() => setSceneOpen(!sceneOpen)} className="flex items-center justify-between w-full text-sm font-medium mb-3">
-              <span className="flex items-center gap-2">🎬 Конструктор сцены</span>
+              <span className="flex items-center gap-2"><Film size={14} /> Конструктор сцены</span>
               {sceneOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
             </button>
             {sceneOpen && (

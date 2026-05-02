@@ -9,6 +9,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { StatusBadge } from "@/components/ui/era/StatusBadge";
+import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { useCommandPalette } from "@/hooks/useCommandPalette";
 import { searchableModels, modelTypeToRoute, type SearchableModelType } from "@/config/searchableModels";
 
@@ -41,9 +42,7 @@ export function CommandPalette() {
               onSelect={() => handleSelect(m.id, m.type)}
               className="h-14 px-3 gap-3 cursor-pointer data-[selected=true]:bg-secondary"
             >
-              <div className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center text-lg shrink-0">
-                {m.icon}
-              </div>
+              <ModelGlyph name={m.name} size={32} />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-sm text-foreground truncate">{m.name}</span>
