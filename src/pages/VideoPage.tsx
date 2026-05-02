@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Zap, X, Sparkles, Square, Clock, Monitor, MoreHorizontal, Film, Music, User, Clapperboard, Smartphone, Heart } from "lucide-react";
+import { Zap, X, Sparkles, Square, Clock, Monitor, MoreHorizontal, Film, Music, User, Clapperboard, Smartphone, Heart, ChevronDown } from "lucide-react";
+import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 import { SegmentedToolbar, SegmentedItem, AttachmentButton } from "@/components/ui/era";
 
@@ -175,6 +176,14 @@ const VideoPage = () => {
   useEffect(() => { document.title = "ERA2 — Генерация видео"; }, []);
   useEffect(() => { feedEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [generations]);
 
+  useEffect(() => {
+    const saved = sessionStorage.getItem("era2_draft_video");
+    if (saved) setPrompt(saved);
+  }, []);
+  useEffect(() => {
+    sessionStorage.setItem("era2_draft_video", prompt);
+  }, [prompt]);
+
   const handleGenerate = () => {
     const text = prompt.trim();
     if (!text) return;
@@ -190,6 +199,7 @@ const VideoPage = () => {
       resolution,
     }]);
     setPrompt("");
+    sessionStorage.removeItem("era2_draft_video");
   };
 
   const handleModelSelect = (providerId: string, subModelId: string) => {
