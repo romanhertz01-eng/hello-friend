@@ -123,7 +123,7 @@ const TextPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-56px)]" style={{ background: c.bg }}>
+    <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]" style={{ background: c.bg }}>
       {/* ─── Header bar ─── */}
       <div
         className="shrink-0 h-[52px] flex items-center justify-between px-4 z-10 border-b"
