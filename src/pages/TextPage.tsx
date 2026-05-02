@@ -172,7 +172,7 @@ const TextPage = () => {
         <div className="max-w-[780px] mx-auto">
           <WorkspaceTabs variant="attached" />
           <div
-            className="rounded-2xl rounded-tl-none p-4 transition-all duration-200"
+            className="rounded-[22px] rounded-tl-none p-4 transition-all duration-200"
             style={{
               background: c.inputBg,
               border: inputFocused ? `1px solid ${c.inputBorderFocus}` : `1px solid ${c.inputBorder}`,
@@ -305,7 +305,7 @@ function WelcomeScreen({ providerId, providerName, subModelName, onQuickAction, 
             <button
               key={action.title}
               onClick={() => onQuickAction(action.prompt)}
-              className="group p-4 rounded-[16px] text-left transition-all"
+              className="group p-4 rounded-[14px] text-left transition-all"
               style={{ background: c.cardBg, border: `1px solid ${c.cardBorder}` }}
               onMouseEnter={(e) => { e.currentTarget.style.borderColor = c.cardBorderHover; e.currentTarget.style.background = c.cardBgHover; }}
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = c.cardBorder; e.currentTarget.style.background = c.cardBg; }}
@@ -345,7 +345,7 @@ function ChatMessages({ messages, isGenerating, currentModel, currentProviderId,
             )}
             <div
               className={cn(
-                "rounded-[16px] px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap",
+                "rounded-[14px] px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap",
                 msg.role === "user" ? "rounded-br-[4px]" : ""
               )}
               style={
