@@ -55,8 +55,10 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
         </Link>
       </div>
 
-      {/* Center: spacer */}
-      <div className="flex-1" />
+      {/* Center: mega menu */}
+      <div className="flex-1 flex justify-center">
+        <NavMegaMenu />
+      </div>
 
       {/* Right: utility cluster */}
       <div className="flex items-center gap-2">
