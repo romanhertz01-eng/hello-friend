@@ -269,7 +269,7 @@ const VideoPage = () => {
 
       {/* Sticky input area */}
       <div className="shrink-0 px-4 lg:px-8 pb-5 pt-2 bg-[var(--bg-primary)]">
-        <div className="max-w-[980px] mx-auto">
+        <div className="max-w-[780px] mx-auto">
           <WorkspaceTabs variant="attached" />
           <div className="rounded-[22px] rounded-tl-none border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4 w-full transition-all duration-200 has-[textarea:focus]:border-[hsl(var(--primary))] has-[textarea:focus]:shadow-[0_0_0_3px_rgba(232,84,32,0.12),0_1px_4px_rgba(0,0,0,0.2)]">
             <div className="flex items-start gap-3 mb-3">
