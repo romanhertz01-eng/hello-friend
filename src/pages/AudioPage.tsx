@@ -137,7 +137,7 @@ const AudioPage = () => {
 
             {isEL ? (
               <>
-                <PillDropdown icon="🎤" value={`Голос: ${selectedVoice}`} options={voices.map(v => ({ value: v.name, label: v.name }))} onSelect={setSelectedVoice} />
+                <PillDropdown icon={<Mic size={14} strokeWidth={1.8} />} value={`Голос: ${selectedVoice}`} options={voices.map(v => ({ value: v.name, label: v.name }))} onSelect={setSelectedVoice} />
                 <PillDropdown value="v2 Multilingual" options={[{ value: "v2 Multilingual", label: "v2 Multilingual" }, { value: "v3", label: "v3" }]} onSelect={() => {}} />
               </>
             ) : (
