@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { Settings2, X, ChevronUp, ChevronDown, RotateCcw, Film, Image as ImageIcon, Clock, Palette } from "lucide-react";
 import { getModelsByCategory, type AIModel } from "@/data/models";
+import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 
 interface RightPanelProps {
@@ -105,7 +106,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
                     onClick={() => { setSelectedModel(m); setSelectedSubIndex(0); setModelDropdownOpen(false); }}
                     className={cn("w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm hover:bg-muted/60 transition-colors text-left", selectedModel.id === m.id && "bg-muted")}
                   >
-                    <span>{m.icon}</span>
+                    <ModelGlyph name={m.name} size={20} />
                     <span className="flex-1 truncate">{m.name}</span>
                     <span className="font-mono text-[11px] text-muted-foreground">{m.credits} cr</span>
                     {selectedModel.id === m.id && <span className="text-green-500 text-xs">✓</span>}
