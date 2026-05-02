@@ -3,6 +3,7 @@ import { ChevronDown, Paperclip, Send, Globe, Brain, Copy, RefreshCw, ThumbsUp, 
 import { textProviders, textQuickActions } from "@/data/textModels";
 import { TextModelSelector } from "@/components/text/TextModelSelector";
 import { ModelIcon } from "@/components/text/ModelIcon";
+import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
