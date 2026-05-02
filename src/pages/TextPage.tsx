@@ -7,6 +7,28 @@ import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
+import { ModelCarousel, type CarouselModel } from "@/components/workspace/ModelCarousel";
+
+const textCarouselModels: CarouselModel[] = [
+  { name: "ChatGPT", desc: "Универсальный ИИ от OpenAI", gradient: "linear-gradient(135deg, #10a37f, #1a7f5a)", badge: "TOP" },
+  { name: "Claude", desc: "Глубокий анализ от Anthropic", gradient: "linear-gradient(135deg, #d4a27f, #8b5e3c)", badge: "TOP" },
+  { name: "Gemini", desc: "Мультимодальный ИИ от Google", gradient: "linear-gradient(135deg, #4285f4, #1a73e8)", badge: "NEW" },
+  { name: "DeepSeek", desc: "Reasoning модель", gradient: "linear-gradient(135deg, #536dfe, #304ffe)", badge: "NEW" },
+  { name: "Grok", desc: "ИИ от xAI с поиском", gradient: "linear-gradient(135deg, #1d1d1f, #3a3a3c)" },
+  { name: "Perplexity", desc: "Поиск с источниками", gradient: "linear-gradient(135deg, #20b2aa, #008080)" },
+  { name: "Qwen", desc: "Мощный китайский ИИ", gradient: "linear-gradient(135deg, #7c3aed, #5b21b6)" },
+];
+
+const textUseCases = [
+  "Написать пост для Telegram",
+  "Составить бизнес-план",
+  "Перевести документ",
+  "Проанализировать данные",
+  "Написать код на Python",
+  "Составить резюме",
+  "Рерайт статьи",
+  "Генерация идей для стартапа",
+];
 
 interface Message {
   id: string;
@@ -165,6 +187,33 @@ const TextPage = () => {
           <ChatMessages messages={messages} isGenerating={isGenerating} currentModel={subModel.name} currentProviderId={provider.id} colors={c} />
         )}
         <div ref={chatEndRef} />
+
+        {/* Каталог — всегда виден при скролле */}
+        <div className="px-4 lg:px-8 py-6 space-y-6 border-t mt-6" style={{ borderColor: c.divider }}>
+          <ModelCarousel
+            models={textCarouselModels}
+            onSelect={(name) => {
+              const p = textProviders.find((pr) => pr.name.toLowerCase() === name.toLowerCase());
+              if (p) handleSelect(p.id, p.subModels[0]?.id ?? subModelId);
+            }}
+          />
+
+          <div>
+            <h2 className="text-base font-bold mb-4" style={{ color: c.textPrimary }}>Сценарии использования</h2>
+            <div className="flex flex-wrap gap-2">
+              {textUseCases.map((uc) => (
+                <button
+                  key={uc}
+                  onClick={() => setInput(uc)}
+                  className="px-4 py-2 rounded-[14px] text-[13px] transition-colors"
+                  style={{ background: c.pillBg, border: `1px solid ${c.pillBorder}`, color: c.textSecondary }}
+                >
+                  {uc}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* ─── Input area ─── */}
