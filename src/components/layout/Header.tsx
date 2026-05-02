@@ -32,9 +32,25 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
             <Menu className="h-5 w-5" />
           </button>
         )}
-        <Link to="/" className="flex items-center gap-1 shrink-0">
-          <span className="text-base font-semibold tracking-tight text-foreground">ERA2</span>
-          <span className="font-mono text-xs text-primary">.ai</span>
+        <Link to="/" className="flex items-center gap-2.5 shrink-0">
+          <span
+            className="flex items-center justify-center font-bold text-white select-none"
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: 8,
+              background: "linear-gradient(135deg, #E85420, #ff7a3d)",
+              fontSize: 18,
+              letterSpacing: "-0.02em",
+              boxShadow: "0 2px 8px rgba(232, 84, 32, 0.3)",
+            }}
+          >
+            E
+          </span>
+          <span className="text-[20px] font-semibold tracking-tight" style={{ color: "var(--c-fg)" }}>
+            era<span style={{ color: "var(--c-accent-2)" }}>2</span>
+            <span className="font-mono text-[13px] font-normal ml-0.5" style={{ color: "var(--c-fg-mute)" }}>.ai</span>
+          </span>
         </Link>
       </div>
 
