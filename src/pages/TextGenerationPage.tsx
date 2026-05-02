@@ -60,7 +60,7 @@ const TextGenerationPage = () => {
 
       <SeoPromptWidget mode="text" placeholder="Напишите запрос для текстовой нейросети..." modelName="GPT 5.2" credits={10} redirectTo={cta} />
 
-      <PromoBanner badge="🔥 Топ модель" title="GPT 5.2" description="Самая мощная модель для работы с текстом. Код, анализ, тексты." link="/text" />
+      <PromoBanner badge="Топ модель" title="GPT 5.2" description="Самая мощная модель для работы с текстом. Код, анализ, тексты." link="/text" />
 
       <section style={{ padding: "80px 0" }}>
         <div className="max-w-[1200px] mx-auto px-4">
