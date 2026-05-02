@@ -68,7 +68,7 @@ const TextGenerationPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {models.map((m) => (
               <div key={m.name} style={{ background: "var(--seo-card-bg)", border: "1px solid var(--seo-card-border)", borderRadius: 16, padding: 24, boxShadow: "var(--seo-card-shadow)" }}>
-                <div className="mb-3 rounded-lg flex items-center justify-center" style={{ width: 40, height: 40, background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)", fontSize: 18, color: "#fff" }}>💬</div>
+                <div className="mb-3 rounded-lg flex items-center justify-center" style={{ width: 40, height: 40, background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)", color: "#fff" }}><MessageCircle size={20} /></div>
                 <div className="flex items-center gap-2 mb-2">
                   <span style={{ fontSize: 18, fontWeight: 700, color: "var(--seo-heading)" }}>{m.name}</span>
                   {m.provider && <span style={{ fontSize: 12, color: "var(--seo-text-muted)" }}>({m.provider})</span>}
