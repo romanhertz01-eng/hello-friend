@@ -34,7 +34,7 @@ function SegmentedDropdown({
   return (
     <div
       ref={ref}
-      className="absolute top-full mt-2 z-50 min-w-[180px] rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--popover))] p-1.5 shadow-2xl"
+      className="absolute bottom-full mb-2 z-50 min-w-[180px] rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--popover))] p-1.5 shadow-2xl"
     >
       {children}
     </div>
