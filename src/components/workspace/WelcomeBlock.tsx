@@ -28,7 +28,7 @@ export function WelcomeBlock({
   onScenarioClick,
 }: Props) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-full px-4 py-12">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-var(--header-height,64px)-180px)] px-4 py-12">
       <div className="flex flex-col items-center text-center max-w-2xl w-full">
         <ModelGlyph name={modelName} size={64} className="mb-5" />
         <h1

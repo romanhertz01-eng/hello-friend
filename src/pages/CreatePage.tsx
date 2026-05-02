@@ -103,7 +103,7 @@ export default function CreatePage() {
   );
 
   return (
-    <div className="flex flex-col" style={{ minHeight: "calc(100vh - 56px)" }}>
+    <div className="flex flex-col" style={{ minHeight: "calc(100vh - var(--header-height, 64px))" }}>
       <WorkspaceTopTabs value={tab} onChange={setTab} />
 
       <div className="flex-1">
