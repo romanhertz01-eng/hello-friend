@@ -61,7 +61,7 @@
   --accent-foreground: 17 80% 38%;
   --destructive: 3 90% 60%;
   --destructive-foreground: 0 0% 100%;
-  --border: 30 25% 80%;
+  --border: 30 22% 76%;
   --input: 30 25% 80%;
   --ring: 15 82% 52%;
   --sidebar-background: 30 26% 92%;
@@ -79,27 +79,27 @@
   --r-xl: 32px;
 
   /* Legacy tokens — repainted to warm beige */
-  --bg-primary: #f7f3ef;
-  --bg-secondary: #f1ebe5;
-  --bg-card: #f1ebe5;
-  --bg-card-hover: #ebe4dd;
-  --bg-input: #f7f3ef;
-  --bg-pill: #ebe4dd;
+  --bg-primary: #f6f3f0;
+  --bg-secondary: #f0ebe6;
+  --bg-card: #f0ebe6;
+  --bg-card-hover: #eae4de;
+  --bg-input: #f6f3f0;
+  --bg-pill: #eae4de;
   --bg-pill-hover: rgba(232, 84, 32, 0.08);
-  --bg-sidebar: #f1ebe5;
-  --bg-footer: #f1ebe5;
-  --bg-table-header: #ebe4dd;
-  --bg-table-row-alt: #ebe4dd;
-  --bg-tag: #ebe4dd;
-  --bg-popup: #f7f3ef;
+  --bg-sidebar: #f0ebe6;
+  --bg-footer: #f0ebe6;
+  --bg-table-header: #eae4de;
+  --bg-table-row-alt: #eae4de;
+  --bg-tag: #eae4de;
+  --bg-popup: #f6f3f0;
   --text-primary: #17110e;
   --text-secondary: #4a3f37;
   --text-tertiary: #7a6f66;
   --text-muted: #a89e94;
-  --border-primary: #d8cdc0;
+  --border-primary: #cfc2b3;
   --border-secondary: #e3dacf;
   --border-hover: rgba(232, 84, 32, 0.3);
-  --shadow-card: 0 1px 3px rgba(20, 11, 5, 0.08);
+  --shadow-card: 0 1px 2px rgba(20, 11, 5, 0.06), 0 4px 16px rgba(20, 11, 5, 0.08);
   --shadow-dropdown: 0 8px 32px rgba(20, 11, 5, 0.12);
   --seo-bg: var(--bg-primary);
   --seo-card-bg: var(--bg-card);
@@ -125,11 +125,11 @@
   --seo-gradient-placeholder: linear-gradient(135deg, rgba(232,84,32,0.08), rgba(255,178,122,0.05));
 
   /* ERA2 raw tokens (light) — used by PromptWindow / ModelPickerPill */
-  --c-bg: #f7f3ef;
-  --c-bg-1: #f1ebe5;
-  --c-bg-2: #ebe4dd;
+  --c-bg: #f6f3f0;
+  --c-bg-1: #f0ebe6;
+  --c-bg-2: #eae4de;
   --c-bg-3: #e3dacf;
-  --c-line: #d8cdc0;
+  --c-line: #cfc2b3;
   --c-line-2: #c4b6a4;
   --c-fg: #17110e;
   --c-fg-dim: #4a3f37;
@@ -142,9 +142,10 @@
   --c-accent-hi: #ffb27a;
 
   /* Light shadows */
-  --shadow-1: 0 1px 0 rgba(0,0,0,0.04) inset, 0 0 0 1px var(--c-line);
-  --shadow-2: 0 30px 80px -30px rgba(0,0,0,0.12), 0 0 0 1px var(--c-line);
-  --shadow-glow: 0 0 0 1px var(--c-accent), 0 0 40px -5px var(--c-accent-glow);
+  --shadow-1: 0 1px 2px rgba(20, 11, 5, 0.06), 0 0 0 1px var(--c-line);
+  --shadow-2: 0 8px 32px rgba(20, 11, 5, 0.12), 0 20px 60px -20px rgba(20, 11, 5, 0.15), 0 0 0 1px var(--c-line);
+  --shadow-glow: 0 0 0 1px var(--c-accent), 0 0 30px -8px rgba(232, 84, 32, 0.25);
+  --card-shadow-light: 0 1px 3px rgba(20, 11, 5, 0.05), 0 6px 20px rgba(20, 11, 5, 0.06);
 }
 
 /* ═══ ERA2 DARK THEME — warm coal (CANON) ═══ */
@@ -244,6 +245,7 @@
   --shadow-1: 0 1px 0 rgba(255,255,255,0.04) inset, 0 0 0 1px var(--c-line);
   --shadow-2: 0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px var(--c-line);
   --shadow-glow: 0 0 0 1px var(--c-accent), 0 0 40px -5px var(--c-accent-glow);
+  --card-shadow-light: none;
 }
 
 @layer base {
