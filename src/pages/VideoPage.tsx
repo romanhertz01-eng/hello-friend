@@ -283,14 +283,16 @@ const VideoPage = () => {
           <>
             <MediaChatFeed generations={generations} />
             <div ref={feedEndRef} />
-            <div className="px-4 lg:px-8 py-6 space-y-6 border-t border-border mt-6">
-              <PromptSuggestions suggestions={videoPromptSuggestions} onSelect={setPrompt} />
-              <ModelCarousel models={carouselModels} onSelect={handleCarouselSelect} />
-              <ScenariosCarousel title="Сценарии для видео" scenarios={videoScenarios} />
-              <ModelsGrid3x3 models={videoGridModels} />
-            </div>
           </>
         )}
+
+        {/* Каталог — всегда виден при скролле */}
+        <div className="px-4 lg:px-8 py-6 space-y-6 border-t border-border mt-6">
+          <PromptSuggestions suggestions={videoPromptSuggestions} onSelect={setPrompt} />
+          <ModelCarousel models={carouselModels} onSelect={handleCarouselSelect} />
+          <ScenariosCarousel title="Сценарии для видео" scenarios={videoScenarios} />
+          <ModelsGrid3x3 models={videoGridModels} />
+        </div>
       </div>
 
       {/* Sticky input area */}
