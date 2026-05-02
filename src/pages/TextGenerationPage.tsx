@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, RefreshCw, Globe, PenLine, Code, BarChart3, CreditCard, MessageCircle } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Footer } from "@/components/shared/Footer";
@@ -27,10 +28,10 @@ const tableRows = [
   { name: "DeepSeek Reasoner", price: 1, context: "64K", code: "★★★★★", analysis: "★★★★☆", speed: "Медленная" },
 ];
 
-const benefits = [
-  { icon: "🔄", title: "Все модели в одном чате", desc: "ChatGPT, Claude, Gemini — переключайтесь за секунду. Не нужно 6 разных подписок." },
-  { icon: "💳", title: "Оплата в рублях", desc: "GPT 5.2 и Claude Opus без иностранной карты. Единая подписка — все модели." },
-  { icon: "🌐", title: "Без VPN", desc: "Все нейросети работают напрямую. ChatGPT, Claude, Gemini — без блокировок." },
+const benefits: { Icon: LucideIcon; title: string; desc: string }[] = [
+  { Icon: RefreshCw, title: "Все модели в одном чате", desc: "ChatGPT, Claude, Gemini — переключайтесь за секунду. Не нужно 6 разных подписок." },
+  { Icon: CreditCard, title: "Оплата в рублях", desc: "GPT 5.2 и Claude Opus без иностранной карты. Единая подписка — все модели." },
+  { Icon: Globe, title: "Без VPN", desc: "Все нейросети работают напрямую. ChatGPT, Claude, Gemini — без блокировок." },
 ];
 
 const faqData = [
