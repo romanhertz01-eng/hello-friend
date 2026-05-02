@@ -4,6 +4,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCommandPalette } from "@/hooks/useCommandPalette";
 import { UserDropdown } from "./UserDropdown";
+import { NavMegaMenu } from "./NavMegaMenu";
 import { PROMO_ACTIVE, PROMO_LABEL, PROMO_TEXT } from "@/config/promo";
 
 interface HeaderProps {
@@ -54,8 +55,10 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
         </Link>
       </div>
 
-      {/* Center: spacer */}
-      <div className="flex-1" />
+      {/* Center: mega menu */}
+      <div className="flex-1 flex justify-center">
+        <NavMegaMenu />
+      </div>
 
       {/* Right: utility cluster */}
       <div className="flex items-center gap-2">
@@ -113,12 +116,22 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
         {isAuthed ? (
           <UserDropdown />
         ) : (
-          <Link
-            to="/auth"
-            className="inline-flex items-center h-9 px-4 rounded-full text-sm font-medium bg-primary text-primary-foreground hover:bg-[#ff7a3d] transition-colors"
-          >
-            Войти
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              to="/auth"
+              className="inline-flex items-center h-9 px-4 rounded-full text-sm font-medium border transition-colors"
+              style={{ borderColor: "var(--c-line)", color: "var(--c-fg)", background: "transparent" }}
+            >
+              Войти
+            </Link>
+            <Link
+              to="/auth"
+              className="inline-flex items-center h-9 px-5 rounded-full text-sm font-medium text-white transition-colors"
+              style={{ background: "var(--c-accent)", boxShadow: "0 4px 16px -4px rgba(232, 84, 32, 0.5)" }}
+            >
+              Начать
+            </Link>
+          </div>
         )}
       </div>
     </header>
