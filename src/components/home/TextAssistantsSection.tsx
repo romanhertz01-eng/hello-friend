@@ -42,7 +42,7 @@ export function TextAssistantsSection() {
       <motion.div variants={fadeUp} className="flex flex-col md:flex-row gap-10">
         {/* Left: chat preview */}
         <div
-          className="md:w-1/2 rounded-[20px] p-6 flex flex-col"
+          className="md:w-1/2 rounded-[22px] p-6 flex flex-col"
           style={{ background: "var(--seo-card-bg)", border: "1px solid var(--seo-card-border)", minHeight: 400, boxShadow: "var(--seo-card-shadow)" }}
         >
           <div className="flex flex-wrap gap-2 mb-6">

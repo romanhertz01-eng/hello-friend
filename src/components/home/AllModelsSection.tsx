@@ -52,14 +52,14 @@ export function AllModelsSection() {
         <div className="inline-flex gap-1 p-1 rounded-xl bg-muted/50 dark:bg-[rgba(255,255,255,0.06)]">
           <button
             onClick={() => setTab("image")}
-            className={cn("px-5 py-2 rounded-[10px] text-sm cursor-pointer transition-all", tab === "image" ? "text-white font-medium" : "text-muted-foreground")}
+            className={cn("px-5 py-2 rounded-[8px] text-sm cursor-pointer transition-all", tab === "image" ? "text-white font-medium" : "text-muted-foreground")}
             style={tab === "image" ? { background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" } : undefined}
           >
             Инструменты изображений
           </button>
           <button
             onClick={() => setTab("video")}
-            className={cn("px-5 py-2 rounded-[10px] text-sm cursor-pointer transition-all", tab === "video" ? "text-white font-medium" : "text-muted-foreground")}
+            className={cn("px-5 py-2 rounded-[8px] text-sm cursor-pointer transition-all", tab === "video" ? "text-white font-medium" : "text-muted-foreground")}
             style={tab === "video" ? { background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" } : undefined}
           >
             Инструменты видео

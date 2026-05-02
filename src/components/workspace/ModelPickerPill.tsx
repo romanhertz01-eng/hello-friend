@@ -139,7 +139,7 @@ export function ModelPickerPill({
       {open && (
         <div
           ref={popupRef}
-          className="fixed rounded-[16px] shadow-2xl z-[100] flex overflow-hidden"
+          className="fixed rounded-[14px] shadow-2xl z-[100] flex overflow-hidden"
           style={{
             left: pos.left,
             ...(pos.top !== undefined ? { top: pos.top } : { bottom: pos.bottom }),

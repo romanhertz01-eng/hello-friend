@@ -65,7 +65,7 @@ function DDOption({ active, onClick, children }: { active: boolean; onClick: () 
     <button
       onClick={onClick}
       className={cn(
-        "w-full text-left px-3 py-2 rounded-[10px] text-sm transition-colors flex items-center justify-between gap-2",
+        "w-full text-left px-3 py-2 rounded-[8px] text-sm transition-colors flex items-center justify-between gap-2",
         active
           ? "bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))]"
           : "text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--secondary))] hover:text-[hsl(var(--foreground))]"
