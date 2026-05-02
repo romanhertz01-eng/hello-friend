@@ -93,7 +93,7 @@ const Index = () => {
         </motion.div>
 
         {/* ─── Interactive prompt window ─── */}
-        <div className="relative max-w-[880px] mx-auto px-4 pb-16 md:pb-24">
+        <div className="relative max-w-[780px] mx-auto px-4 pb-16 md:pb-24">
           <PromptWindow
             type={genType}
             onTypeChange={setGenType}
