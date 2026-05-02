@@ -5,6 +5,7 @@ import { Sidebar } from "./Sidebar";
 import { CommandPalette } from "./CommandPalette";
 import { CommandPaletteProvider } from "@/hooks/useCommandPalette";
 import { useAuth } from "@/contexts/AuthContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/lib/utils";
 
 const sidebarPages = ["/text", "/design", "/video", "/audio", "/agents", "/toolkit", "/history", "/pricing", "/create"];
@@ -14,6 +15,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const { isAuthed } = useAuth();
+  const { theme } = useTheme();
   const location = useLocation();
 
   // Auth page has no layout at all
@@ -55,6 +57,28 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </main>
 
         <CommandPalette />
+
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-[9999]"
+          style={{
+            opacity: theme === "dark" ? 0.035 : 0.08,
+            mixBlendMode: "overlay",
+          }}
+        >
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <filter id="era-grain">
+              <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch" />
+              <feColorMatrix type="saturate" values="0" />
+              <feComponentTransfer>
+                <feFuncR type="linear" slope="1.2" intercept="0.05" />
+                <feFuncG type="linear" slope="0.9" />
+                <feFuncB type="linear" slope="0.7" />
+              </feComponentTransfer>
+            </filter>
+            <rect width="100%" height="100%" filter="url(#era-grain)" />
+          </svg>
+        </div>
       </div>
     </CommandPaletteProvider>
   );
