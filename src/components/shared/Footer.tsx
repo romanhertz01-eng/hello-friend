@@ -52,9 +52,24 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-12">
         {/* Brand */}
         <div>
-          <Link to="/" className="flex items-center gap-1">
-            <span className="text-[22px] font-bold tracking-tight text-foreground">ERA2</span>
-            <span className="font-mono text-sm text-[#ff7a3d]">.ai</span>
+          <Link to="/" className="flex items-center gap-2.5 shrink-0">
+            <span
+              className="flex items-center justify-center font-bold text-white select-none"
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: 8,
+                background: "linear-gradient(135deg, #E85420, #ff7a3d)",
+                fontSize: 18,
+                letterSpacing: "-0.02em",
+                boxShadow: "0 2px 8px rgba(232, 84, 32, 0.3)",
+              }}
+            >
+              E
+            </span>
+            <span className="text-[20px] font-semibold tracking-tight" style={{ color: "var(--c-fg)" }}>
+              era<span style={{ color: "var(--c-accent-2)" }}>2</span>
+            </span>
           </Link>
           <p className="mt-4 text-sm text-[hsl(var(--muted-foreground))] max-w-[320px] leading-relaxed">
             Все нейросети в одном месте. Единая подписка, оплата в рублях.
