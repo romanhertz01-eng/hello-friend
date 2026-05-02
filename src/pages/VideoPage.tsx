@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Zap, X, Sparkles, Square, Clock, Monitor, MoreHorizontal } from "lucide-react";
+import { Zap, X, Sparkles, Square, Clock, Monitor, MoreHorizontal, Film, Music, User, Clapperboard, Smartphone, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { SegmentedToolbar, SegmentedItem, AttachmentButton, Placeholder } from "@/components/ui/era";
+import { SegmentedToolbar, SegmentedItem, AttachmentButton } from "@/components/ui/era";
 
 import { PromptSuggestions } from "@/components/workspace/PromptSuggestions";
 import { ModelCarousel } from "@/components/workspace/ModelCarousel";
@@ -10,10 +10,10 @@ import { ModelsGrid3x3 } from "@/components/workspace/ModelsGrid3x3";
 
 import { TwoPanelModelSelector } from "@/components/workspace/TwoPanelModelSelector";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
+import { WelcomeBlock, type WelcomeScenario } from "@/components/workspace/WelcomeBlock";
 import {
   videoProviders,
   videoCarouselCards,
-  videoGridCards,
   videoPromptSuggestions,
 } from "@/data/videoModels";
 
@@ -59,7 +59,6 @@ function VideoMorePopup({
           <button onClick={onClose} style={{ color: "var(--text-tertiary)" }} className="hover:opacity-80"><X size={16} /></button>
         </div>
 
-        {/* Aspect ratio */}
         <div className="space-y-2">
           <span className="text-[13px]" style={{ color: "var(--text-tertiary)" }}>Соотношение сторон</span>
           <div className="grid grid-cols-5 gap-1.5">
@@ -82,7 +81,6 @@ function VideoMorePopup({
           </div>
         </div>
 
-        {/* Duration */}
         <div className="space-y-2">
           <span className="text-[13px]" style={{ color: "var(--text-tertiary)" }}>Длительность</span>
           <div className="flex gap-1.5 flex-wrap">
@@ -102,7 +100,6 @@ function VideoMorePopup({
           </div>
         </div>
 
-        {/* Resolution */}
         <div className="space-y-2">
           <span className="text-[13px]" style={{ color: "var(--text-tertiary)" }}>Разрешение</span>
           <div className="flex gap-1.5">
@@ -122,7 +119,6 @@ function VideoMorePopup({
           </div>
         </div>
 
-        {/* Quality */}
         {qualityOptions && onQualityChange && quality && (
           <div className="space-y-2">
             <span className="text-[13px]" style={{ color: "var(--text-tertiary)" }}>Качество</span>
@@ -148,6 +144,15 @@ function VideoMorePopup({
   );
 }
 
+const welcomeScenarios: WelcomeScenario[] = [
+  { Icon: Film, title: "Рекламный ролик", desc: "Видео для продвижения продукта", prompt: "Рекламный ролик для " },
+  { Icon: Music, title: "Музыкальный клип", desc: "Визуальный ряд к треку", prompt: "Музыкальный клип " },
+  { Icon: User, title: "Анимация персонажа", desc: "Оживить статичного героя", prompt: "Анимация персонажа " },
+  { Icon: Clapperboard, title: "Кинематографичная сцена", desc: "Кинокачество с ИИ", prompt: "Кинематографичная сцена " },
+  { Icon: Smartphone, title: "Короткий клип для Reels", desc: "9:16 вертикальное видео", prompt: "Короткое видео для Reels " },
+  { Icon: Heart, title: "Видеооткрытка", desc: "Поздравление с анимацией", prompt: "Видеооткрытка " },
+];
+
 const VideoPage = () => {
   const [prompt, setPrompt] = useState("");
   const [selectedProviderId, setSelectedProviderId] = useState("kling");
@@ -156,8 +161,7 @@ const VideoPage = () => {
   const [duration, setDuration] = useState("5s");
   const [resolution, setResolution] = useState("720p");
   const [quality, setQuality] = useState("Стандарт");
-  const [selectedFunc, setSelectedFunc] = useState("Текст в видео");
-  const [funcOpen, setFuncOpen] = useState(false);
+  const [, setSelectedFunc] = useState("Текст в видео");
   const [moreOpen, setMoreOpen] = useState(false);
 
   const provider = videoProviders.find((p) => p.id === selectedProviderId);
@@ -218,56 +222,66 @@ const VideoPage = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-56px)]">
-
-      <div className="flex-1 overflow-y-auto px-4 lg:px-8 py-4 space-y-4 w-full">
-        <div>
-        <WorkspaceTabs variant="attached" />
-        <div className="rounded-[22px] rounded-tl-none border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4 w-full transition-all duration-200 has-[textarea:focus]:border-[hsl(var(--primary))] has-[textarea:focus]:shadow-[0_0_0_3px_rgba(232,84,32,0.12),0_1px_4px_rgba(0,0,0,0.2)]">
-          <div className="flex items-start gap-3 mb-3">
-            <AttachmentButton current={0} max={5} />
-            <textarea
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              placeholder="Введите свою идею для генерации"
-              rows={4}
-              className="flex-1 min-w-0 bg-transparent border-none outline-none text-[15px] resize-none min-h-[120px] py-3 px-1 text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] placeholder:opacity-60"
-            />
-          </div>
-
-          <div className="flex items-center gap-2 flex-wrap">
-            <TwoPanelModelSelector
-              providers={selectorProviders}
-              selectedProviderId={selectedProviderId}
-              selectedSubModelId={selectedSubModelId}
-              onSelect={handleModelSelect}
-            />
-
-            <SegmentedToolbar>
-              <SegmentedItem icon={<Square />} label={<span className="font-mono tabular-nums">{aspectRatio}</span>} onClick={() => setMoreOpen(true)} />
-              <SegmentedItem icon={<Clock />} label={<span className="font-mono tabular-nums">{duration}</span>} onClick={() => setMoreOpen(true)} />
-              <SegmentedItem icon={<Monitor />} label={<span className="font-mono tabular-nums">{resolution}</span>} onClick={() => setMoreOpen(true)} />
-              <SegmentedItem icon={<MoreHorizontal />} label={null} onClick={() => setMoreOpen(true)} trailing={null} />
-            </SegmentedToolbar>
-
-            <button
-              onClick={() => {}}
-              disabled={!prompt.trim()}
-              className="ml-auto inline-flex items-center gap-1.5 px-5 h-10 rounded-full gradient-accent text-white text-[14px] font-semibold shadow-[0_10px_30px_-10px_rgba(232,84,32,0.55),inset_0_1px_0_rgba(255,255,255,0.25)] hover:opacity-90 transition-all disabled:opacity-50"
-            >
-              <Sparkles className="w-3.5 h-3.5" /> Генерировать
-              <span className="inline-flex items-center gap-1 ml-1 font-mono tabular-nums">
-                <Zap className="w-3 h-3" /> {credits}
-              </span>
-            </button>
-          </div>
-        </div>
-        </div>
+    <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
+      {/* Scrollable area: welcome + catalog */}
+      <div className="flex-1 overflow-y-auto px-4 lg:px-8 py-4 space-y-6 w-full">
+        <WelcomeBlock
+          modelName={provider?.name || "Видео"}
+          subModelName={subModel?.name}
+          scenarios={welcomeScenarios}
+          onScenarioClick={(p) => setPrompt(p)}
+        />
 
         <PromptSuggestions suggestions={videoPromptSuggestions} onSelect={setPrompt} />
         <ModelCarousel models={carouselModels} onSelect={handleCarouselSelect} />
         <ScenariosCarousel title="Сценарии для видео" scenarios={videoScenarios} />
         <ModelsGrid3x3 models={videoGridModels} />
+      </div>
+
+      {/* Sticky input area */}
+      <div className="shrink-0 px-4 lg:px-8 pb-5 pt-2 bg-[var(--bg-primary)]">
+        <div className="max-w-[980px] mx-auto">
+          <WorkspaceTabs variant="attached" />
+          <div className="rounded-[22px] rounded-tl-none border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4 w-full transition-all duration-200 has-[textarea:focus]:border-[hsl(var(--primary))] has-[textarea:focus]:shadow-[0_0_0_3px_rgba(232,84,32,0.12),0_1px_4px_rgba(0,0,0,0.2)]">
+            <div className="flex items-start gap-3 mb-3">
+              <AttachmentButton current={0} max={5} />
+              <textarea
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="Введите свою идею для генерации"
+                rows={3}
+                className="flex-1 min-w-0 bg-transparent border-none outline-none text-[15px] resize-none min-h-[80px] py-3 px-1 text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] placeholder:opacity-60"
+              />
+            </div>
+
+            <div className="flex items-center gap-2 flex-wrap">
+              <TwoPanelModelSelector
+                providers={selectorProviders}
+                selectedProviderId={selectedProviderId}
+                selectedSubModelId={selectedSubModelId}
+                onSelect={handleModelSelect}
+              />
+
+              <SegmentedToolbar>
+                <SegmentedItem icon={<Square />} label={<span className="font-mono tabular-nums">{aspectRatio}</span>} onClick={() => setMoreOpen(true)} />
+                <SegmentedItem icon={<Clock />} label={<span className="font-mono tabular-nums">{duration}</span>} onClick={() => setMoreOpen(true)} />
+                <SegmentedItem icon={<Monitor />} label={<span className="font-mono tabular-nums">{resolution}</span>} onClick={() => setMoreOpen(true)} />
+                <SegmentedItem icon={<MoreHorizontal />} label={null} onClick={() => setMoreOpen(true)} trailing={null} />
+              </SegmentedToolbar>
+
+              <button
+                onClick={() => {}}
+                disabled={!prompt.trim()}
+                className="ml-auto inline-flex items-center gap-1.5 px-5 h-10 rounded-full gradient-accent text-white text-[14px] font-semibold shadow-[0_10px_30px_-10px_rgba(232,84,32,0.55),inset_0_1px_0_rgba(255,255,255,0.25)] hover:opacity-90 transition-all disabled:opacity-50"
+              >
+                <Sparkles className="w-3.5 h-3.5" /> Генерировать
+                <span className="inline-flex items-center gap-1 ml-1 font-mono tabular-nums">
+                  <Zap className="w-3 h-3" /> {credits}
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <VideoMorePopup
