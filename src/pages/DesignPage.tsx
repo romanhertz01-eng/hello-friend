@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Camera, Palette, Sparkles, Image as ImageIcon, Zap, Paintbrush } from "lucide-react";
 
 import { PromptBlock } from "@/components/workspace/ImagePromptBlock";
@@ -8,6 +8,13 @@ import { ModelCarousel } from "@/components/workspace/ModelCarousel";
 import { ScenariosCarousel } from "@/components/workspace/ScenariosCarousel";
 import { ModelsGrid3x3 } from "@/components/workspace/ModelsGrid3x3";
 import { WelcomeBlock, type WelcomeScenario } from "@/components/workspace/WelcomeBlock";
+import { MediaChatFeed, type MediaGeneration } from "@/components/workspace/MediaChatFeed";
+
+const ASPECT_TO_DIM: Record<string, [number, number]> = {
+  "1:1": [1024, 1024], "16:9": [1280, 720], "9:16": [720, 1280],
+  "4:3": [1152, 864], "3:4": [864, 1152], "3:2": [1216, 832], "2:3": [832, 1216],
+  "21:9": [1536, 658], "4:5": [896, 1120], "5:4": [1120, 896],
+};
 
 import {
   imageProviders,
@@ -54,11 +61,34 @@ const DesignPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [quality, setQuality] = useState("2K");
   const [turbo, setTurbo] = useState(false);
+  const [generations, setGenerations] = useState<MediaGeneration[]>([]);
+  const feedEndRef = useRef<HTMLDivElement>(null);
 
   const provider = imageProviders.find((p) => p.id === selectedProviderId);
   const subModel = provider?.subModels.find((s) => s.id === selectedSubModelId);
+  const hasGenerations = generations.length > 0;
 
   useEffect(() => { document.title = "ERA2 — Генерация изображений"; }, []);
+  useEffect(() => { feedEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [generations]);
+
+  const handleGenerate = () => {
+    const text = prompt.trim();
+    if (!text) return;
+    const [w, h] = ASPECT_TO_DIM[aspectRatio] || [1024, 1024];
+    const imgs = Array.from({ length: Math.max(1, quantity) }, () => ({ width: w, height: h }));
+    setGenerations((prev) => [...prev, {
+      id: Date.now().toString(),
+      prompt: text,
+      model: provider?.name || "Image",
+      subModel: subModel?.name || "",
+      createdAt: new Date(),
+      type: "image",
+      images: imgs,
+      aspect: aspectRatio,
+      quality,
+    }]);
+    setPrompt("");
+  };
 
   const handleModelSelect = (providerId: string, subModelId: string) => {
     setSelectedProviderId(providerId);
@@ -85,19 +115,26 @@ const DesignPage = () => {
 
   return (
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
-      {/* Scrollable area: welcome + catalog */}
-      <div className="flex-1 overflow-y-auto px-4 lg:px-8 py-4 space-y-6 w-full">
-        <WelcomeBlock
-          modelName={provider?.name || "Изображения"}
-          subModelName={subModel?.name}
-          scenarios={welcomeScenarios}
-          onScenarioClick={(p) => setPrompt(p)}
-        />
+      {/* Scrollable area: chat (welcome OR feed) + catalog below */}
+      <div className="flex-1 overflow-y-auto w-full">
+        {!hasGenerations ? (
+          <WelcomeBlock
+            modelName={provider?.name || "Изображения"}
+            subModelName={subModel?.name}
+            scenarios={welcomeScenarios}
+            onScenarioClick={(p) => setPrompt(p)}
+          />
+        ) : (
+          <MediaChatFeed generations={generations} />
+        )}
+        <div ref={feedEndRef} />
 
-        <PromptSuggestions suggestions={imagePromptSuggestions} onSelect={setPrompt} />
-        <ModelCarousel models={carouselModels} onSelect={handleCarouselSelect} />
-        <ScenariosCarousel title="Сценарии для изображений" scenarios={designScenarios} />
-        <ModelsGrid3x3 models={designGridModels} />
+        <div className="px-4 lg:px-8 py-6 space-y-6">
+          <PromptSuggestions suggestions={imagePromptSuggestions} onSelect={setPrompt} />
+          <ModelCarousel models={carouselModels} onSelect={handleCarouselSelect} />
+          <ScenariosCarousel title="Сценарии для изображений" scenarios={designScenarios} />
+          <ModelsGrid3x3 models={designGridModels} />
+        </div>
       </div>
 
       {/* Sticky input area */}
@@ -119,7 +156,7 @@ const DesignPage = () => {
             onQualityChange={setQuality}
             turbo={turbo}
             onTurboToggle={() => setTurbo(!turbo)}
-            onGenerate={() => {}}
+            onGenerate={handleGenerate}
           />
         </div>
       </div>

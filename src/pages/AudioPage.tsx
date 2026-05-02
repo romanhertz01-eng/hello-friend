@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronDown, Play, Plus, Zap, Settings2, Smartphone, Film, Mic, Megaphone, Headphones, Globe, Music, Volume2, Languages, AudioLines } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { PillDropdown } from "@/components/workspace/PillDropdown";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { WelcomeBlock, type WelcomeScenario } from "@/components/workspace/WelcomeBlock";
+import { MediaChatFeed, type MediaGeneration } from "@/components/workspace/MediaChatFeed";
 
 /* ─── Voice data ─── */
 const voices = [
@@ -80,11 +81,15 @@ const AudioPage = () => {
   const [sunoMode, setSunoMode] = useState("Автоматический");
   const [sunoDuration, setSunoDuration] = useState("До 2 минут");
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [generations, setGenerations] = useState<MediaGeneration[]>([]);
+  const feedEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { document.title = "ERA2 — Генерация аудио"; }, []);
+  useEffect(() => { feedEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [generations]);
 
   const isEL = selectedModel === "elevenlabs";
   const filteredVoices = voices.filter(v => v.category.includes(voiceTab));
+  const hasGenerations = generations.length > 0;
 
   const toggleGenre = (g: string) => {
     setSelectedGenres(prev => prev.includes(g) ? prev.filter(x => x !== g) : [...prev, g]);
@@ -93,16 +98,38 @@ const AudioPage = () => {
   const currentModelName = isEL ? "ElevenLabs" : "Suno";
   const currentSubName = isEL ? elModel : `Suno ${sunoVersion}`;
 
+  const handleGenerate = () => {
+    const text = prompt.trim();
+    if (!text) return;
+    setGenerations((prev) => [...prev, {
+      id: Date.now().toString(),
+      prompt: text,
+      model: currentModelName,
+      subModel: currentSubName,
+      createdAt: new Date(),
+      type: "audio",
+      audioDuration: isEL ? "0:18" : sunoDuration === "До 1 минуты" ? "0:58" : sunoDuration === "До 2 минут" ? "1:54" : "3:42",
+    }]);
+    setPrompt("");
+  };
+
   return (
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
-      {/* Scrollable area: welcome + catalog */}
-      <div className="flex-1 overflow-y-auto px-4 lg:px-8 py-6 space-y-8 w-full">
-        <WelcomeBlock
-          modelName={currentModelName}
-          subModelName={currentSubName}
-          scenarios={welcomeScenarios}
-          onScenarioClick={(p) => setPrompt(p)}
-        />
+      {/* Scrollable area: chat (welcome OR feed) + catalog below */}
+      <div className="flex-1 overflow-y-auto w-full">
+        {!hasGenerations ? (
+          <WelcomeBlock
+            modelName={currentModelName}
+            subModelName={currentSubName}
+            scenarios={welcomeScenarios}
+            onScenarioClick={(p) => setPrompt(p)}
+          />
+        ) : (
+          <MediaChatFeed generations={generations} />
+        )}
+        <div ref={feedEndRef} />
+
+        <div className="px-4 lg:px-8 py-6 space-y-8">
 
         {/* ─── ElevenLabs content ─── */}
         {isEL && (
@@ -282,6 +309,7 @@ const AudioPage = () => {
             ))}
           </div>
         </div>
+        </div>
       </div>
 
       {/* ─── Sticky input area ─── */}
@@ -359,7 +387,7 @@ const AudioPage = () => {
               <div className="flex-1" />
 
               <button
-                onClick={() => {}}
+                onClick={handleGenerate}
                 disabled={!prompt.trim()}
                 className="px-4 py-2 rounded-[10px] text-white text-sm font-semibold disabled:opacity-50 flex items-center gap-1.5"
                 style={{ background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" }}

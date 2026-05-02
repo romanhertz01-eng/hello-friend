@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Zap, X, Sparkles, Square, Clock, Monitor, MoreHorizontal, Film, Music, User, Clapperboard, Smartphone, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SegmentedToolbar, SegmentedItem, AttachmentButton } from "@/components/ui/era";
@@ -11,6 +11,7 @@ import { ModelsGrid3x3 } from "@/components/workspace/ModelsGrid3x3";
 import { TwoPanelModelSelector } from "@/components/workspace/TwoPanelModelSelector";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 import { WelcomeBlock, type WelcomeScenario } from "@/components/workspace/WelcomeBlock";
+import { MediaChatFeed, type MediaGeneration } from "@/components/workspace/MediaChatFeed";
 import {
   videoProviders,
   videoCarouselCards,
@@ -163,12 +164,33 @@ const VideoPage = () => {
   const [quality, setQuality] = useState("Стандарт");
   const [, setSelectedFunc] = useState("Текст в видео");
   const [moreOpen, setMoreOpen] = useState(false);
+  const [generations, setGenerations] = useState<MediaGeneration[]>([]);
+  const feedEndRef = useRef<HTMLDivElement>(null);
 
   const provider = videoProviders.find((p) => p.id === selectedProviderId);
   const subModel = provider?.subModels.find((s) => s.id === selectedSubModelId);
   const credits = subModel?.credits ?? 0;
+  const hasGenerations = generations.length > 0;
 
   useEffect(() => { document.title = "ERA2 — Генерация видео"; }, []);
+  useEffect(() => { feedEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [generations]);
+
+  const handleGenerate = () => {
+    const text = prompt.trim();
+    if (!text) return;
+    setGenerations((prev) => [...prev, {
+      id: Date.now().toString(),
+      prompt: text,
+      model: provider?.name || "Video",
+      subModel: subModel?.name || "",
+      createdAt: new Date(),
+      type: "video",
+      aspect: aspectRatio,
+      duration,
+      resolution,
+    }]);
+    setPrompt("");
+  };
 
   const handleModelSelect = (providerId: string, subModelId: string) => {
     setSelectedProviderId(providerId);
@@ -223,19 +245,26 @@ const VideoPage = () => {
 
   return (
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
-      {/* Scrollable area: welcome + catalog */}
-      <div className="flex-1 overflow-y-auto px-4 lg:px-8 py-4 space-y-6 w-full">
-        <WelcomeBlock
-          modelName={provider?.name || "Видео"}
-          subModelName={subModel?.name}
-          scenarios={welcomeScenarios}
-          onScenarioClick={(p) => setPrompt(p)}
-        />
+      {/* Scrollable area: chat (welcome OR feed) + catalog below */}
+      <div className="flex-1 overflow-y-auto w-full">
+        {!hasGenerations ? (
+          <WelcomeBlock
+            modelName={provider?.name || "Видео"}
+            subModelName={subModel?.name}
+            scenarios={welcomeScenarios}
+            onScenarioClick={(p) => setPrompt(p)}
+          />
+        ) : (
+          <MediaChatFeed generations={generations} />
+        )}
+        <div ref={feedEndRef} />
 
-        <PromptSuggestions suggestions={videoPromptSuggestions} onSelect={setPrompt} />
-        <ModelCarousel models={carouselModels} onSelect={handleCarouselSelect} />
-        <ScenariosCarousel title="Сценарии для видео" scenarios={videoScenarios} />
-        <ModelsGrid3x3 models={videoGridModels} />
+        <div className="px-4 lg:px-8 py-6 space-y-6">
+          <PromptSuggestions suggestions={videoPromptSuggestions} onSelect={setPrompt} />
+          <ModelCarousel models={carouselModels} onSelect={handleCarouselSelect} />
+          <ScenariosCarousel title="Сценарии для видео" scenarios={videoScenarios} />
+          <ModelsGrid3x3 models={videoGridModels} />
+        </div>
       </div>
 
       {/* Sticky input area */}
@@ -270,7 +299,7 @@ const VideoPage = () => {
               </SegmentedToolbar>
 
               <button
-                onClick={() => {}}
+                onClick={handleGenerate}
                 disabled={!prompt.trim()}
                 className="ml-auto inline-flex items-center gap-1.5 px-5 h-10 rounded-full gradient-accent text-white text-[14px] font-semibold shadow-[0_10px_30px_-10px_rgba(232,84,32,0.55),inset_0_1px_0_rgba(255,255,255,0.25)] hover:opacity-90 transition-all disabled:opacity-50"
               >
