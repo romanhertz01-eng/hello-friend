@@ -169,10 +169,17 @@ const VideoPage = () => {
   const feedEndRef = useRef<HTMLDivElement>(null);
   const inputAreaRef = useRef<HTMLDivElement>(null);
   const modelTriggerRef = useRef<HTMLButtonElement>(null);
-  const handleCapsuleClick = () => {
-    inputAreaRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-    window.setTimeout(() => modelTriggerRef.current?.click(), 250);
-  };
+  const [capsuleOpen, setCapsuleOpen] = useState(false);
+
+  useEffect(() => {
+    if (!capsuleOpen) return;
+    const handler = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest("[data-capsule-dropdown]")) setCapsuleOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [capsuleOpen]);
 
   const provider = videoProviders.find((p) => p.id === selectedProviderId);
   const subModel = provider?.subModels.find((s) => s.id === selectedSubModelId);
@@ -264,13 +271,40 @@ const VideoPage = () => {
       {/* Scrollable area: chat (welcome OR feed) + catalog below */}
       <div className="flex-1 overflow-y-auto w-full">
         <div className="sticky top-0 z-20 flex justify-center py-3" style={{ background: "color-mix(in oklab, var(--c-bg) 85%, transparent)", backdropFilter: "blur(12px)" }}>
-          <button onClick={handleCapsuleClick} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity" style={{ background: "var(--c-bg-1)", border: "1px solid var(--c-line)", color: "var(--c-fg)" }}>
-            <ModelGlyph name={provider?.name || "Kling"} size={20} />
-            <span>{provider?.name}</span>
-            <span className="text-muted-foreground">·</span>
-            <span className="font-mono tabular-nums text-xs" style={{ color: "var(--c-accent-2)" }}>{subModel?.name}</span>
-            <ChevronDown size={14} className="text-muted-foreground" />
-          </button>
+          <div className="relative" data-capsule-dropdown>
+            <button onClick={() => setCapsuleOpen(!capsuleOpen)} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity" style={{ background: "var(--c-bg-1)", border: "1px solid var(--c-line)", color: "var(--c-fg)" }}>
+              <ModelGlyph name={provider?.name || "Kling"} size={20} />
+              <span>{provider?.name}</span>
+              <span className="text-muted-foreground">·</span>
+              <span className="font-mono tabular-nums text-xs" style={{ color: "var(--c-accent-2)" }}>{subModel?.name}</span>
+              <ChevronDown size={14} className="text-muted-foreground" />
+            </button>
+            {capsuleOpen && (
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[320px] max-h-[400px] overflow-y-auto rounded-[14px] border p-1.5 shadow-2xl z-50" style={{ background: "hsl(var(--popover))", borderColor: "hsl(var(--border))" }}>
+                {videoProviders.map((p) => (
+                  <div key={p.id}>
+                    <div className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider text-muted-foreground">{p.name}</div>
+                    {p.subModels.map((s) => (
+                      <button
+                        key={s.id}
+                        onClick={() => { handleModelSelect(p.id, s.id); setCapsuleOpen(false); }}
+                        className={cn(
+                          "w-full flex items-center gap-3 px-3 py-2.5 rounded-[8px] text-sm transition-colors text-left",
+                          selectedSubModelId === s.id ? "bg-[rgba(232,84,32,0.12)]" : "hover:bg-secondary"
+                        )}
+                      >
+                        <ModelGlyph name={p.name} size={24} />
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium truncate" style={{ color: selectedSubModelId === s.id ? "hsl(var(--primary))" : "hsl(var(--foreground))" }}>{s.name}</div>
+                        </div>
+                        <span className="text-[11px] font-mono text-muted-foreground shrink-0">{s.credits} cr</span>
+                      </button>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
         {!hasGenerations ? (
           <WelcomeBlock
