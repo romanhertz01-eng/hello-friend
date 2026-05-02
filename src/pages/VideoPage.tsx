@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Zap, X, Sparkles, Square, Clock, Monitor, MoreHorizontal, Film, Music, User, Clapperboard, Smartphone, Heart } from "lucide-react";
+import { Zap, X, Sparkles, Square, Clock, Monitor, MoreHorizontal, Film, Music, User, Clapperboard, Smartphone, Heart, ChevronDown } from "lucide-react";
+import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 import { SegmentedToolbar, SegmentedItem, AttachmentButton } from "@/components/ui/era";
 
@@ -175,6 +176,14 @@ const VideoPage = () => {
   useEffect(() => { document.title = "ERA2 — Генерация видео"; }, []);
   useEffect(() => { feedEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [generations]);
 
+  useEffect(() => {
+    const saved = sessionStorage.getItem("era2_draft_video");
+    if (saved) setPrompt(saved);
+  }, []);
+  useEffect(() => {
+    sessionStorage.setItem("era2_draft_video", prompt);
+  }, [prompt]);
+
   const handleGenerate = () => {
     const text = prompt.trim();
     if (!text) return;
@@ -190,6 +199,7 @@ const VideoPage = () => {
       resolution,
     }]);
     setPrompt("");
+    sessionStorage.removeItem("era2_draft_video");
   };
 
   const handleModelSelect = (providerId: string, subModelId: string) => {
@@ -247,6 +257,15 @@ const VideoPage = () => {
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
       {/* Scrollable area: chat (welcome OR feed) + catalog below */}
       <div className="flex-1 overflow-y-auto w-full">
+        <div className="sticky top-0 z-20 flex justify-center py-3" style={{ background: "color-mix(in oklab, var(--c-bg) 85%, transparent)", backdropFilter: "blur(12px)" }}>
+          <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium" style={{ background: "var(--c-bg-1)", border: "1px solid var(--c-line)", color: "var(--c-fg)" }}>
+            <ModelGlyph name={provider?.name || "Kling"} size={20} />
+            <span>{provider?.name}</span>
+            <span className="text-muted-foreground">·</span>
+            <span className="font-mono tabular-nums text-xs" style={{ color: "var(--c-accent-2)" }}>{subModel?.name}</span>
+            <ChevronDown size={14} className="text-muted-foreground" />
+          </button>
+        </div>
         {!hasGenerations ? (
           <WelcomeBlock
             modelName={provider?.name || "Видео"}

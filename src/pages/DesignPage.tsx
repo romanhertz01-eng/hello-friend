@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Camera, Palette, Sparkles, Image as ImageIcon, Zap, Paintbrush } from "lucide-react";
+import { Camera, Palette, Sparkles, Image as ImageIcon, Zap, Paintbrush, ChevronDown } from "lucide-react";
+import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 
 import { PromptBlock } from "@/components/workspace/ImagePromptBlock";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
@@ -71,6 +72,16 @@ const DesignPage = () => {
   useEffect(() => { document.title = "ERA2 — Генерация изображений"; }, []);
   useEffect(() => { feedEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [generations]);
 
+  // Restore draft on mount
+  useEffect(() => {
+    const saved = sessionStorage.getItem("era2_draft_design");
+    if (saved) setPrompt(saved);
+  }, []);
+  // Save draft on change
+  useEffect(() => {
+    sessionStorage.setItem("era2_draft_design", prompt);
+  }, [prompt]);
+
   const handleGenerate = () => {
     const text = prompt.trim();
     if (!text) return;
@@ -88,6 +99,7 @@ const DesignPage = () => {
       quality,
     }]);
     setPrompt("");
+    sessionStorage.removeItem("era2_draft_design");
   };
 
   const handleModelSelect = (providerId: string, subModelId: string) => {
@@ -117,6 +129,15 @@ const DesignPage = () => {
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
       {/* Scrollable area: chat (welcome OR feed) + catalog below */}
       <div className="flex-1 overflow-y-auto w-full">
+        <div className="sticky top-0 z-20 flex justify-center py-3" style={{ background: "color-mix(in oklab, var(--c-bg) 85%, transparent)", backdropFilter: "blur(12px)" }}>
+          <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium" style={{ background: "var(--c-bg-1)", border: "1px solid var(--c-line)", color: "var(--c-fg)" }}>
+            <ModelGlyph name={provider?.name || "Nano Banana"} size={20} />
+            <span>{provider?.name}</span>
+            <span className="text-muted-foreground">·</span>
+            <span className="font-mono tabular-nums text-xs" style={{ color: "var(--c-accent-2)" }}>{subModel?.name}</span>
+            <ChevronDown size={14} className="text-muted-foreground" />
+          </button>
+        </div>
         {!hasGenerations ? (
           <WelcomeBlock
             modelName={provider?.name || "Изображения"}

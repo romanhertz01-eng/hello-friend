@@ -87,6 +87,14 @@ const AudioPage = () => {
   useEffect(() => { document.title = "ERA2 — Генерация аудио"; }, []);
   useEffect(() => { feedEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [generations]);
 
+  useEffect(() => {
+    const saved = sessionStorage.getItem("era2_draft_audio");
+    if (saved) setPrompt(saved);
+  }, []);
+  useEffect(() => {
+    sessionStorage.setItem("era2_draft_audio", prompt);
+  }, [prompt]);
+
   const isEL = selectedModel === "elevenlabs";
   const filteredVoices = voices.filter(v => v.category.includes(voiceTab));
   const hasGenerations = generations.length > 0;
@@ -111,12 +119,22 @@ const AudioPage = () => {
       audioDuration: isEL ? "0:18" : sunoDuration === "До 1 минуты" ? "0:58" : sunoDuration === "До 2 минут" ? "1:54" : "3:42",
     }]);
     setPrompt("");
+    sessionStorage.removeItem("era2_draft_audio");
   };
 
   return (
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
       {/* Scrollable area: chat (welcome OR feed) + catalog below */}
       <div className="flex-1 overflow-y-auto w-full">
+        <div className="sticky top-0 z-20 flex justify-center py-3" style={{ background: "color-mix(in oklab, var(--c-bg) 85%, transparent)", backdropFilter: "blur(12px)" }}>
+          <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium" style={{ background: "var(--c-bg-1)", border: "1px solid var(--c-line)", color: "var(--c-fg)" }}>
+            <ModelGlyph name={currentModelName} size={20} />
+            <span>{currentModelName}</span>
+            <span className="text-muted-foreground">·</span>
+            <span className="font-mono tabular-nums text-xs" style={{ color: "var(--c-accent-2)" }}>{currentSubName}</span>
+            <ChevronDown size={14} className="text-muted-foreground" />
+          </button>
+        </div>
         {!hasGenerations ? (
           <WelcomeBlock
             modelName={currentModelName}

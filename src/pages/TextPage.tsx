@@ -81,6 +81,14 @@ const TextPage = () => {
   useEffect(() => { document.title = "ERA2 — Текстовые нейросети"; }, []);
   useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
 
+  useEffect(() => {
+    const saved = sessionStorage.getItem("era2_draft_text");
+    if (saved) setInput(saved);
+  }, []);
+  useEffect(() => {
+    sessionStorage.setItem("era2_draft_text", input);
+  }, [input]);
+
   const autoResize = useCallback(() => {
     const el = textareaRef.current;
     if (!el) return;
@@ -93,6 +101,7 @@ const TextPage = () => {
     if (!text || isGenerating) return;
     setMessages((prev) => [...prev, { id: Date.now().toString(), role: "user", content: text }]);
     setInput("");
+    sessionStorage.removeItem("era2_draft_text");
     if (textareaRef.current) textareaRef.current.style.height = "auto";
     setIsGenerating(true);
     setTimeout(() => {
