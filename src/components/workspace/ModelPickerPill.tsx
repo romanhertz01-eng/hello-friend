@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown, Check, Zap, Clock } from "lucide-react";
-import { cn } from "@/lib/utils";
+
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 
 export interface PickerSubModel {
