@@ -1,32 +1,9 @@
 import { useNavigate } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { StatusBadge } from "@/components/ui/era";
-import { getModelIcon } from "@/components/ui/era/ModelGlyph";
+import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import type { SearchableModel } from "@/config/searchableModels";
 import { cn } from "@/lib/utils";
-
-const brandColors: Record<string, string> = {
-  chatgpt: "bg-emerald-600",
-  claude: "bg-orange-500",
-  gemini: "bg-blue-500",
-  grok: "bg-zinc-800",
-  deepseek: "bg-indigo-600",
-  perplexity: "bg-teal-700",
-  qwen: "bg-purple-700",
-  "nano-banana-2": "bg-yellow-500",
-  seedream: "bg-cyan-600",
-  "flux-kontext": "bg-purple-600",
-  midjourney: "bg-slate-700",
-  "gpt-image": "bg-emerald-700",
-  "kling-3": "bg-pink-600",
-  "veo-3": "bg-blue-600",
-  "sora-2": "bg-zinc-700",
-  "seedance-2": "bg-teal-600",
-  hailuo: "bg-fuchsia-700",
-  vidu: "bg-amber-600",
-  suno: "bg-violet-600",
-  "eleven-labs": "bg-rose-600",
-};
 
 // rough seconds-to-render estimate per type (декоративно)
 const approxSeconds: Record<SearchableModel["type"], number> = {
@@ -47,7 +24,6 @@ export function ModelCard({ model }: { model: SearchableModel }) {
   };
 
   const badgeVariant: "new" | "top" | "beta" | undefined = model.isNew ? "new" : undefined;
-  const colorClass = brandColors[model.id] ?? "bg-secondary";
 
   return (
     <button
@@ -62,18 +38,7 @@ export function ModelCard({ model }: { model: SearchableModel }) {
     >
       {/* top row: icon + badge */}
       <div className="flex items-start justify-between">
-        <div
-          className={cn(
-            "w-14 h-14 rounded-2xl flex items-center justify-center",
-            "text-white drop-shadow-sm shrink-0",
-            colorClass,
-          )}
-        >
-          {(() => {
-            const Icon = getModelIcon(model.name);
-            return <Icon size={28} strokeWidth={1.75} />;
-          })()}
-        </div>
+        <ModelGlyph name={model.name} size={56} />
         {badgeVariant && <StatusBadge variant={badgeVariant} />}
       </div>
 
