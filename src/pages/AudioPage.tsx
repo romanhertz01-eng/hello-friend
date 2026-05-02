@@ -309,6 +309,7 @@ const AudioPage = () => {
             ))}
           </div>
         </div>
+        </div>
       </div>
 
       {/* ─── Sticky input area ─── */}
