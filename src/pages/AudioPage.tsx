@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronDown, Play, Plus, Zap, Settings2, Smartphone, Film, Mic, Megaphone, Headphones, Globe, Music, Volume2, Languages, AudioLines } from "lucide-react";
+import { ChevronDown, Play, Plus, Zap, Settings2, Smartphone, Film, Mic, Megaphone, Headphones, Globe, Music, Volume2, Languages, AudioLines, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { PillDropdown } from "@/components/workspace/PillDropdown";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
@@ -228,7 +228,7 @@ const AudioPage = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {elevenScenarios.map(s => (
                   <div key={s.label} className="rounded-xl p-5 flex flex-col items-center gap-2 cursor-pointer transition-colors" style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}>
-                    <div className="w-10 h-10 rounded-[10px] flex items-center justify-center" style={{ background: "rgba(232, 84, 32, 0.1)", border: "1px solid rgba(232, 84, 32, 0.18)" }}>
+                    <div className="w-10 h-10 rounded-[8px] flex items-center justify-center" style={{ background: "rgba(232, 84, 32, 0.1)", border: "1px solid rgba(232, 84, 32, 0.18)" }}>
                       <s.Icon size={20} strokeWidth={1.75} style={{ color: "hsl(var(--primary))" }} />
                     </div>
                     <span className="text-[13px] font-semibold text-foreground">{s.label}</span>
@@ -295,7 +295,7 @@ const AudioPage = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {sunoScenarios.map(s => (
                   <div key={s.label} className="rounded-xl p-5 flex flex-col items-center gap-2 cursor-pointer transition-colors" style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}>
-                    <div className="w-10 h-10 rounded-[10px] flex items-center justify-center" style={{ background: "rgba(232, 84, 32, 0.1)", border: "1px solid rgba(232, 84, 32, 0.18)" }}>
+                    <div className="w-10 h-10 rounded-[8px] flex items-center justify-center" style={{ background: "rgba(232, 84, 32, 0.1)", border: "1px solid rgba(232, 84, 32, 0.18)" }}>
                       <s.Icon size={20} strokeWidth={1.75} style={{ color: "hsl(var(--primary))" }} />
                     </div>
                     <span className="text-[13px] font-semibold text-foreground">{s.label}</span>
@@ -343,7 +343,7 @@ const AudioPage = () => {
         <div className="max-w-[780px] mx-auto">
           <WorkspaceTabs variant="attached" />
           <div
-            className="rounded-[20px] rounded-tl-none p-5 border border-[hsl(var(--border))] bg-[hsl(var(--card))] transition-all duration-200 has-[textarea:focus]:border-[hsl(var(--primary))] has-[textarea:focus]:shadow-[0_0_0_3px_rgba(232,84,32,0.12),0_1px_4px_rgba(0,0,0,0.2)]"
+            className="rounded-[22px] rounded-tl-none p-5 border border-[hsl(var(--border))] bg-[hsl(var(--card))] transition-all duration-200 has-[textarea:focus]:border-[hsl(var(--primary))] has-[textarea:focus]:shadow-[0_0_0_3px_rgba(232,84,32,0.12),0_1px_4px_rgba(0,0,0,0.2)]"
           >
             <textarea
               value={prompt}
@@ -416,10 +416,9 @@ const AudioPage = () => {
               <button
                 onClick={handleGenerate}
                 disabled={!prompt.trim()}
-                className="px-4 py-2 rounded-[10px] text-white text-sm font-semibold disabled:opacity-50 flex items-center gap-1.5"
-                style={{ background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" }}
+                className="ml-auto inline-flex items-center gap-1.5 px-5 h-10 rounded-full gradient-accent text-white text-[14px] font-semibold shadow-[0_10px_30px_-10px_rgba(232,84,32,0.55),inset_0_1px_0_rgba(255,255,255,0.25)] hover:opacity-90 transition-all disabled:opacity-50"
               >
-                <Plus size={14} /> Генерировать <Zap size={12} /> {isEL ? 60 : 30}
+                <Sparkles className="w-3.5 h-3.5" /> Генерировать <span className="inline-flex items-center gap-1 ml-1 font-mono tabular-nums"><Zap className="w-3 h-3" /> {isEL ? 60 : 30}</span>
               </button>
             </div>
           </div>

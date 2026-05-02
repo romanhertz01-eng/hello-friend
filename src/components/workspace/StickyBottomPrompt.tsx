@@ -12,7 +12,7 @@ export function StickyBottomPrompt({ prompt, onPromptChange, selectedModel, cred
   return (
     <div className="sticky bottom-0 z-10 px-4 py-3 bg-[hsl(var(--background))]/95 backdrop-blur-md">
       <div className="w-full rounded-[22px] border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-4 py-3 flex items-center gap-3 transition-colors focus-within:border-[hsl(var(--primary))] focus-within:ring-2 focus-within:ring-[hsl(var(--primary))]/20">
-        <button className="w-9 h-9 shrink-0 border border-dashed border-[hsl(var(--border))] rounded-[10px] flex items-center justify-center text-[hsl(var(--muted-foreground))] hover:border-[hsl(var(--primary))]/60 hover:text-[hsl(var(--foreground))] transition-colors">
+        <button className="w-9 h-9 shrink-0 border border-dashed border-[hsl(var(--border))] rounded-[8px] flex items-center justify-center text-[hsl(var(--muted-foreground))] hover:border-[hsl(var(--primary))]/60 hover:text-[hsl(var(--foreground))] transition-colors">
           <Plus size={16} />
         </button>
         <input

@@ -359,7 +359,7 @@ export function PromptWindow({ type, onTypeChange, prompt, onPromptChange, onGen
     : "var(--c-line-2)";
 
   return (
-    <div className="w-full max-w-[880px] mx-auto">
+    <div className="w-full max-w-[780px] mx-auto">
       {/* ─── Folder tabs (anchor to card top) ─── */}
       <div
         className="flex items-end gap-1 overflow-x-auto scrollbar-hide flex-nowrap justify-start pl-1"

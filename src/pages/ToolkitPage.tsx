@@ -206,7 +206,7 @@ const ToolkitPage = () => {
         </div>
       ))}
 
-      <div className="mt-12 p-8 rounded-[20px] bg-gradient-to-br from-[rgba(232, 84, 32,0.08)] to-[rgba(255, 122, 61,0.05)] text-center">
+      <div className="mt-12 p-8 rounded-[22px] bg-gradient-to-br from-[rgba(232, 84, 32,0.08)] to-[rgba(255, 122, 61,0.05)] text-center">
         <div className="flex justify-center gap-16 flex-wrap">
           {[
             { value: "90+", label: "AI-моделей" },

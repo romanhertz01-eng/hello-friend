@@ -221,7 +221,7 @@ const ToolPage = () => {
         <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
           {imageTools.map((t) => (
             <div key={t.label} className="shrink-0 w-[180px] h-[120px] border border-border rounded-xl flex flex-col items-center justify-center gap-3 hover:border-primary/30 hover:bg-accent/50 transition-colors cursor-pointer">
-              <div className="w-10 h-10 rounded-[10px] flex items-center justify-center" style={{ background: "rgba(232, 84, 32, 0.1)", border: "1px solid rgba(232, 84, 32, 0.18)" }}>
+              <div className="w-10 h-10 rounded-[8px] flex items-center justify-center" style={{ background: "rgba(232, 84, 32, 0.1)", border: "1px solid rgba(232, 84, 32, 0.18)" }}>
                 <t.Icon size={20} strokeWidth={1.75} style={{ color: "hsl(var(--primary))" }} />
               </div>
               <span className="text-[13px] text-center px-3 leading-tight">{t.label}</span>
