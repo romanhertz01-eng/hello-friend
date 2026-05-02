@@ -257,6 +257,15 @@ const VideoPage = () => {
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
       {/* Scrollable area: chat (welcome OR feed) + catalog below */}
       <div className="flex-1 overflow-y-auto w-full">
+        <div className="sticky top-0 z-20 flex justify-center py-3" style={{ background: "color-mix(in oklab, var(--c-bg) 85%, transparent)", backdropFilter: "blur(12px)" }}>
+          <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium" style={{ background: "var(--c-bg-1)", border: "1px solid var(--c-line)", color: "var(--c-fg)" }}>
+            <ModelGlyph name={provider?.name || "Kling"} size={20} />
+            <span>{provider?.name}</span>
+            <span className="text-muted-foreground">·</span>
+            <span className="font-mono tabular-nums text-xs" style={{ color: "var(--c-accent-2)" }}>{subModel?.name}</span>
+            <ChevronDown size={14} className="text-muted-foreground" />
+          </button>
+        </div>
         {!hasGenerations ? (
           <WelcomeBlock
             modelName={provider?.name || "Видео"}
