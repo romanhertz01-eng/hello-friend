@@ -88,10 +88,10 @@ const TextGenerationPage = () => {
       </section>
 
       <ScenariosGrid heading="Для чего используют" items={[
-        { icon: "📝", title: "Тексты и статьи", description: "Блоги, лендинги, описания товаров" },
-        { icon: "💻", title: "Код и разработка", description: "Написание, отладка и рефакторинг кода" },
-        { icon: "📊", title: "Аналитика и отчёты", description: "Обработка данных и построение выводов" },
-        { icon: "🌐", title: "Переводы", description: "Профессиональный перевод на 50+ языков" },
+        { title: "Тексты и статьи", description: "Блоги, лендинги, описания товаров" },
+        { title: "Код и разработка", description: "Написание, отладка и рефакторинг кода" },
+        { title: "Аналитика и отчёты", description: "Обработка данных и построение выводов" },
+        { title: "Переводы", description: "Профессиональный перевод на 50+ языков" },
       ]} />
 
       <section style={{ padding: "80px 0" }}>
@@ -131,7 +131,9 @@ const TextGenerationPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {benefits.map((b) => (
               <div key={b.title} className="text-center" style={{ background: "var(--seo-card-bg)", borderRadius: 16, padding: 32, border: "1px solid var(--seo-card-border)", boxShadow: "var(--seo-card-shadow)" }}>
-                <div style={{ fontSize: 40, marginBottom: 16 }}>{b.icon}</div>
+                <div className="inline-flex items-center justify-center mb-4" style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(232, 84, 32, 0.12)" }}>
+                  <b.Icon size={24} style={{ color: "hsl(var(--primary))" }} />
+                </div>
                 <h3 style={{ fontSize: 18, fontWeight: 700, color: "var(--seo-heading)", marginBottom: 8 }}>{b.title}</h3>
                 <p style={{ fontSize: 14, color: "var(--seo-text)" }}>{b.desc}</p>
               </div>
