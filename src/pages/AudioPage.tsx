@@ -143,12 +143,11 @@ const AudioPage = () => {
             onScenarioClick={(p) => setPrompt(p)}
           />
         ) : (
-          <MediaChatFeed generations={generations} />
-        )}
-        <div ref={feedEndRef} />
-        {!hasGenerations && <div className="h-8" />}
+          <>
+            <MediaChatFeed generations={generations} />
+            <div ref={feedEndRef} />
 
-        <div className="px-4 lg:px-8 py-6 space-y-8 border-t border-border">
+            <div className="px-4 lg:px-8 py-6 space-y-8 border-t border-border mt-6">
 
         {/* ─── ElevenLabs content ─── */}
         {isEL && (
