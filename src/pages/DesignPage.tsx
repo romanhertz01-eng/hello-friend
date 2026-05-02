@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Camera, Palette, Sparkles, Image as ImageIcon, Zap, Paintbrush } from "lucide-react";
 
 import { PromptBlock } from "@/components/workspace/ImagePromptBlock";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
@@ -6,6 +7,7 @@ import { PromptSuggestions } from "@/components/workspace/PromptSuggestions";
 import { ModelCarousel } from "@/components/workspace/ModelCarousel";
 import { ScenariosCarousel } from "@/components/workspace/ScenariosCarousel";
 import { ModelsGrid3x3 } from "@/components/workspace/ModelsGrid3x3";
+import { WelcomeBlock, type WelcomeScenario } from "@/components/workspace/WelcomeBlock";
 
 import {
   imageProviders,
@@ -35,6 +37,15 @@ const designGridModels = [
   { name: "Kling V3 Omni", desc: "Мультимодальная", icon: "🎨", iconColor: "#f97316", isNew: true, credits: 25 },
 ];
 
+const welcomeScenarios: WelcomeScenario[] = [
+  { Icon: Camera, title: "Фотореалистичный портрет", desc: "Портрет человека с детализацией", prompt: "Фотореалистичный портрет " },
+  { Icon: Palette, title: "Логотип и брендинг", desc: "Минималистичный лого для бренда", prompt: "Логотип для " },
+  { Icon: Sparkles, title: "Аниме иллюстрация", desc: "Персонаж в стиле аниме", prompt: "Аниме иллюстрация " },
+  { Icon: ImageIcon, title: "Контент для соцсетей", desc: "Пост, сторис, обложка", prompt: "Изображение для поста " },
+  { Icon: Zap, title: "Киберпанк сцена", desc: "Неоновый город будущего", prompt: "Киберпанк город ночью " },
+  { Icon: Paintbrush, title: "Арт и иллюстрация", desc: "Художественная иллюстрация", prompt: "Иллюстрация " },
+];
+
 const DesignPage = () => {
   const [prompt, setPrompt] = useState("");
   const [selectedProviderId, setSelectedProviderId] = useState("nano-banana");
@@ -46,7 +57,6 @@ const DesignPage = () => {
 
   const provider = imageProviders.find((p) => p.id === selectedProviderId);
   const subModel = provider?.subModels.find((s) => s.id === selectedSubModelId);
-  const credits = subModel?.credits ?? 0;
 
   useEffect(() => { document.title = "ERA2 — Генерация изображений"; }, []);
 
@@ -74,9 +84,25 @@ const DesignPage = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-56px)]">
-      <div className="flex-1 overflow-y-auto px-4 lg:px-8 py-4 space-y-4 w-full">
-        <div>
+    <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
+      {/* Scrollable area: welcome + catalog */}
+      <div className="flex-1 overflow-y-auto px-4 lg:px-8 py-4 space-y-6 w-full">
+        <WelcomeBlock
+          modelName={provider?.name || "Изображения"}
+          subModelName={subModel?.name}
+          scenarios={welcomeScenarios}
+          onScenarioClick={(p) => setPrompt(p)}
+        />
+
+        <PromptSuggestions suggestions={imagePromptSuggestions} onSelect={setPrompt} />
+        <ModelCarousel models={carouselModels} onSelect={handleCarouselSelect} />
+        <ScenariosCarousel title="Сценарии для изображений" scenarios={designScenarios} />
+        <ModelsGrid3x3 models={designGridModels} />
+      </div>
+
+      {/* Sticky input area */}
+      <div className="shrink-0 px-4 lg:px-8 pb-5 pt-2 bg-[var(--bg-primary)]">
+        <div className="max-w-[980px] mx-auto">
           <WorkspaceTabs variant="attached" />
           <PromptBlock
             prompt={prompt}
@@ -96,11 +122,6 @@ const DesignPage = () => {
             onGenerate={() => {}}
           />
         </div>
-
-        <PromptSuggestions suggestions={imagePromptSuggestions} onSelect={setPrompt} />
-        <ModelCarousel models={carouselModels} onSelect={handleCarouselSelect} />
-        <ScenariosCarousel title="Сценарии для изображений" scenarios={designScenarios} />
-        <ModelsGrid3x3 models={designGridModels} />
       </div>
     </div>
   );
