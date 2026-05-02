@@ -99,8 +99,16 @@ export function Footer() {
 
       <div className="border-t border-[hsl(var(--border))]">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-2">
-          <span className="text-xs text-[hsl(var(--muted-foreground))]">
-            © 2026 ERA2. Все права защищены.
+          <span className="flex items-center gap-2 text-[hsl(var(--muted-foreground))]">
+            <span
+              className="flex items-center justify-center font-bold text-white select-none"
+              style={{ width: 20, height: 20, borderRadius: 5, background: "linear-gradient(135deg, #E85420, #ff7a3d)", fontSize: 11 }}
+            >
+              E
+            </span>
+            <span className="text-xs">
+              © 2026 era<span style={{ color: "var(--c-accent-2)" }}>2</span>.ai
+            </span>
           </span>
           <span className="font-mono text-xs text-[hsl(var(--muted-foreground))]">
             v1.0.0
