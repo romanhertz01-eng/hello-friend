@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useAuth } from "@/contexts/AuthContext";
 import { Footer } from "@/components/shared/Footer";
-import { ChevronDown, PenLine, Code, Palette, BarChart3, Globe, FileText, Smartphone, Mail, GraduationCap, Target, RefreshCw, Zap, Briefcase } from "lucide-react";
+import { ChevronDown, PenLine, Code, Palette, BarChart3, Globe, FileText, Smartphone, Mail, GraduationCap, Target, RefreshCw, Zap } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { PromoBanner } from "@/components/seo/PromoBanner";
 import { SeoPromptWidget } from "@/components/seo/SeoPromptWidget";
