@@ -106,14 +106,14 @@ const AudioPage = () => {
                 className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full text-[13px] font-medium whitespace-nowrap leading-none transition-colors text-foreground"
                 style={{ background: "var(--bg-pill)", border: "1px solid var(--border-primary)" }}
               >
-                <span className="leading-none">{isEL ? "🔊 ElevenLabs" : "🎵 Suno"}</span>
+                <span className="leading-none">{isEL ? "ElevenLabs" : "Suno"}</span>
                 <ChevronDown size={12} className="shrink-0 opacity-60" />
               </button>
               {modelDDOpen && (
                 <div className="absolute top-full left-0 mt-1 w-64 rounded-xl shadow-xl z-50 p-1" style={{ background: "var(--bg-popup)", border: "1px solid var(--border-primary)" }}>
                   {[
-                    { id: "elevenlabs" as const, icon: "🔊", name: "ElevenLabs", desc: "Озвучка и голос", credits: 60 },
-                    { id: "suno" as const, icon: "🎵", name: "Suno", desc: "Генерация музыки", credits: 30 },
+                    { id: "elevenlabs" as const, name: "ElevenLabs", desc: "Озвучка и голос", credits: 60 },
+                    { id: "suno" as const, name: "Suno", desc: "Генерация музыки", credits: 30 },
                   ].map(m => (
                     <button
                       key={m.id}
@@ -123,7 +123,7 @@ const AudioPage = () => {
                         selectedModel === m.id ? "bg-[rgba(232, 84, 32,0.15)]" : "hover:bg-[rgba(255,255,255,0.04)]"
                       )}
                     >
-                      <span className="text-lg">{m.icon}</span>
+                      <ModelGlyph name={m.name} size={28} />
                       <div className="flex-1 text-left">
                         <div className="font-medium" style={{ color: selectedModel === m.id ? "hsl(var(--primary))" : "var(--text-primary)" }}>{m.name}</div>
                         <div className="text-[11px]" style={{ color: "var(--text-tertiary)" }}>{m.desc}</div>
