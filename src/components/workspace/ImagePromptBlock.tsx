@@ -48,7 +48,7 @@ function DropdownOption({
     <button
       onClick={onClick}
       className={cn(
-        "w-full text-left px-3 py-2 rounded-[10px] text-sm font-mono tabular-nums transition-colors flex items-center justify-between",
+        "w-full text-left px-3 py-2 rounded-[8px] text-sm font-mono tabular-nums transition-colors flex items-center justify-between",
         active
           ? "bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))]"
           : "text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--secondary))] hover:text-[hsl(var(--foreground))]"
@@ -117,7 +117,7 @@ function MorePopup({
                   key={q}
                   onClick={() => onQuantityChange(q)}
                   className={cn(
-                    "w-[44px] h-9 rounded-[10px] border text-sm font-mono tabular-nums font-medium transition-colors",
+                    "w-[44px] h-9 rounded-[8px] border text-sm font-mono tabular-nums font-medium transition-colors",
                     quantity === q
                       ? "border-transparent text-white gradient-accent"
                       : "border-[hsl(var(--border))] text-[hsl(var(--muted-foreground))]"
@@ -139,7 +139,7 @@ function MorePopup({
                   key={q}
                   onClick={() => onQualityChange(q)}
                   className={cn(
-                    "px-4 h-9 rounded-[10px] border text-sm font-mono tabular-nums font-medium transition-colors",
+                    "px-4 h-9 rounded-[8px] border text-sm font-mono tabular-nums font-medium transition-colors",
                     quality === q
                       ? "border-transparent text-white gradient-accent"
                       : "border-[hsl(var(--border))] text-[hsl(var(--muted-foreground))]"
@@ -162,7 +162,7 @@ function MorePopup({
               </div>
             )}
             {f.type === "input" && (
-              <input type="number" value={advValues[f.key] ?? ""} onChange={(e) => onAdvChange(f.key, e.target.value)} placeholder="Случайный" className="w-full rounded-[10px] px-3 py-2 text-sm font-mono tabular-nums bg-[hsl(var(--secondary))] border border-[hsl(var(--border))] text-[hsl(var(--foreground))]" />
+              <input type="number" value={advValues[f.key] ?? ""} onChange={(e) => onAdvChange(f.key, e.target.value)} placeholder="Случайный" className="w-full rounded-[8px] px-3 py-2 text-sm font-mono tabular-nums bg-[hsl(var(--secondary))] border border-[hsl(var(--border))] text-[hsl(var(--foreground))]" />
             )}
           </div>
         ))}
@@ -172,7 +172,7 @@ function MorePopup({
             <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[hsl(var(--muted-foreground))]">Стиль</span>
             <div className="grid grid-cols-3 gap-1.5">
               {styles.map((s) => (
-                <button key={s} onClick={() => onAdvChange("style", s)} className={cn("px-3 py-2 rounded-[10px] text-xs border transition-colors", advValues.style === s ? "border-[hsl(var(--primary))] bg-[hsl(var(--accent))] text-[hsl(var(--primary))]" : "border-[hsl(var(--border))] text-[hsl(var(--muted-foreground))]")}>
+                <button key={s} onClick={() => onAdvChange("style", s)} className={cn("px-3 py-2 rounded-[8px] text-xs border transition-colors", advValues.style === s ? "border-[hsl(var(--primary))] bg-[hsl(var(--accent))] text-[hsl(var(--primary))]" : "border-[hsl(var(--border))] text-[hsl(var(--muted-foreground))]")}>
                   {s}
                 </button>
               ))}

@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import {
-  Home, Image, Video, MessageSquare, Mic, Bot, LayoutGrid,
+  Home, Image, Video, MessageSquare, Mic, Bot, LayoutGrid, Layers,
   CreditCard, History, ChevronLeft, X, ArrowRight, Gem,
 } from "lucide-react";
 import { StatusBadge } from "@/components/ui/era/StatusBadge";
@@ -20,10 +20,10 @@ const genItems = [
   { icon: Mic, label: "Аудио", path: "/audio" },
 ];
 
-const toolItems: Array<{ icon: React.ElementType; label: string; path: string; badge?: "new" }> = [
+const toolItems: Array<{ icon: React.ElementType; label: string; path: string; badge?: "new" | "soon" }> = [
   { icon: Bot, label: "Агенты / Ассистенты", path: "/agents" },
   { icon: LayoutGrid, label: "Все нейросети", path: "/toolkit" },
-  { icon: LayoutGrid, label: "Студии", path: "/studios", badge: "new" },
+  { icon: Layers, label: "Студии", path: "/studios", badge: "soon" },
 ];
 
 const bottomItems = [
@@ -35,7 +35,7 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
 
-  const renderItem = (item: { icon: React.ElementType; label: string; path: string; badge?: "new" }) => (
+  const renderItem = (item: { icon: React.ElementType; label: string; path: string; badge?: "new" | "soon" }) => (
     <Link
       key={item.label}
       to={item.path}
@@ -51,10 +51,11 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
       <item.icon className="h-[18px] w-[18px] shrink-0" />
       {!collapsed && <span className="truncate flex-1">{item.label}</span>}
       {!collapsed && item.badge === "new" && <StatusBadge variant="new" />}
+      {!collapsed && item.badge === "soon" && <StatusBadge variant="soon">СКОРО</StatusBadge>}
     </Link>
   );
 
-  const renderSection = (label: string, items: Array<{ icon: React.ElementType; label: string; path: string; badge?: "new" }>) => (
+  const renderSection = (label: string, items: Array<{ icon: React.ElementType; label: string; path: string; badge?: "new" | "soon" }>) => (
     <>
       {!collapsed && label && (
         <div className="px-4 pt-5 pb-2">

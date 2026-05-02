@@ -86,7 +86,7 @@ const NanoBananaPage = () => {
       </section>
 
       <section className="px-4">
-        <div className="max-w-[900px] mx-auto rounded-[20px] p-6" style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}>
+        <div className="max-w-[900px] mx-auto rounded-[22px] p-6" style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}>
           <div className="rounded-xl p-4 text-sm" style={{ background: "var(--bg-card-hover)", color: "var(--text-tertiary)" }}>
             Фотореалистичный портрет девушки в осеннем парке...
           </div>
@@ -272,7 +272,7 @@ const NanoBananaPage = () => {
       </section>
 
       <section className="py-20 px-4">
-        <div className="max-w-[700px] mx-auto text-center p-10 rounded-[20px] bg-gradient-to-br from-[rgba(232, 84, 32,0.1)] to-[rgba(255, 122, 61,0.06)]">
+        <div className="max-w-[700px] mx-auto text-center p-10 rounded-[22px] bg-gradient-to-br from-[rgba(232, 84, 32,0.1)] to-[rgba(255, 122, 61,0.06)]">
           <h2 className="text-[28px] font-bold" style={{ color: "var(--text-primary)" }}>Попробуйте Nano Banana 2 на ERA2</h2>
           <p className="mt-2 mb-6" style={{ color: "var(--text-secondary)" }}>Бесплатный старт — без карты, без VPN</p>
           <Link to={cta} className="inline-block px-8 py-3.5 rounded-xl bg-primary text-white font-semibold text-sm hover:opacity-90 transition">

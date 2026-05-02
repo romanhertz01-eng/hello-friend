@@ -140,7 +140,7 @@ const TextPage = () => {
           <div className="relative">
             <button
               onClick={() => setSelectorOpen(!selectorOpen)}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
               style={{ background: "var(--c-bg-1)", border: "1px solid var(--c-line)", color: c.textPrimary }}
             >
               <ModelGlyph name={provider.name} size={20} />

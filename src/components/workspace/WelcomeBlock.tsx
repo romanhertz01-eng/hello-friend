@@ -49,7 +49,7 @@ export function WelcomeBlock({
             <button
               key={s.title}
               onClick={() => onScenarioClick(s.prompt)}
-              className="group p-4 rounded-[16px] text-left transition-all"
+              className="group p-4 rounded-[14px] text-left transition-all"
               style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "var(--border-hover)";
