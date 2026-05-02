@@ -387,7 +387,7 @@ const AudioPage = () => {
               <div className="flex-1" />
 
               <button
-                onClick={() => {}}
+                onClick={handleGenerate}
                 disabled={!prompt.trim()}
                 className="px-4 py-2 rounded-[10px] text-white text-sm font-semibold disabled:opacity-50 flex items-center gap-1.5"
                 style={{ background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" }}
