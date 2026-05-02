@@ -224,6 +224,7 @@ interface PromptBlockImageProps {
   turbo: boolean;
   onTurboToggle: () => void;
   onGenerate: () => void;
+  modelTriggerRef?: React.RefObject<HTMLButtonElement | null>;
 }
 
 export function PromptBlock({
@@ -234,6 +235,7 @@ export function PromptBlock({
   quality, onQualityChange,
   turbo, onTurboToggle,
   onGenerate,
+  modelTriggerRef,
 }: PromptBlockImageProps) {
   const [moreOpen, setMoreOpen] = useState(false);
   const [advValues, setAdvValues] = useStateRef<Record<string, any>>({});
@@ -283,6 +285,7 @@ export function PromptBlock({
             selectedProviderId={selectedProviderId}
             selectedSubModelId={selectedSubModelId}
             onSelect={onModelSelect}
+            triggerButtonRef={modelTriggerRef}
           />
 
           {/* Segmented bar: aspect / qty / quality / turbo / more */}
