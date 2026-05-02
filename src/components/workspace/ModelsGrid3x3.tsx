@@ -26,6 +26,7 @@ export function ModelsGrid3x3({ models, onSelect }: ModelsGrid3x3Props) {
             key={m.name}
             onClick={() => onSelect?.(m.name)}
             className="flex items-center gap-3 p-3 rounded-[14px] cursor-pointer transition-colors hover:bg-[hsl(var(--secondary))]"
+            style={{ boxShadow: "var(--card-shadow-light)" }}
           >
             <ModelGlyph name={m.name} size={40} />
             <div className="flex-1 min-w-0">

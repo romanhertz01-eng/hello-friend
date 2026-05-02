@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground rounded-full shadow-[0_10px_30px_-10px_rgba(232,84,32,0.55),inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-[#ff7a3d] hover:-translate-y-px active:translate-y-0",
+          "bg-primary text-primary-foreground rounded-full shadow-[0_6px_24px_-6px_rgba(232,84,32,0.4),inset_0_1px_0_rgba(255,255,255,0.35)] hover:bg-[#ff7a3d] hover:-translate-y-px active:translate-y-0",
         ghost:
           "bg-card text-foreground rounded-full border border-[hsl(var(--border))] hover:bg-secondary hover:border-[hsl(20_17%_20%)]",
         quiet:
