@@ -27,7 +27,7 @@ export const textProviders: TextProvider[] = [
   {
     id: "chatgpt",
     name: "ChatGPT",
-    icon: "🤖",
+    icon: "",
     subModels: [
       { id: "gpt-web", name: "GPT Web", credits: 0, badge: "WEB", description: "Веб-поиск и анализ ссылок в реальном времени", hasWeb: true, hasImages: true },
       { id: "gpt-4.1", name: "GPT-4.1", credits: 3, description: "Производительная модель для повседневных задач", hasFiles: true, hasImages: true },
@@ -43,7 +43,7 @@ export const textProviders: TextProvider[] = [
   {
     id: "claude",
     name: "Claude",
-    icon: "✳️",
+    icon: "",
     subModels: [
       { id: "claude-3.5-haiku", name: "Claude 3.5 Haiku", credits: 1, badge: "∞ FAST", description: "Быстрый и эффективный", hasFiles: true },
       { id: "claude-4-sonnet", name: "Claude 4 Sonnet", credits: 1, description: "Баланс скорости и качества", hasFiles: true },
@@ -58,7 +58,7 @@ export const textProviders: TextProvider[] = [
   {
     id: "gemini",
     name: "Gemini",
-    icon: "✦",
+    icon: "",
     subModels: [
       { id: "gemini-2.5-flash", name: "Gemini 2.5 Flash", credits: 1, badge: "∞ FAST", description: "Быстрый и мультимодальный", hasFiles: true, hasImages: true },
       { id: "gemini-2.5-pro", name: "Gemini 2.5 Pro", credits: 1, badge: "NEW", description: "Самая мощная версия с высокой точностью", isNew: true, hasFiles: true, hasImages: true },
@@ -69,7 +69,7 @@ export const textProviders: TextProvider[] = [
   {
     id: "grok",
     name: "Grok",
-    icon: "⊘",
+    icon: "",
     subModels: [
       { id: "grok-3", name: "Grok 3", credits: 1, description: "Стандартный Grok от xAI" },
       { id: "grok-3-reasoner", name: "Grok 3 Reasoner", credits: 2, badge: "THINK", description: "Рассуждающая версия Grok", hasThinking: true },
@@ -80,7 +80,7 @@ export const textProviders: TextProvider[] = [
   {
     id: "deepseek",
     name: "DeepSeek",
-    icon: "🐋",
+    icon: "",
     subModels: [
       { id: "deepseek-v3", name: "DeepSeek V3", credits: 1, badge: "∞ FAST", description: "Быстрый и мощный open-source" },
       { id: "deepseek-r1", name: "DeepSeek R1", credits: 1, badge: "THINK", description: "Лучшая рассуждающая модель", hasThinking: true },
@@ -89,7 +89,7 @@ export const textProviders: TextProvider[] = [
   {
     id: "perplexity",
     name: "Perplexity",
-    icon: "🔮",
+    icon: "",
     subModels: [
       { id: "perplexity-sonar", name: "Perplexity Sonar", credits: 1, badge: "∞ FAST", description: "Быстрый поиск с цитатами", hasWeb: true },
       { id: "perplexity-sonar-pro", name: "Perplexity Sonar Pro", credits: 2, badge: "WEB", description: "Расширенный поиск с анализом", hasWeb: true },

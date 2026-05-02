@@ -45,7 +45,6 @@
 
 /* ═══ ERA2 LIGHT THEME — warm beige ═══ */
 :root {
-  --radius: 0.875rem;
   --background: 30 28% 95%;
   --foreground: 20 24% 7%;
   --card: 30 26% 92%;
@@ -300,7 +299,7 @@
     box-shadow: 0 0 30px rgba(232, 84, 32, 0.25);
   }
   .rounded-button {
-    border-radius: 10px;
+    border-radius: 8px;
   }
 }
 
@@ -315,7 +314,7 @@
 }
 .prompt-animated-border {
   position: relative;
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 2px;
   background: linear-gradient(var(--gradient-angle, 0deg), #E85420, #ff7a3d, #ffb27a, #E85420);
   animation: gradient-rotate 4s linear infinite;
@@ -323,7 +322,7 @@
 }
 .prompt-animated-border-thin {
   position: relative;
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 1px;
   background: linear-gradient(var(--gradient-angle, 0deg), rgba(232,84,32,0.6), rgba(255,122,61,0.4), rgba(255,178,122,0.6), rgba(232,84,32,0.6));
   animation: gradient-rotate 6s linear infinite;

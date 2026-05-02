@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, RefreshCw, Globe, PenLine, Code, BarChart3, CreditCard, MessageCircle } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Footer } from "@/components/shared/Footer";
@@ -27,10 +28,10 @@ const tableRows = [
   { name: "DeepSeek Reasoner", price: 1, context: "64K", code: "★★★★★", analysis: "★★★★☆", speed: "Медленная" },
 ];
 
-const benefits = [
-  { icon: "🔄", title: "Все модели в одном чате", desc: "ChatGPT, Claude, Gemini — переключайтесь за секунду. Не нужно 6 разных подписок." },
-  { icon: "💳", title: "Оплата в рублях", desc: "GPT 5.2 и Claude Opus без иностранной карты. Единая подписка — все модели." },
-  { icon: "🌐", title: "Без VPN", desc: "Все нейросети работают напрямую. ChatGPT, Claude, Gemini — без блокировок." },
+const benefits: { Icon: LucideIcon; title: string; desc: string }[] = [
+  { Icon: RefreshCw, title: "Все модели в одном чате", desc: "ChatGPT, Claude, Gemini — переключайтесь за секунду. Не нужно 6 разных подписок." },
+  { Icon: CreditCard, title: "Оплата в рублях", desc: "GPT 5.2 и Claude Opus без иностранной карты. Единая подписка — все модели." },
+  { Icon: Globe, title: "Без VPN", desc: "Все нейросети работают напрямую. ChatGPT, Claude, Gemini — без блокировок." },
 ];
 
 const faqData = [
@@ -59,7 +60,7 @@ const TextGenerationPage = () => {
 
       <SeoPromptWidget mode="text" placeholder="Напишите запрос для текстовой нейросети..." modelName="GPT 5.2" credits={10} redirectTo={cta} />
 
-      <PromoBanner badge="🔥 Топ модель" title="GPT 5.2" description="Самая мощная модель для работы с текстом. Код, анализ, тексты." link="/text" />
+      <PromoBanner badge="Топ модель" title="GPT 5.2" description="Самая мощная модель для работы с текстом. Код, анализ, тексты." link="/text" />
 
       <section style={{ padding: "80px 0" }}>
         <div className="max-w-[1200px] mx-auto px-4">
@@ -67,7 +68,7 @@ const TextGenerationPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {models.map((m) => (
               <div key={m.name} style={{ background: "var(--seo-card-bg)", border: "1px solid var(--seo-card-border)", borderRadius: 16, padding: 24, boxShadow: "var(--seo-card-shadow)" }}>
-                <div className="mb-3 rounded-lg flex items-center justify-center" style={{ width: 40, height: 40, background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)", fontSize: 18, color: "#fff" }}>💬</div>
+                <div className="mb-3 rounded-lg flex items-center justify-center" style={{ width: 40, height: 40, background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)", color: "#fff" }}><MessageCircle size={20} /></div>
                 <div className="flex items-center gap-2 mb-2">
                   <span style={{ fontSize: 18, fontWeight: 700, color: "var(--seo-heading)" }}>{m.name}</span>
                   {m.provider && <span style={{ fontSize: 12, color: "var(--seo-text-muted)" }}>({m.provider})</span>}
@@ -87,10 +88,10 @@ const TextGenerationPage = () => {
       </section>
 
       <ScenariosGrid heading="Для чего используют" items={[
-        { icon: "📝", title: "Тексты и статьи", description: "Блоги, лендинги, описания товаров" },
-        { icon: "💻", title: "Код и разработка", description: "Написание, отладка и рефакторинг кода" },
-        { icon: "📊", title: "Аналитика и отчёты", description: "Обработка данных и построение выводов" },
-        { icon: "🌐", title: "Переводы", description: "Профессиональный перевод на 50+ языков" },
+        { title: "Тексты и статьи", description: "Блоги, лендинги, описания товаров" },
+        { title: "Код и разработка", description: "Написание, отладка и рефакторинг кода" },
+        { title: "Аналитика и отчёты", description: "Обработка данных и построение выводов" },
+        { title: "Переводы", description: "Профессиональный перевод на 50+ языков" },
       ]} />
 
       <section style={{ padding: "80px 0" }}>
@@ -130,7 +131,9 @@ const TextGenerationPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {benefits.map((b) => (
               <div key={b.title} className="text-center" style={{ background: "var(--seo-card-bg)", borderRadius: 16, padding: 32, border: "1px solid var(--seo-card-border)", boxShadow: "var(--seo-card-shadow)" }}>
-                <div style={{ fontSize: 40, marginBottom: 16 }}>{b.icon}</div>
+                <div className="inline-flex items-center justify-center mb-4" style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(232, 84, 32, 0.12)" }}>
+                  <b.Icon size={24} style={{ color: "hsl(var(--primary))" }} />
+                </div>
                 <h3 style={{ fontSize: 18, fontWeight: 700, color: "var(--seo-heading)", marginBottom: 8 }}>{b.title}</h3>
                 <p style={{ fontSize: 14, color: "var(--seo-text)" }}>{b.desc}</p>
               </div>

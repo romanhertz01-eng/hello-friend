@@ -33,15 +33,15 @@ const designScenarios = [
 ];
 
 const designGridModels = [
-  { name: "Nano Banana 2", desc: "Премиум генерация", icon: "🍌", iconColor: "#eab308", isNew: true, credits: 300 },
-  { name: "MidJourney", desc: "Топ для арта", icon: "⛵", iconColor: "#f97316", badges: ["Топ"], credits: 80 },
-  { name: "Seedream 5 Lite", desc: "Быстрая генерация", icon: "📊", iconColor: "#22c55e", isNew: true, credits: 2 },
-  { name: "GPT Image 1.5", desc: "От OpenAI", icon: "🤖", iconColor: "#3b82f6", credits: 40 },
-  { name: "Flux", desc: "State of the art", icon: "⚡", iconColor: "#f97316", badges: ["SOTA"], credits: 15 },
-  { name: "Runway", desc: "Креативная генерация", icon: "🎬", iconColor: "hsl(var(--primary))", credits: 20 },
-  { name: "Imagen 4", desc: "От Google", icon: "🌀", iconColor: "#3b82f6", badges: ["Google"], credits: 8 },
-  { name: "Higgsfield Soul", desc: "Уникальный стиль", icon: "🔥", iconColor: "hsl(var(--primary))", isNew: true, credits: 15 },
-  { name: "Kling V3 Omni", desc: "Мультимодальная", icon: "🎨", iconColor: "#f97316", isNew: true, credits: 25 },
+  { name: "Nano Banana 2", desc: "Премиум генерация", isNew: true, credits: 300 },
+  { name: "MidJourney", desc: "Топ для арта", badges: ["Топ"], credits: 80 },
+  { name: "Seedream 5 Lite", desc: "Быстрая генерация", isNew: true, credits: 2 },
+  { name: "GPT Image 1.5", desc: "От OpenAI", credits: 40 },
+  { name: "Flux", desc: "State of the art", badges: ["SOTA"], credits: 15 },
+  { name: "Runway", desc: "Креативная генерация", credits: 20 },
+  { name: "Imagen 4", desc: "От Google", badges: ["Google"], credits: 8 },
+  { name: "Higgsfield Soul", desc: "Уникальный стиль", isNew: true, credits: 15 },
+  { name: "Kling V3 Omni", desc: "Мультимодальная", isNew: true, credits: 25 },
 ];
 
 const welcomeScenarios: WelcomeScenario[] = [

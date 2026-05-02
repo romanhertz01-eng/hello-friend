@@ -4,15 +4,17 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Footer } from "@/components/shared/Footer";
 import { FAQ } from "@/components/shared/FAQ";
 import { aiPhotos, aiArt, aiLandscapes } from "@/data/placeholderImages";
-import { Zap } from "lucide-react";
+import { Zap, Target, Lock, Type, Image as ImageIcon, Palette, Ratio, Globe, CreditCard, Wallet, Sailboat, Sparkles } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 
-const features = [
-  { icon: "🎯", title: "Фотореализм", desc: "Генерация изображений с фотографической детализацией. Кожа, текстуры, освещение — неотличимо от реальных фото." },
-  { icon: "🔒", title: "Неизменные сюжеты", desc: "Контроль консистентности персонажей и сцен. Один и тот же человек в разных ракурсах и ситуациях." },
-  { icon: "✍️", title: "Текст на изображениях", desc: "Точная генерация текста, надписей и типографики прямо на картинке." },
-  { icon: "🖼", title: "Разрешение до 4K", desc: "Генерация в высоком разрешении без потери качества и деталей." },
-  { icon: "🎨", title: "Любые стили", desc: "От фотореализма до аниме, от масляной живописи до минималистичных иллюстраций." },
-  { icon: "📐", title: "Гибкие пропорции", desc: "Поддержка всех форматов: 1:1, 16:9, 9:16, 4:3, 3:2, 21:9 и auto." },
+const features: { Icon: LucideIcon; title: string; desc: string }[] = [
+  { Icon: Target, title: "Фотореализм", desc: "Генерация изображений с фотографической детализацией. Кожа, текстуры, освещение — неотличимо от реальных фото." },
+  { Icon: Lock, title: "Неизменные сюжеты", desc: "Контроль консистентности персонажей и сцен. Один и тот же человек в разных ракурсах и ситуациях." },
+  { Icon: Type, title: "Текст на изображениях", desc: "Точная генерация текста, надписей и типографики прямо на картинке." },
+  { Icon: ImageIcon, title: "Разрешение до 4K", desc: "Генерация в высоком разрешении без потери качества и деталей." },
+  { Icon: Palette, title: "Любые стили", desc: "От фотореализма до аниме, от масляной живописи до минималистичных иллюстраций." },
+  { Icon: Ratio, title: "Гибкие пропорции", desc: "Поддержка всех форматов: 1:1, 16:9, 9:16, 4:3, 3:2, 21:9 и auto." },
 ];
 
 const pricing = [
@@ -21,10 +23,10 @@ const pricing = [
   { name: "Nano Banana", credits: 80 },
 ];
 
-const whyEra2 = [
-  { icon: "🌐", title: "Без VPN", desc: "Nano Banana работает напрямую из России. Никаких блокировок." },
-  { icon: "💳", title: "Оплата в рублях", desc: "Не нужна иностранная карта. Оплата любым российским банком." },
-  { icon: "💰", title: "Дешевле подписки", desc: "Платите только за использование. Не нужна отдельная подписка за $30/мес." },
+const whyEra2: { Icon: LucideIcon; title: string; desc: string }[] = [
+  { Icon: Globe, title: "Без VPN", desc: "Nano Banana работает напрямую из России. Никаких блокировок." },
+  { Icon: CreditCard, title: "Оплата в рублях", desc: "Не нужна иностранная карта. Оплата любым российским банком." },
+  { Icon: Wallet, title: "Дешевле подписки", desc: "Платите только за использование. Не нужна отдельная подписка за $30/мес." },
 ];
 
 const steps = [
@@ -34,12 +36,12 @@ const steps = [
 ];
 
 const otherModels = [
-  { name: "MidJourney", icon: "⛵", badge: "Топ", credits: 80 },
-  { name: "Seedream 5 Lite", icon: "🌱", badge: "NEW", credits: 2 },
-  { name: "GPT Image 1.5", icon: "🎨", badge: "Premium", credits: 40 },
-  { name: "Flux", icon: "✨", badge: "SOTA", credits: 15 },
-  { name: "Imagen 4", icon: "🖼", badge: "Google", credits: 8 },
-  { name: "Higgsfield Soul", icon: "🧬", badge: "NEW", credits: 15 },
+  { name: "MidJourney", badge: "Топ", credits: 80 },
+  { name: "Seedream 5 Lite", badge: "NEW", credits: 2 },
+  { name: "GPT Image 1.5", badge: "Premium", credits: 40 },
+  { name: "Flux", badge: "SOTA", credits: 15 },
+  { name: "Imagen 4", badge: "Google", credits: 8 },
+  { name: "Higgsfield Soul", badge: "NEW", credits: 15 },
 ];
 
 const faqItems = [
@@ -63,7 +65,7 @@ const NanoBananaPage = () => {
     <div className="min-h-screen" style={{ background: "var(--bg-primary)" }}>
       <section className="pt-28 pb-16 px-4" style={{ background: "linear-gradient(180deg, #1a0533 0%, transparent 60%)" }}>
         <div className="max-w-[800px] mx-auto text-center">
-          <div className="w-16 h-16 rounded-full bg-[#facc15] flex items-center justify-center text-3xl mx-auto">🍌</div>
+          <div className="mx-auto"><ModelGlyph name="Nano Banana" size={64} /></div>
           <h1 className="text-[clamp(28px,5vw,40px)] font-extrabold mt-5" style={{ color: "var(--text-primary)" }}>
             Nano Banana 2 — генерация изображений
           </h1>
@@ -104,7 +106,7 @@ const NanoBananaPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((f) => (
               <div key={f.title} className="rounded-2xl p-6" style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)", boxShadow: "var(--shadow-card)" }}>
-                <div className="w-9 h-9 rounded-full bg-[rgba(232, 84, 32,0.15)] flex items-center justify-center text-lg mb-3">{f.icon}</div>
+                <div className="w-9 h-9 rounded-full bg-[rgba(232, 84, 32,0.15)] flex items-center justify-center mb-3"><f.Icon size={18} style={{ color: "hsl(var(--primary))" }} /></div>
                 <h3 className="text-base font-semibold" style={{ color: "var(--text-primary)" }}>{f.title}</h3>
                 <p className="text-[13px] mt-1.5" style={{ color: "var(--text-secondary)" }}>{f.desc}</p>
               </div>
@@ -173,7 +175,7 @@ const NanoBananaPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {whyEra2.map((w) => (
               <div key={w.title} className="rounded-2xl p-8 text-center" style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)", boxShadow: "var(--shadow-card)" }}>
-                <div className="text-3xl mb-3">{w.icon}</div>
+                <div className="inline-flex items-center justify-center mb-3" style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(232, 84, 32, 0.15)" }}><w.Icon size={22} style={{ color: "hsl(var(--primary))" }} /></div>
                 <h3 className="text-base font-semibold" style={{ color: "var(--text-primary)" }}>{w.title}</h3>
                 <p className="text-[13px] mt-2" style={{ color: "var(--text-secondary)" }}>{w.desc}</p>
               </div>
@@ -251,7 +253,7 @@ const NanoBananaPage = () => {
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
             {otherModels.map((m) => (
               <div key={m.name} className="flex-shrink-0 w-[180px] rounded-2xl p-4 transition cursor-pointer" style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)", boxShadow: "var(--shadow-card)" }}>
-                <div className="text-2xl mb-2">{m.icon}</div>
+                <div className="mb-2"><ModelGlyph name={m.name} size={32} /></div>
                 <div className="flex items-center gap-1.5 flex-wrap">
                   <span className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>{m.name}</span>
                   <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: "var(--bg-tag)", color: "var(--text-secondary)" }}>{m.badge}</span>

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Search, ChevronRight, ChevronLeft, Check } from "lucide-react";
 import { getModelsByCategory, type AIModel, type SubModel } from "@/data/models";
+import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -110,7 +111,7 @@ function ProviderList({
             selectedModelId === m.id && "bg-muted/40"
           )}
         >
-          <span className="text-xl shrink-0">{m.icon}</span>
+          <ModelGlyph name={m.name} size={24} />
           <div className="flex-1 min-w-0">
             <div className="text-sm font-semibold truncate">{m.name}</div>
             <div className="text-xs text-muted-foreground">Модель {m.provider}</div>
@@ -152,7 +153,7 @@ function SubModelList({
         Назад
       </button>
       <div className="px-4 py-2 flex items-center gap-2">
-        <span className="text-lg">{model.icon}</span>
+        <ModelGlyph name={model.name} size={20} />
         <span className="text-sm font-semibold">{model.name}</span>
       </div>
       {model.subModels?.map((sub) => {

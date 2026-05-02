@@ -2,29 +2,30 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useAuth } from "@/contexts/AuthContext";
 import { Footer } from "@/components/shared/Footer";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, PenLine, Code, Palette, BarChart3, Globe, FileText, Smartphone, Mail, GraduationCap, Target, RefreshCw, Zap } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { PromoBanner } from "@/components/seo/PromoBanner";
 import { SeoPromptWidget } from "@/components/seo/SeoPromptWidget";
 import { ScenariosGrid } from "@/components/seo/ScenariosGrid";
 import { HowItWorks } from "@/components/seo/HowItWorks";
 import { SeoEditorialBlock } from "@/components/seo/SeoEditorialBlock";
 
-const agents = [
-  { icon: "✍️", name: "Копирайтер", description: "Пишет продающие тексты, посты для соцсетей, email-рассылки и рекламные заголовки." },
-  { icon: "💻", name: "Программист", description: "Пишет код, находит ошибки, объясняет алгоритмы. Python, JavaScript, SQL и другие языки." },
-  { icon: "🎨", name: "Дизайн-ассистент", description: "Помогает составить промпт для генерации изображений, подбирает стили и композицию." },
-  { icon: "📊", name: "Аналитик данных", description: "Анализирует таблицы, строит отчёты, находит инсайты в данных." },
-  { icon: "🌐", name: "Переводчик", description: "Переводит тексты с сохранением стиля и контекста. 50+ языков." },
-  { icon: "📝", name: "Редактор", description: "Проверяет грамматику, улучшает стиль, адаптирует тексты под целевую аудиторию." },
-  { icon: "📱", name: "SMM-менеджер", description: "Создаёт контент-планы, пишет посты, придумывает идеи для Reels и Stories." },
-  { icon: "📧", name: "Email-маркетолог", description: "Пишет цепочки писем, welcome-серии, триггерные рассылки." },
-  { icon: "🎓", name: "Репетитор", description: "Объясняет сложные темы простым языком, помогает учиться и готовиться к экзаменам." },
+const agents: { Icon: LucideIcon; name: string; description: string }[] = [
+  { Icon: PenLine, name: "Копирайтер", description: "Пишет продающие тексты, посты для соцсетей, email-рассылки и рекламные заголовки." },
+  { Icon: Code, name: "Программист", description: "Пишет код, находит ошибки, объясняет алгоритмы. Python, JavaScript, SQL и другие языки." },
+  { Icon: Palette, name: "Дизайн-ассистент", description: "Помогает составить промпт для генерации изображений, подбирает стили и композицию." },
+  { Icon: BarChart3, name: "Аналитик данных", description: "Анализирует таблицы, строит отчёты, находит инсайты в данных." },
+  { Icon: Globe, name: "Переводчик", description: "Переводит тексты с сохранением стиля и контекста. 50+ языков." },
+  { Icon: FileText, name: "Редактор", description: "Проверяет грамматику, улучшает стиль, адаптирует тексты под целевую аудиторию." },
+  { Icon: Smartphone, name: "SMM-менеджер", description: "Создаёт контент-планы, пишет посты, придумывает идеи для Reels и Stories." },
+  { Icon: Mail, name: "Email-маркетолог", description: "Пишет цепочки писем, welcome-серии, триггерные рассылки." },
+  { Icon: GraduationCap, name: "Репетитор", description: "Объясняет сложные темы простым языком, помогает учиться и готовиться к экзаменам." },
 ];
 
-const benefits = [
-  { icon: "🎯", title: "Готовые роли", description: "Не нужно писать промпт с нуля. Каждый агент уже настроен под свою задачу." },
-  { icon: "🔄", title: "Любая модель", description: "Агенты работают на ChatGPT, Claude, Gemini — выбирайте лучшую для задачи." },
-  { iconName: "Zap", title: "Мгновенный старт", description: "Выберите агента и начните работу. Без регистрации, без настройки." },
+const benefits: { Icon: LucideIcon; title: string; description: string }[] = [
+  { Icon: Target, title: "Готовые роли", description: "Не нужно писать промпт с нуля. Каждый агент уже настроен под свою задачу." },
+  { Icon: RefreshCw, title: "Любая модель", description: "Агенты работают на ChatGPT, Claude, Gemini — выбирайте лучшую для задачи." },
+  { Icon: Zap, title: "Мгновенный старт", description: "Выберите агента и начните работу. Без регистрации, без настройки." },
 ];
 
 const faqItems = [
@@ -60,7 +61,7 @@ export default function AgentsLandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {agents.map((a) => (
               <div key={a.name} className="flex flex-col" style={{ background: "var(--seo-card-bg)", border: "1px solid var(--seo-card-border)", borderRadius: 16, padding: 24, boxShadow: "var(--seo-card-shadow)" }}>
-                <div className="text-[36px] mb-3">{a.icon}</div>
+                <div className="inline-flex items-center justify-center mb-3" style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(232, 84, 32, 0.12)" }}><a.Icon size={22} style={{ color: "hsl(var(--primary))" }} /></div>
                 <h3 className="text-lg font-bold mb-2" style={{ color: "var(--seo-heading)" }}>{a.name}</h3>
                 <p className="text-sm flex-1" style={{ color: "var(--seo-text)" }}>{a.description}</p>
                 <Link to={cta} className="mt-4 text-[13px] font-medium hover:underline" style={{ color: "hsl(var(--primary))" }}>Попробовать →</Link>
@@ -71,10 +72,10 @@ export default function AgentsLandingPage() {
       </section>
 
       <ScenariosGrid heading="Для чего используют агентов" items={[
-        { icon: "✍️", title: "Контент-маркетинг", description: "Посты, рассылки, статьи за минуты" },
-        { icon: "💼", title: "Бизнес-аналитика", description: "Отчёты, стратегии, конкурентный анализ" },
-        { icon: "🎓", title: "Обучение", description: "Репетитор по любому предмету" },
-        { icon: "💻", title: "Разработка", description: "Код, отладка, документация" },
+        { title: "Контент-маркетинг", description: "Посты, рассылки, статьи за минуты" },
+        { title: "Бизнес-аналитика", description: "Отчёты, стратегии, конкурентный анализ" },
+        { title: "Обучение", description: "Репетитор по любому предмету" },
+        { title: "Разработка", description: "Код, отладка, документация" },
       ]} />
 
       <HowItWorks />
@@ -85,7 +86,9 @@ export default function AgentsLandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {benefits.map((b) => (
               <div key={b.title} className="text-center" style={{ background: "var(--seo-card-bg)", borderRadius: 16, padding: 32, border: "1px solid var(--seo-card-border)", boxShadow: "var(--seo-card-shadow)" }}>
-                <div className="text-4xl mb-4">{b.icon}</div>
+                <div className="inline-flex items-center justify-center mb-4" style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(232, 84, 32, 0.12)" }}>
+                  <b.Icon size={24} style={{ color: "hsl(var(--primary))" }} />
+                </div>
                 <h3 className="text-lg font-bold mb-2" style={{ color: "var(--seo-heading)" }}>{b.title}</h3>
                 <p className="text-sm" style={{ color: "var(--seo-text)" }}>{b.description}</p>
               </div>
