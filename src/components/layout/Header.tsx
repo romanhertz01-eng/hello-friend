@@ -4,6 +4,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCommandPalette } from "@/hooks/useCommandPalette";
 import { UserDropdown } from "./UserDropdown";
+import { NavMegaMenu } from "./NavMegaMenu";
 import { PROMO_ACTIVE, PROMO_LABEL, PROMO_TEXT } from "@/config/promo";
 
 interface HeaderProps {
