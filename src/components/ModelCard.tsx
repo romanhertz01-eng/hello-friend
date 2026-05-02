@@ -1,6 +1,7 @@
 import { useNavigate } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { StatusBadge } from "@/components/ui/era";
+import { getModelIcon } from "@/components/ui/era/ModelGlyph";
 import type { SearchableModel } from "@/config/searchableModels";
 import { cn } from "@/lib/utils";
 
@@ -64,11 +65,14 @@ export function ModelCard({ model }: { model: SearchableModel }) {
         <div
           className={cn(
             "w-14 h-14 rounded-2xl flex items-center justify-center",
-            "text-2xl text-white drop-shadow-sm shrink-0",
+            "text-white drop-shadow-sm shrink-0",
             colorClass,
           )}
         >
-          {model.icon}
+          {(() => {
+            const Icon = getModelIcon(model.name);
+            return <Icon size={28} strokeWidth={1.75} />;
+          })()}
         </div>
         {badgeVariant && <StatusBadge variant={badgeVariant} />}
       </div>
