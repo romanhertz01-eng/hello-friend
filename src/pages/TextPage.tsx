@@ -3,6 +3,7 @@ import { ChevronDown, Paperclip, Send, Globe, Brain, Copy, RefreshCw, ThumbsUp, 
 import { textProviders, textQuickActions } from "@/data/textModels";
 import { TextModelSelector } from "@/components/text/TextModelSelector";
 import { ModelIcon } from "@/components/text/ModelIcon";
+import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
@@ -133,46 +134,31 @@ const TextPage = () => {
 
   return (
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]" style={{ background: c.bg }}>
-      {/* ─── Header bar ─── */}
-      <div
-        className="shrink-0 h-[52px] flex items-center justify-between px-4 z-10 border-b"
-        style={{ background: c.bg, borderColor: c.headerBorder }}
-      >
-        <div className="flex-1" />
-        <div className="relative">
-          <button
-            onClick={() => setSelectorOpen(!selectorOpen)}
-            className="flex items-center gap-2.5 px-4 py-2 rounded-full border transition-all"
-            style={{
-              background: c.pillBg,
-              borderColor: selectorOpen ? c.pillBorderActive : c.pillBorder,
-            }}
-          >
-            <ModelIcon providerId={providerId} size={20} />
-            <span className="text-sm font-semibold" style={{ color: c.textPrimary }}>{provider.name}</span>
-            <span style={{ color: c.dot }}>·</span>
-            <span className="text-sm font-medium" style={{ color: c.textAccent }}>{subModel.name}</span>
-            <span
-              className="font-mono text-[11px] px-1.5 py-0.5 rounded-full"
-              style={{ background: c.badgeBg, color: c.textAccent }}
-            >
-              {subModel.credits} cr
-            </span>
-            <ChevronDown className="w-3.5 h-3.5" style={{ color: c.textSecondary }} />
-          </button>
-          <TextModelSelector
-            open={selectorOpen}
-            onClose={() => setSelectorOpen(false)}
-            selectedProviderId={providerId}
-            selectedSubModelId={subModelId}
-            onSelect={(pId, sId) => { handleSelect(pId, sId); setSelectorOpen(false); }}
-          />
-        </div>
-        <div className="flex-1" />
-      </div>
-
       {/* ─── Chat area ─── */}
       <div className="flex-1 overflow-y-auto">
+        <div className="sticky top-0 z-20 flex justify-center py-3" style={{ background: "color-mix(in oklab, var(--c-bg) 85%, transparent)", backdropFilter: "blur(12px)" }}>
+          <div className="relative">
+            <button
+              onClick={() => setSelectorOpen(!selectorOpen)}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
+              style={{ background: "var(--c-bg-1)", border: "1px solid var(--c-line)", color: c.textPrimary }}
+            >
+              <ModelGlyph name={provider.name} size={20} />
+              <span>{provider.name}</span>
+              <span className="text-muted-foreground">·</span>
+              <span className="font-mono text-xs" style={{ color: "var(--c-accent-2)" }}>{subModel.name}</span>
+              <span className="font-mono text-xs" style={{ color: "var(--c-accent-2)" }}>{subModel.credits} cr</span>
+              <ChevronDown size={14} className="text-muted-foreground" />
+            </button>
+            <TextModelSelector
+              open={selectorOpen}
+              onClose={() => setSelectorOpen(false)}
+              selectedProviderId={providerId}
+              selectedSubModelId={subModelId}
+              onSelect={(pId, sId) => { handleSelect(pId, sId); setSelectorOpen(false); }}
+            />
+          </div>
+        </div>
         {!hasMessages ? (
           <WelcomeScreen providerId={providerId} providerName={provider.name} subModelName={subModel.name} onQuickAction={handleQuickAction} colors={c} />
         ) : (
