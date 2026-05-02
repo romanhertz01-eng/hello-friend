@@ -66,7 +66,7 @@ const DesignPage = () => {
   const [generations, setGenerations] = useState<MediaGeneration[]>([]);
   const feedEndRef = useRef<HTMLDivElement>(null);
   const inputAreaRef = useRef<HTMLDivElement>(null);
-  const modelTriggerRef = useRef<HTMLButtonElement>(null);
+  
   const [capsuleOpen, setCapsuleOpen] = useState(false);
 
   useEffect(() => {
@@ -222,7 +222,6 @@ const DesignPage = () => {
             turbo={turbo}
             onTurboToggle={() => setTurbo(!turbo)}
             onGenerate={handleGenerate}
-            modelTriggerRef={modelTriggerRef}
           />
         </div>
       </div>
