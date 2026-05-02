@@ -62,8 +62,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
           aria-hidden="true"
           className="pointer-events-none fixed inset-0 z-[9999]"
           style={{
-            opacity: theme === "dark" ? 0.035 : 0.08,
-            mixBlendMode: "overlay",
+            opacity: theme === "dark" ? 0.035 : 0.12,
+            mixBlendMode: theme === "dark" ? "overlay" : "multiply",
           }}
         >
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
