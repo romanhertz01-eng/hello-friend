@@ -136,7 +136,7 @@ function ParamPill({
               type="button"
               onClick={() => { onChange(o); setOpen(false); }}
               className={cn(
-                "w-full text-left px-3 py-2 rounded-[10px] text-[13px] transition-colors",
+                "w-full text-left px-3 py-2 rounded-[8px] text-[13px] transition-colors",
                 mono && "font-mono tabular-nums",
               )}
               style={{

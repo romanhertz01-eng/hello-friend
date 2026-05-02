@@ -199,7 +199,7 @@ export function NavMegaMenu() {
                   <button
                     key={f.title}
                     onClick={() => { setActive(null); navigate({ to: activeTab.route }); }}
-                    className="flex items-center gap-3 px-3 py-2 rounded-[10px] text-left transition-colors hover:bg-[var(--c-bg-2)]"
+                    className="flex items-center gap-3 px-3 py-2 rounded-[8px] text-left transition-colors hover:bg-[var(--c-bg-2)]"
                   >
                     <span
                       className="inline-flex items-center justify-center shrink-0"
@@ -234,7 +234,7 @@ export function NavMegaMenu() {
                   <button
                     key={m.name}
                     onClick={() => { setActive(null); navigate({ to: activeTab.route }); }}
-                    className="flex items-center gap-3 px-3 py-2 rounded-[10px] text-left transition-colors hover:bg-[var(--c-bg-2)]"
+                    className="flex items-center gap-3 px-3 py-2 rounded-[8px] text-left transition-colors hover:bg-[var(--c-bg-2)]"
                   >
                     <ModelGlyph name={m.name} size={32} />
                     <span className="flex flex-col min-w-0">

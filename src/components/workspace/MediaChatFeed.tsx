@@ -104,7 +104,7 @@ export function MediaChatFeed({ generations }: Props) {
           {/* User message */}
           <div className="flex justify-end">
             <div
-              className="max-w-[75%] rounded-[16px] rounded-br-[4px] px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap"
+              className="max-w-[75%] rounded-[14px] rounded-br-[4px] px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap"
               style={{ background: "hsl(var(--primary))", color: "#fff" }}
             >
               {gen.prompt}

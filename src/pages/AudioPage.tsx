@@ -84,7 +84,7 @@ const AudioPage = () => {
   const [generations, setGenerations] = useState<MediaGeneration[]>([]);
   const feedEndRef = useRef<HTMLDivElement>(null);
   const inputAreaRef = useRef<HTMLDivElement>(null);
-  const modelTriggerRef = useRef<HTMLButtonElement>(null);
+  
   const [capsuleOpen, setCapsuleOpen] = useState(false);
 
   useEffect(() => {
@@ -387,7 +387,6 @@ const AudioPage = () => {
             <div className="flex flex-wrap items-center gap-2 mt-3">
               <div className="relative">
                 <button
-                  ref={modelTriggerRef}
                   onClick={() => setModelDDOpen(!modelDDOpen)}
                   className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full text-[13px] font-medium whitespace-nowrap leading-none transition-colors text-foreground"
                   style={{ background: "var(--bg-pill)", border: "1px solid var(--border-primary)" }}

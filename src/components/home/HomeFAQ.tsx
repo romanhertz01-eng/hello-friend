@@ -29,7 +29,7 @@ export function HomeFAQ() {
               href="https://t.me/era2_support"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-6 px-5 py-3 rounded-[10px] text-[14px] text-[hsl(var(--primary))] border border-[rgba(232, 84, 32,0.2)] hover:bg-[rgba(232, 84, 32,0.15)] transition-colors"
+              className="inline-flex items-center gap-2 mt-6 px-5 py-3 rounded-[8px] text-[14px] text-[hsl(var(--primary))] border border-[rgba(232, 84, 32,0.2)] hover:bg-[rgba(232, 84, 32,0.15)] transition-colors"
               style={{ background: "rgba(232, 84, 32,0.1)" }}
             >
               ✈ Написать в поддержку
