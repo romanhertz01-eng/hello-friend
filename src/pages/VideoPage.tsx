@@ -201,15 +201,15 @@ const VideoPage = () => {
   ];
 
   const videoGridModels = [
-    { name: "Kling 3.0", desc: "Топовое видео от Kling AI", icon: "🎬", iconColor: "#f97316", isNew: true, credits: 75 },
-    { name: "Seedance 2.0", desc: "Плавные многокадровые видео", icon: "📊", iconColor: "#22c55e", isNew: true, badges: ["60% OFF"], credits: 48 },
-    { name: "Veo 3", desc: "Топовая модель Google", icon: "🌊", iconColor: "#3b82f6", isNew: true, credits: 120 },
-    { name: "Sora 2", desc: "Флагман видеогенерации OpenAI", icon: "⬛", iconColor: "#1f2937", credits: 480 },
-    { name: "Wan AI", desc: "Точное управление видео", icon: "🌊", iconColor: "hsl(var(--primary))", isNew: true, credits: 30 },
-    { name: "Hailuo AI", desc: "Новый игрок на рынке", icon: "🎬", iconColor: "#eab308", isNew: true, credits: 40 },
-    { name: "Vidu AI", desc: "Кинотеатральное качество", icon: "🎬", iconColor: "hsl(var(--primary))", isNew: true, credits: 50 },
-    { name: "Sora 2 Pro", desc: "Максимальное качество", icon: "⬛", iconColor: "#1f2937", credits: 1440 },
-    { name: "Kling 2.5 Turbo", desc: "Быстрая генерация видео", icon: "🎬", iconColor: "#f97316", credits: 30 },
+    { name: "Kling 3.0", desc: "Топовое видео от Kling AI", isNew: true, credits: 75 },
+    { name: "Seedance 2.0", desc: "Плавные многокадровые видео", isNew: true, badges: ["60% OFF"], credits: 48 },
+    { name: "Veo 3", desc: "Топовая модель Google", isNew: true, credits: 120 },
+    { name: "Sora 2", desc: "Флагман видеогенерации OpenAI", credits: 480 },
+    { name: "Wan AI", desc: "Точное управление видео", isNew: true, credits: 30 },
+    { name: "Hailuo AI", desc: "Новый игрок на рынке", isNew: true, credits: 40 },
+    { name: "Vidu AI", desc: "Кинотеатральное качество", isNew: true, credits: 50 },
+    { name: "Sora 2 Pro", desc: "Максимальное качество", credits: 1440 },
+    { name: "Kling 2.5 Turbo", desc: "Быстрая генерация видео", credits: 30 },
   ];
 
   const handleCarouselSelect = (name: string) => {
