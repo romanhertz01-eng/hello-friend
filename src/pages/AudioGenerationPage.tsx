@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useAuth } from "@/contexts/AuthContext";
 import { Footer } from "@/components/shared/Footer";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Mic, Music, Globe, CreditCard, Zap, Megaphone, Languages } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { PromoBanner } from "@/components/seo/PromoBanner";
 import { SeoPromptWidget } from "@/components/seo/SeoPromptWidget";
 import { ScenariosGrid } from "@/components/seo/ScenariosGrid";
@@ -14,17 +15,17 @@ const models = [
   { name: "Suno", description: "Генерация музыки по текстовому описанию. Создавайте треки любого жанра за секунды.", price: "от 30" },
 ];
 
-const useCases = [
-  { icon: "🎙", title: "Озвучка видео", description: "Профессиональная озвучка роликов для YouTube, Reels, TikTok. 29 языков, сотни голосов." },
-  { icon: "📢", title: "Реклама", description: "Аудиоролики для рекламы. Естественный голос без найма диктора." },
-  { icon: "🎵", title: "Музыка", description: "Создание уникальных треков для контента, подкастов, видео и презентаций." },
-  { icon: "🌍", title: "Локализация", description: "Перевод и озвучка контента на другие языки с сохранением интонации." },
+const useCases: { Icon: LucideIcon; title: string; description: string }[] = [
+  { Icon: Mic, title: "Озвучка видео", description: "Профессиональная озвучка роликов для YouTube, Reels, TikTok. 29 языков, сотни голосов." },
+  { Icon: Megaphone, title: "Реклама", description: "Аудиоролики для рекламы. Естественный голос без найма диктора." },
+  { Icon: Music, title: "Музыка", description: "Создание уникальных треков для контента, подкастов, видео и презентаций." },
+  { Icon: Languages, title: "Локализация", description: "Перевод и озвучка контента на другие языки с сохранением интонации." },
 ];
 
-const benefits = [
-  { icon: "🌐", title: "Без VPN", description: "ElevenLabs и Suno работают напрямую из России." },
-  { icon: "💳", title: "Оплата в рублях", description: "Без иностранных карт. Единая подписка — голос и музыка." },
-  { iconName: "Zap", title: "Дешевле подписки", description: "Платите только за использование. Не нужна ежемесячная подписка ElevenLabs за $22." },
+const benefits: { Icon: LucideIcon; title: string; description: string }[] = [
+  { Icon: Globe, title: "Без VPN", description: "ElevenLabs и Suno работают напрямую из России." },
+  { Icon: CreditCard, title: "Оплата в рублях", description: "Без иностранных карт. Единая подписка — голос и музыка." },
+  { Icon: Zap, title: "Дешевле подписки", description: "Платите только за использование. Не нужна ежемесячная подписка ElevenLabs за $22." },
 ];
 
 const faqItems = [
@@ -52,7 +53,7 @@ export default function AudioGenerationPage() {
 
       <SeoPromptWidget mode="audio" placeholder="Введите текст для озвучки или опишите музыку..." modelName="ElevenLabs" credits={60} redirectTo={cta} />
 
-      <PromoBanner badge="🎙 Лидер рынка" title="ELEVENLABS" description="Реалистичная озвучка и клонирование голоса. 29 языков." link="/audio" />
+      <PromoBanner badge="Лидер рынка" title="ELEVENLABS" description="Реалистичная озвучка и клонирование голоса. 29 языков." link="/audio" />
 
       <section style={{ padding: "80px 0" }} className="px-4">
         <div className="max-w-[1200px] mx-auto">
@@ -72,10 +73,10 @@ export default function AudioGenerationPage() {
       </section>
 
       <ScenariosGrid heading="Что можно создать" items={[
-        { icon: "🎙", title: "Озвучка видео", description: "Профессиональный голос для роликов" },
-        { icon: "📢", title: "Рекламные аудио", description: "Ролики без найма диктора" },
-        { icon: "🎵", title: "Музыкальные треки", description: "Уникальная музыка для контента" },
-        { icon: "🌍", title: "Локализация", description: "Перевод голоса на другие языки" },
+        { title: "Озвучка видео", description: "Профессиональный голос для роликов" },
+        { title: "Рекламные аудио", description: "Ролики без найма диктора" },
+        { title: "Музыкальные треки", description: "Уникальная музыка для контента" },
+        { title: "Локализация", description: "Перевод голоса на другие языки" },
       ]} />
 
       <section style={{ padding: "80px 0" }} className="px-4">
@@ -84,7 +85,9 @@ export default function AudioGenerationPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-[800px] mx-auto">
             {useCases.map((uc) => (
               <div key={uc.title} style={{ background: "var(--seo-card-bg)", borderRadius: 16, padding: 24, border: "1px solid var(--seo-card-border)", boxShadow: "var(--seo-card-shadow)" }}>
-                <div className="text-[32px] mb-3">{uc.icon}</div>
+                <div className="inline-flex items-center justify-center mb-3" style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(232, 84, 32, 0.12)" }}>
+                  <uc.Icon size={22} style={{ color: "hsl(var(--primary))" }} />
+                </div>
                 <h3 className="text-base font-bold mb-2" style={{ color: "var(--seo-heading)" }}>{uc.title}</h3>
                 <p className="text-sm" style={{ color: "var(--seo-text)" }}>{uc.description}</p>
               </div>
@@ -101,7 +104,9 @@ export default function AudioGenerationPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {benefits.map((b) => (
               <div key={b.title} className="text-center" style={{ background: "var(--seo-card-bg)", borderRadius: 16, padding: 32, border: "1px solid var(--seo-card-border)", boxShadow: "var(--seo-card-shadow)" }}>
-                <div className="text-4xl mb-4">{b.icon}</div>
+                <div className="inline-flex items-center justify-center mb-4" style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(232, 84, 32, 0.12)" }}>
+                  <b.Icon size={24} style={{ color: "hsl(var(--primary))" }} />
+                </div>
                 <h3 className="text-lg font-bold mb-2" style={{ color: "var(--seo-heading)" }}>{b.title}</h3>
                 <p className="text-sm" style={{ color: "var(--seo-text)" }}>{b.description}</p>
               </div>
