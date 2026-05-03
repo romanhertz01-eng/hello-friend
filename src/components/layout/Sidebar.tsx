@@ -294,6 +294,7 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
           <ChevronLeft className={cn("h-3 w-3 transition-transform", collapsed && "rotate-180")} />
         </button>
       </aside>
+      {showReferral && <ReferralPopup onClose={() => setShowReferral(false)} />}
     </>
   );
 }
