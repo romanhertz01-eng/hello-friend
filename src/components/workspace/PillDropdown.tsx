@@ -40,7 +40,7 @@ export function PillDropdown({ icon, value, options, onSelect }: PillDropdownPro
       </button>
       {open && (
         <div
-          className="absolute top-full left-0 mt-1 w-40 rounded-xl z-50 p-1"
+          className="absolute bottom-full left-0 mb-1 w-40 rounded-xl z-50 p-1"
           style={{ background: "var(--bg-popup)", border: "1px solid var(--border-primary)", boxShadow: "var(--shadow-dropdown)" }}
         >
           {options.map((o) => (
