@@ -132,6 +132,7 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
           </div>
         )}
       </div>
-    </header>
+      </header>
+    </>
   );
 }
