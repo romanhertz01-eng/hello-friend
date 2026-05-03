@@ -19,6 +19,7 @@ interface FeatureItem {
 interface ModelItem {
   name: string;
   desc: string;
+  badge?: string;
 }
 interface TabConfig {
   key: string;
@@ -104,8 +105,8 @@ const TABS: TabConfig[] = [
       { icon: VolumeX, title: "Удаление шума", desc: "Очистка и улучшение" },
     ],
     models: [
-      { name: "ElevenLabs", desc: "TTS и клон голоса" },
-      { name: "Suno", desc: "Генерация музыки" },
+      { name: "ElevenLabs", desc: "Озвучка и голос" },
+      { name: "Suno", desc: "Генерация музыки", badge: "TOP" },
     ],
   },
   {
@@ -248,7 +249,10 @@ export function NavMegaMenu() {
                     >
                       <ModelGlyph name={m.name} size={32} />
                       <span className="flex flex-col min-w-0">
-                        <span className="text-[14px] font-medium leading-tight truncate" style={{ color: "var(--c-fg)" }}>{m.name}</span>
+                        <span className="text-[14px] font-medium leading-tight truncate flex items-center" style={{ color: "var(--c-fg)" }}>
+                          {m.name}
+                          {m.badge && <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded-full ml-1" style={{ background: "rgba(232,84,32,0.12)", color: "hsl(var(--primary))" }}>{m.badge}</span>}
+                        </span>
                         <span className="text-[12px] truncate" style={{ color: "var(--c-fg-mute)" }}>{m.desc}</span>
                       </span>
                     </button>
