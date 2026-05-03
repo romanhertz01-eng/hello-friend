@@ -9,6 +9,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 import { ModelCarousel, type CarouselModel } from "@/components/workspace/ModelCarousel";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
+import { AssistantsList } from "@/components/text/AssistantsList";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 
 const textCarouselModels: CarouselModel[] = [
@@ -221,6 +222,14 @@ const TextPage = () => {
                 ))}
               </div>
             </div>
+
+            <AssistantsList
+              onPick={(name) => {
+                setSystemPrompt(`Ты — ${name}. Отвечай в этой роли.`);
+                setInput("");
+                setTimeout(() => textareaRef.current?.focus(), 50);
+              }}
+            />
           </div>
         )}
 
