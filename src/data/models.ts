@@ -295,6 +295,22 @@ export const models: AIModel[] = [
       { id: "el-localization", name: "Локализация", credits: 120 },
     ],
   },
+  {
+    id: "suno",
+    name: "Suno",
+    provider: "Suno",
+    category: "audio",
+    credits: 30,
+    description: "Генерация музыки и песен по текстовому описанию.",
+    icon: "🎵",
+    slug: "suno",
+    subModels: [
+      { id: "suno-song", name: "Песня с вокалом", credits: 30 },
+      { id: "suno-instrumental", name: "Инструментал", credits: 25 },
+      { id: "suno-jingle", name: "Джингл / реклама", credits: 20 },
+      { id: "suno-extended", name: "Расширенный трек", credits: 50 },
+    ],
+  },
 ];
 
 export function getModelsByCategory(category: ModelCategory): AIModel[] {
