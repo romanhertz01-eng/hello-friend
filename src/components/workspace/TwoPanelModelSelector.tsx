@@ -180,7 +180,7 @@ export function TwoPanelModelSelector({
           style={{
             left: pos.left,
             ...(pos.top !== undefined ? { top: pos.top } : { bottom: pos.bottom }),
-            width: 640,
+            width,
             height: "min(420px, calc(100vh - 16px))",
             background: "var(--bg-popup)",
             border: "1px solid var(--border-primary)",
