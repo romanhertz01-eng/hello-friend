@@ -50,7 +50,7 @@ const genItems = [
 const toolItems: Array<{ icon: React.ElementType; label: string; path: string; badge?: "new" | "soon" }> = [
   { icon: Bot, label: "Агенты / Ассистенты", path: "/agents" },
   { icon: LayoutGrid, label: "Все нейросети", path: "/toolkit" },
-  { icon: Layers, label: "Студии", path: "/studios", badge: "soon" },
+  { icon: Layers, label: "Инструменты", path: "/studios" },
 ];
 
 const bottomItems = [
