@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, Menu, Moon, Search, Sun } from "lucide-react";
+import { Clock, Menu, Moon, Search, Sun, SlidersHorizontal } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCommandPalette } from "@/hooks/useCommandPalette";
