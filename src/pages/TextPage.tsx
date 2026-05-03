@@ -227,10 +227,11 @@ const TextPage = () => {
       </div>
 
       {/* ─── Input area ─── */}
-      <div className="shrink-0 px-4 pb-5 pt-2" style={{ background: c.bg }}>
+      <div className="shrink-0 px-4 pb-5 pt-2 relative z-[1]" style={{ background: c.bg }}>
         <div className="max-w-[780px] mx-auto">
           <WorkspaceTabs variant="attached" />
 
+          <div className={isGenerating ? "glow-border-active" : "glow-border-idle"}>
           <div
             className="rounded-[22px] rounded-tl-none p-4 transition-all duration-200"
             style={{
