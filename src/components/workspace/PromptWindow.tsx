@@ -159,30 +159,6 @@ function ParamPill({
   );
 }
 
-function MorePill() {
-  return (
-    <button
-      type="button"
-      className="inline-flex items-center justify-center w-9 h-9 rounded-full transition-colors shrink-0"
-      style={{
-        background: "var(--c-bg-2)",
-        border: "1px solid var(--c-line)",
-        color: "var(--c-fg-dim)",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "var(--c-line-2)";
-        e.currentTarget.style.color = "var(--c-fg)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "var(--c-line)";
-        e.currentTarget.style.color = "var(--c-fg-dim)";
-      }}
-      aria-label="Больше параметров"
-    >
-      <MoreHorizontal size={16} strokeWidth={1.8} />
-    </button>
-  );
-}
 
 /* ─── Per-type params row ─── */
 function ParamsRow({ type }: { type: GenType }) {
