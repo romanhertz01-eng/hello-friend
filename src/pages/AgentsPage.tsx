@@ -4,16 +4,19 @@ import {
   Calculator, FlaskConical, GraduationCap, BookOpen, FileText, Award, Brain,
   RefreshCw, BookMarked, Feather, Lightbulb, Clapperboard, Music, Megaphone,
   TrendingUp, Receipt, Scale,
-  Code, Bug, ScanText,
-  Stethoscope, HeartPulse, Dumbbell, Apple, TestTube2,
-  Plane, Stars, Sun, Moon,
+  Code, Bug, ScanText, Wand2,
+  Stethoscope, HeartPulse, Dumbbell, Apple, TestTube2, Salad,
+  Plane, Stars, Sun, Moon, Languages,
+  PenLine, Type, Copy, Pencil,
+  Target, Share2, BarChart3,
+  FileSpreadsheet, Presentation, Users, ClipboardList, Briefcase, FileBarChart,
   type LucideIcon,
 } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const tabs = ["Все", "Образование", "Контент", "Бизнес", "Разработка", "Здоровье", "Лайфстайл"];
+const tabs = ["Все", "Образование", "Контент", "Маркетинг", "Бизнес", "Разработка", "Здоровье", "Лайфстайл"];
 
 interface Agent {
   Icon: LucideIcon;
@@ -31,33 +34,49 @@ const agents: Agent[] = [
   { Icon: FileText, title: "Реферат", desc: "Структура, источники, оформление", tab: "Образование" },
   { Icon: Award, title: "Диплом", desc: "Дипломные и курсовые работы", tab: "Образование" },
   { Icon: Brain, title: "Решение задач", desc: "Пошаговый разбор любых задач", tab: "Образование" },
-  // Контент (7)
+  // Контент (10)
   { Icon: RefreshCw, title: "Рерайт", desc: "Перефразирование и уникализация текста", tab: "Контент" },
   { Icon: BookMarked, title: "Сторителлинг", desc: "Увлекательные истории и нарративы", tab: "Контент" },
   { Icon: Feather, title: "Написание книг", desc: "Главы, сюжеты, персонажи", tab: "Контент" },
   { Icon: Lightbulb, title: "Генерация идей", desc: "Концепции, названия, слоганы", tab: "Контент" },
   { Icon: Clapperboard, title: "Сценарист", desc: "Сценарии для видео и рекламы", tab: "Контент" },
   { Icon: Music, title: "Песенник", desc: "Тексты песен, куплеты, припевы", tab: "Контент" },
-  { Icon: Megaphone, title: "Рекламный текст", desc: "Объявления, баннеры, слоганы", tab: "Контент" },
-  // Бизнес (3)
-  { Icon: TrendingUp, title: "Маркетолог", desc: "Стратегии продвижения и аналитика", tab: "Бизнес" },
+  { Icon: PenLine, title: "Стихотворец", desc: "Стихи, поэмы, поздравления в стихах", tab: "Контент" },
+  { Icon: Type, title: "Редактор текста", desc: "Корректура, стилистика, грамматика", tab: "Контент" },
+  { Icon: Copy, title: "Копирайтер", desc: "Продающие тексты, лендинги, описания", tab: "Контент" },
+  { Icon: Languages, title: "Переводчик", desc: "Перевод текстов на любой язык", tab: "Контент" },
+  // Маркетинг (4)
+  { Icon: TrendingUp, title: "Маркетолог", desc: "Стратегии продвижения и аналитика", tab: "Маркетинг" },
+  { Icon: Megaphone, title: "Рекламный текст", desc: "Объявления, баннеры, слоганы", tab: "Маркетинг" },
+  { Icon: Target, title: "SEO-специалист", desc: "Мета-теги, ключевые слова, оптимизация", tab: "Маркетинг" },
+  { Icon: Share2, title: "Эксперт по SMM", desc: "Контент-план, посты, сторис для соцсетей", tab: "Маркетинг" },
+  // Бизнес (8)
   { Icon: Receipt, title: "Бухгалтер", desc: "Учёт, налоги, финансовая отчётность", tab: "Бизнес" },
   { Icon: Scale, title: "Юрист", desc: "Анализ документов, консультации", tab: "Бизнес" },
-  // Разработка (3)
+  { Icon: FileBarChart, title: "Генератор отчётов", desc: "Бизнес-отчёты, аналитические записки", tab: "Бизнес" },
+  { Icon: ClipboardList, title: "Создание КП", desc: "Коммерческие предложения и презентации", tab: "Бизнес" },
+  { Icon: FileSpreadsheet, title: "Excel ассистент", desc: "Формулы, таблицы, анализ данных", tab: "Бизнес" },
+  { Icon: Users, title: "HR-ассистент", desc: "Вакансии, резюме, собеседования", tab: "Бизнес" },
+  { Icon: Briefcase, title: "Бизнес-план", desc: "Структура, финансы, стратегия запуска", tab: "Бизнес" },
+  { Icon: Presentation, title: "Презентации", desc: "Слайды, структура, визуальный сторителлинг", tab: "Бизнес" },
+  // Разработка (4)
   { Icon: Code, title: "Генерация кода", desc: "Написание кода на любом языке", tab: "Разработка" },
   { Icon: Bug, title: "Исправление кода", desc: "Дебаг, рефакторинг, оптимизация", tab: "Разработка" },
   { Icon: ScanText, title: "Распознавание текста", desc: "OCR из изображений и PDF", tab: "Разработка" },
-  // Здоровье (5)
+  { Icon: Wand2, title: "Prompt Engineer", desc: "Создание и оптимизация промптов для ИИ", tab: "Разработка" },
+  // Здоровье (6)
   { Icon: Stethoscope, title: "Доктор", desc: "Общие медицинские консультации", tab: "Здоровье" },
   { Icon: HeartPulse, title: "Психолог", desc: "Поддержка и рекомендации", tab: "Здоровье" },
   { Icon: Dumbbell, title: "Фитнес-тренер", desc: "Программы тренировок и упражнения", tab: "Здоровье" },
   { Icon: Apple, title: "Рацион питания", desc: "Меню, калории, рекомендации", tab: "Здоровье" },
   { Icon: TestTube2, title: "Расшифровка анализов", desc: "Интерпретация результатов анализов", tab: "Здоровье" },
-  // Лайфстайл (4)
+  { Icon: Salad, title: "Нутрициолог", desc: "Персональная диета, БЖУ, витамины", tab: "Здоровье" },
+  // Лайфстайл (5)
   { Icon: Plane, title: "Путешествия", desc: "Маршруты, бюджет, достопримечательности", tab: "Лайфстайл" },
   { Icon: Stars, title: "Таролог", desc: "Расклады и интерпретации карт", tab: "Лайфстайл" },
   { Icon: Sun, title: "Гороскоп", desc: "Персональный астрологический прогноз", tab: "Лайфстайл" },
   { Icon: Moon, title: "Толкование снов", desc: "Анализ символов и значений", tab: "Лайфстайл" },
+  { Icon: Pencil, title: "Поздравлятор", desc: "Поздравления, тосты, пожелания на любой случай", tab: "Лайфстайл" },
 ];
 
 const textModels = ["ChatGPT", "Claude", "Gemini", "Grok", "Deepseek", "Perplexity", "Qwen"];
@@ -88,7 +107,7 @@ const AgentsPage = () => {
           <div>
             <h1 className="text-2xl md:text-[28px] font-bold mb-1">Создайте и общайтесь со своим личным агентом</h1>
             <p className="text-muted-foreground text-sm max-w-xl">
-              27 ИИ-ассистентов для любых задач
+              44 ИИ-ассистента для любых задач
             </p>
           </div>
         </motion.div>
