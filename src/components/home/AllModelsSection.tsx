@@ -71,7 +71,7 @@ export function AllModelsSection() {
         {tools.map((tool, i) => (
           <div
             key={tool.name}
-            className="shrink-0 w-[220px] rounded-2xl overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform"
+            className="shrink-0 w-[220px] rounded-2xl overflow-hidden cursor-pointer hover:brightness-110 transition-[filter]"
             style={{ border: "1px solid var(--seo-card-border)" }}
           >
             <img

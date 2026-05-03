@@ -32,7 +32,7 @@ export function ModelCarousel({ models, onSelect }: ModelCarouselProps) {
           <div
             key={m.name}
             onClick={() => onSelect?.(m.name)}
-            className="shrink-0 w-[340px] h-[180px] rounded-2xl p-5 flex flex-col justify-end cursor-pointer hover:scale-[1.02] transition-transform relative overflow-hidden"
+            className="shrink-0 w-[340px] h-[180px] rounded-2xl p-5 flex flex-col justify-end cursor-pointer hover:brightness-110 transition-[filter] relative overflow-hidden"
             style={{ background: m.gradient }}
           >
             {m.badge && (
