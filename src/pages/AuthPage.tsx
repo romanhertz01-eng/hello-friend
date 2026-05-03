@@ -12,6 +12,26 @@ const AuthPage = () => {
   const [name, setName] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(3 * 24 * 3600);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("era2_signup_timer_start");
+    if (!saved) {
+      localStorage.setItem("era2_signup_timer_start", String(Date.now()));
+    } else {
+      const elapsed = Math.floor((Date.now() - parseInt(saved)) / 1000);
+      setTimeLeft(Math.max(0, 3 * 24 * 3600 - elapsed));
+    }
+    const interval = setInterval(() => setTimeLeft((prev) => Math.max(0, prev - 1)), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const hours = Math.floor(timeLeft / 3600);
+  const mins = Math.floor((timeLeft % 3600) / 60);
+  const secs = timeLeft % 60;
+  const pad = (n: number) => String(n).padStart(2, "0");
+
   useEffect(() => {
     document.title = mode === "login" ? "ERA2 — Вход" : "ERA2 — Регистрация";
   }, [mode]);
