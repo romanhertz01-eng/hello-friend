@@ -68,7 +68,7 @@ export function PromptBlock({
   }));
 
   return (
-    <div className="rounded-[22px] rounded-tl-none border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4 w-full transition-all duration-200 has-[textarea:focus]:border-[hsl(var(--primary))] has-[textarea:focus]:shadow-[0_0_0_3px_rgba(232,84,32,0.18),0_2px_8px_rgba(20,11,5,0.1)]">
+    <div className="rounded-[22px] rounded-tl-none border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-3 sm:p-4 w-full transition-all duration-200 has-[textarea:focus]:border-[hsl(var(--primary))] has-[textarea:focus]:shadow-[0_0_0_3px_rgba(232,84,32,0.18),0_2px_8px_rgba(20,11,5,0.1)]">
       <div className="flex items-start gap-3 mb-3">
         <AttachmentButton current={0} max={provider.maxUploads} />
         <textarea
