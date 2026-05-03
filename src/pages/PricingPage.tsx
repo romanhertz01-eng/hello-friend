@@ -120,6 +120,7 @@ const faqItems = [
 const PricingPage = () => {
   const [period, setPeriod] = useState<Period>("year");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const copy = useCopyToast();
 
   useEffect(() => { document.title = "ERA2 — Тарифы"; }, []);
 
