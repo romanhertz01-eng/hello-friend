@@ -104,7 +104,7 @@ export function PromptBlock({
             onChange={(e) => onPromptChange(e.target.value)}
             placeholder={placeholder || "Введите свою идею для генерации"}
             rows={mode === "audio" ? 4 : 3}
-            className="flex-1 min-w-0 bg-transparent border-none outline-none text-[15px] resize-none min-h-[120px] py-3 px-1 text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] placeholder:opacity-60"
+            className="flex-1 min-w-0 bg-transparent border-none outline-none text-[15px] resize-none min-h-[80px] py-3 px-1 text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] placeholder:opacity-60"
           />
         </div>
 
