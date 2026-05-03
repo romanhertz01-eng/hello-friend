@@ -60,6 +60,23 @@ export function ModelPickerPill({
   const ref = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
+  const providerHoverTimer = useRef<number | null>(null);
+
+  const clearProviderHoverTimer = () => {
+    if (providerHoverTimer.current !== null) {
+      window.clearTimeout(providerHoverTimer.current);
+      providerHoverTimer.current = null;
+    }
+  };
+
+  const scheduleProviderHover = (providerId: string) => {
+    if (providerId === expanded?.id) return;
+    clearProviderHoverTimer();
+    providerHoverTimer.current = window.setTimeout(() => {
+      setHoverProviderId((prev) => (prev === providerId ? prev : providerId));
+      providerHoverTimer.current = null;
+    }, 70);
+  };
 
   const selectedProvider =
     providers.find((p) => p.id === selectedProviderId) || providers[0];
@@ -110,6 +127,8 @@ export function ModelPickerPill({
     if (open) setHoverProviderId(selectedProviderId);
   }, [open, selectedProviderId]);
 
+  useEffect(() => clearProviderHoverTimer, []);
+
   if (!selectedProvider || !selectedSub) return null;
 
   return (
@@ -146,7 +165,7 @@ export function ModelPickerPill({
             background: "var(--c-bg-1)",
             border: "1px solid var(--c-line-2)",
             width: pos.width,
-            maxHeight: 440,
+            height: "min(440px, calc(100vh - 16px))",
           }}
         >
           {/* Left: providers */}
@@ -167,8 +186,10 @@ export function ModelPickerPill({
                 <button
                   key={p.id}
                   type="button"
-                  onMouseEnter={() => setHoverProviderId(p.id)}
+                  onMouseEnter={() => scheduleProviderHover(p.id)}
+                  onMouseLeave={clearProviderHoverTimer}
                   onClick={() => {
+                    clearProviderHoverTimer();
                     if (p.subModels.length === 1) {
                       onSelect(p.id, p.subModels[0].id);
                       setOpen(false);
@@ -176,7 +197,7 @@ export function ModelPickerPill({
                       setHoverProviderId(p.id);
                     }
                   }}
-                  className="w-full flex items-center gap-2.5 px-4 py-2.5 text-left transition-colors"
+                  className="w-full flex items-center gap-2.5 px-4 py-2.5 text-left"
                   style={{
                     background: isExpanded
                       ? "var(--c-bg-2)"
@@ -203,7 +224,7 @@ export function ModelPickerPill({
           </div>
 
           {/* Right: sub-models */}
-          <div className="flex-1 overflow-y-auto py-2">
+          <div className="flex-1 overflow-y-scroll py-2 min-h-0 [scrollbar-gutter:stable]">
             {expanded?.subModels.map((s) => {
               const isSelected =
                 selectedProviderId === expanded.id && selectedSubModelId === s.id;
