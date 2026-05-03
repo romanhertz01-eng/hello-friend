@@ -391,19 +391,21 @@ const AudioPage = () => {
               </div>
             </div>
 
-            <div>
-              <h2 className="text-base font-bold text-foreground mb-4">Сценарии использования</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {sunoScenarios.map(s => (
-                  <div key={s.label} className="rounded-xl p-5 flex flex-col items-center gap-2 cursor-pointer transition-colors" style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}>
-                    <div className="w-10 h-10 rounded-[8px] flex items-center justify-center" style={{ background: "rgba(232, 84, 32, 0.1)", border: "1px solid rgba(232, 84, 32, 0.18)" }}>
-                      <s.Icon size={20} strokeWidth={1.75} style={{ color: "hsl(var(--primary))" }} />
+            {!hasGenerations && (
+              <div>
+                <h2 className="text-base font-bold text-foreground mb-4">Сценарии использования</h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {sunoScenarios.map(s => (
+                    <div key={s.label} className="rounded-xl p-5 flex flex-col items-center gap-2 cursor-pointer transition-colors" style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}>
+                      <div className="w-10 h-10 rounded-[8px] flex items-center justify-center" style={{ background: "rgba(232, 84, 32, 0.1)", border: "1px solid rgba(232, 84, 32, 0.18)" }}>
+                        <s.Icon size={20} strokeWidth={1.75} style={{ color: "hsl(var(--primary))" }} />
+                      </div>
+                      <span className="text-[13px] font-semibold text-foreground">{s.label}</span>
                     </div>
-                    <span className="text-[13px] font-semibold text-foreground">{s.label}</span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </>
         )}
 
