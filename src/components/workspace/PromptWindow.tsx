@@ -392,7 +392,7 @@ export function PromptWindow({ type, onTypeChange, prompt, onPromptChange, onGen
 
       {/* ─── Prompt window ─── */}
       <div
-        className="rounded-[22px] p-5 transition-all duration-200 relative h-[188px] flex flex-col justify-between"
+        className="rounded-[22px] p-4 sm:p-5 transition-all duration-200 relative min-h-[160px] sm:h-[188px] flex flex-col justify-between gap-3"
         style={{
           background: "var(--c-bg-1)",
           border: `1px solid ${cardBorder}`,
