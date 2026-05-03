@@ -45,7 +45,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
   const [versionDropdownOpen, setVersionDropdownOpen] = useState(false);
   const [funcDropdownOpen, setFuncDropdownOpen] = useState(false);
 
-  if (!open) return null;
+  // Panel always rendered; slides off-screen when closed
 
   const resetAll = () => {
     setSelectedModel(models[0]);
