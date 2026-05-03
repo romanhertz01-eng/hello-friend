@@ -1,10 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { Bell, Clock, Menu, Moon, Search, Sun } from "lucide-react";
+import { Clock, Menu, Moon, Search, Sun } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCommandPalette } from "@/hooks/useCommandPalette";
 import { UserDropdown } from "./UserDropdown";
 import { NavMegaMenu } from "./NavMegaMenu";
+import { NotificationsDropdown } from "./NotificationsDropdown";
 import { PROMO_ACTIVE, PROMO_LABEL, PROMO_TEXT } from "@/config/promo";
 
 interface HeaderProps {
@@ -96,16 +97,8 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
           </Link>
         )}
 
-        {/* Bell */}
-        {isAuthed && (
-          <button className={iconBtn} aria-label="Уведомления">
-            <Bell className="h-4 w-4" />
-            <span
-              className="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary"
-              style={{ boxShadow: "0 0 6px var(--c-accent)" }}
-            />
-          </button>
-        )}
+        {/* Notifications */}
+        {isAuthed && <NotificationsDropdown />}
 
         {/* Theme */}
         <button onClick={toggleTheme} className={iconBtn} aria-label="Переключить тему">
