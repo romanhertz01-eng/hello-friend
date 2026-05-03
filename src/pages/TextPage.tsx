@@ -328,6 +328,7 @@ const TextPage = () => {
               </button>
             </div>
           </div>
+          </div>
 
         </div>
       </div>
