@@ -8,6 +8,7 @@ import { useCopyToast } from "@/components/shared/CopyToast";
 import { StatusBadge } from "@/components/ui/era/StatusBadge";
 import { MOCK_HISTORY } from "@/data/mockHistory";
 import { cn } from "@/lib/utils";
+import { ReferralPopup } from "@/components/shared/ReferralPopup";
 
 const recentChats = MOCK_HISTORY.slice(0, 8).map((h) => ({
   id: h.id,
