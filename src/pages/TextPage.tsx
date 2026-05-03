@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 import { ModelCarousel, type CarouselModel } from "@/components/workspace/ModelCarousel";
+import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 
 const textCarouselModels: CarouselModel[] = [
   { name: "ChatGPT", desc: "Универсальный ИИ от OpenAI", gradient: "linear-gradient(135deg, #10a37f, #1a7f5a)", badge: "TOP" },
@@ -155,6 +156,7 @@ const TextPage = () => {
   };
 
   return (
+    <ErrorBoundary>
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]" style={{ background: c.bg }}>
       {/* ─── Chat area ─── */}
       <div className="flex-1 overflow-y-auto">
@@ -327,6 +329,7 @@ const TextPage = () => {
         <SystemPromptDrawer value={systemPrompt} onChange={setSystemPrompt} onClose={() => setSystemDrawerOpen(false)} />
       )}
     </div>
+    </ErrorBoundary>
   );
 };
 
