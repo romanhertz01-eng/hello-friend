@@ -143,6 +143,7 @@ const AudioPage = () => {
   };
 
   return (
+    <ErrorBoundary>
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
       {/* Scrollable area: chat (welcome OR feed) + catalog below */}
       <div className="flex-1 overflow-y-auto w-full">
@@ -191,6 +192,7 @@ const AudioPage = () => {
         ) : (
           <>
             <MediaChatFeed generations={generations} />
+            {isGenerating && <GenerationLoader type="audio" model={currentSubName} />}
             <div ref={feedEndRef} />
           </>
         )}
@@ -454,7 +456,7 @@ const AudioPage = () => {
 
               <button
                 onClick={handleGenerate}
-                disabled={!prompt.trim()}
+                disabled={!prompt.trim() || isGenerating}
                 className="ml-auto inline-flex items-center gap-1.5 px-5 h-10 rounded-full gradient-accent text-white text-[14px] font-semibold shadow-[0_10px_30px_-10px_rgba(232,84,32,0.55),inset_0_1px_0_rgba(255,255,255,0.25)] hover:opacity-90 transition-all disabled:opacity-50"
               >
                 <Sparkles className="w-3.5 h-3.5" /> Генерировать <span className="inline-flex items-center gap-1 ml-1 font-mono tabular-nums"><Zap className="w-3 h-3" /> {isEL ? 60 : 30}</span>
@@ -464,6 +466,7 @@ const AudioPage = () => {
         </div>
       </div>
     </div>
+    </ErrorBoundary>
   );
 };
 
