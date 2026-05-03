@@ -149,12 +149,71 @@ function VideoMorePopup({
 }
 
 const welcomeScenarios: WelcomeScenario[] = [
-  { Icon: Film, title: "Рекламный ролик", desc: "Видео для продвижения продукта", prompt: "Рекламный ролик для " },
-  { Icon: Music, title: "Музыкальный клип", desc: "Визуальный ряд к треку", prompt: "Музыкальный клип " },
-  { Icon: User, title: "Анимация персонажа", desc: "Оживить статичного героя", prompt: "Анимация персонажа " },
-  { Icon: Clapperboard, title: "Кинематографичная сцена", desc: "Кинокачество с ИИ", prompt: "Кинематографичная сцена " },
-  { Icon: Smartphone, title: "Короткий клип для Reels", desc: "9:16 вертикальное видео", prompt: "Короткое видео для Reels " },
-  { Icon: Heart, title: "Видеооткрытка", desc: "Поздравление с анимацией", prompt: "Видеооткрытка " },
+  {
+    Icon: Film,
+    title: "Рекламный ролик",
+    desc: "Видео для продвижения продукта",
+    prompt: "Product showcase commercial, smooth camera movement, clean white studio, premium lighting, slow motion details",
+    providerId: "kling",
+    subModelId: "kling-3.0",
+    aspect: "16:9",
+    duration: "5s",
+    resolution: "1080p",
+  },
+  {
+    Icon: Music,
+    title: "Музыкальный клип",
+    desc: "Визуальный ряд к треку",
+    prompt: "Music video scene, cinematic color grading, dynamic transitions, artistic visual effects, concert atmosphere",
+    providerId: "kling",
+    subModelId: "kling-3.0",
+    aspect: "16:9",
+    duration: "10s",
+    resolution: "1080p",
+  },
+  {
+    Icon: User,
+    title: "Анимация персонажа",
+    desc: "Оживить статичного героя",
+    prompt: "Character animation, smooth movement, expressive gestures, 3D rendered style, professional quality",
+    providerId: "kling",
+    subModelId: "kling-3.0",
+    aspect: "1:1",
+    duration: "5s",
+    resolution: "720p",
+  },
+  {
+    Icon: Clapperboard,
+    title: "Кинематографичная сцена",
+    desc: "Кинокачество с ИИ",
+    prompt: "Cinematic establishing shot, golden hour lighting, anamorphic lens flare, shallow depth of field, film grain",
+    providerId: "veo",
+    aspect: "21:9",
+    duration: "5s",
+    resolution: "1080p",
+  },
+  {
+    Icon: Smartphone,
+    title: "Короткий клип для Reels",
+    desc: "9:16 вертикальное видео",
+    prompt: "Trendy vertical video, fast cuts, text overlay ready, vibrant colors, social media optimized, engaging hook",
+    providerId: "kling",
+    subModelId: "kling-3.0",
+    aspect: "9:16",
+    duration: "5s",
+    resolution: "1080p",
+  },
+  {
+    Icon: Heart,
+    title: "Видеооткрытка",
+    desc: "Поздравление с анимацией",
+    prompt: "Animated greeting card, floating particles, warm colors, celebration mood, gentle camera movement, sparkle effects",
+    providerId: "kling",
+    subModelId: "kling-2.1",
+    aspect: "1:1",
+    duration: "5s",
+    resolution: "720p",
+  },
 ];
 
 const VideoPage = () => {
@@ -319,7 +378,22 @@ const VideoPage = () => {
             modelName={provider?.name || "Видео"}
             subModelName={subModel?.name}
             scenarios={welcomeScenarios}
-            onScenarioClick={(p) => setPrompt(p)}
+            onScenarioClick={(scenario) => {
+              setPrompt(scenario.prompt);
+              if (scenario.providerId) {
+                const prov = videoProviders.find(p => p.id === scenario.providerId);
+                if (prov) {
+                  setSelectedProviderId(prov.id);
+                  if (scenario.subModelId) {
+                    const sub = prov.subModels.find(s => s.id === scenario.subModelId);
+                    if (sub) setSelectedSubModelId(sub.id);
+                  }
+                }
+              }
+              if (scenario.aspect) setAspectRatio(scenario.aspect);
+              if (scenario.duration) setDuration(scenario.duration);
+              if (scenario.resolution) setResolution(scenario.resolution);
+            }}
           />
         ) : (
           <>

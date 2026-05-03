@@ -49,12 +49,72 @@ const designGridModels = [
 ];
 
 const welcomeScenarios: WelcomeScenario[] = [
-  { Icon: Camera, title: "Фотореалистичный портрет", desc: "Портрет человека с детализацией", prompt: "Фотореалистичный портрет " },
-  { Icon: Palette, title: "Логотип и брендинг", desc: "Минималистичный лого для бренда", prompt: "Логотип для " },
-  { Icon: Sparkles, title: "Аниме иллюстрация", desc: "Персонаж в стиле аниме", prompt: "Аниме иллюстрация " },
-  { Icon: ImageIcon, title: "Контент для соцсетей", desc: "Пост, сторис, обложка", prompt: "Изображение для поста " },
-  { Icon: Zap, title: "Киберпанк сцена", desc: "Неоновый город будущего", prompt: "Киберпанк город ночью " },
-  { Icon: Paintbrush, title: "Арт и иллюстрация", desc: "Художественная иллюстрация", prompt: "Иллюстрация " },
+  {
+    Icon: Camera,
+    title: "Фотореалистичный портрет",
+    desc: "Портрет человека с детализацией",
+    prompt: "Photorealistic portrait of a young woman, soft studio lighting, shallow depth of field, 85mm lens, high detail skin texture, natural makeup",
+    providerId: "midjourney",
+    subModelId: "7",
+    aspect: "3:4",
+    quality: "2K",
+    quantity: 2,
+  },
+  {
+    Icon: Palette,
+    title: "Логотип и брендинг",
+    desc: "Минималистичный лого для бренда",
+    prompt: "Minimal flat vector logo design, clean lines, modern typography, white background, professional branding",
+    providerId: "flux",
+    subModelId: "flux-kontext-pro",
+    aspect: "1:1",
+    quality: "2K",
+    quantity: 4,
+  },
+  {
+    Icon: Sparkles,
+    title: "Аниме иллюстрация",
+    desc: "Персонаж в стиле аниме",
+    prompt: "Anime style character illustration, vibrant colors, detailed eyes, dynamic pose, studio ghibli inspired",
+    providerId: "midjourney",
+    subModelId: "niji-7",
+    aspect: "3:4",
+    quality: "2K",
+    quantity: 2,
+  },
+  {
+    Icon: ImageIcon,
+    title: "Контент для соцсетей",
+    desc: "Пост, сторис, обложка",
+    prompt: "Eye-catching social media post design, bold typography, gradient background, modern aesthetic, Instagram ready",
+    providerId: "nano-banana",
+    subModelId: "banana-2",
+    aspect: "1:1",
+    quality: "2K",
+    quantity: 1,
+  },
+  {
+    Icon: Zap,
+    title: "Киберпанк сцена",
+    desc: "Неоновый город будущего",
+    prompt: "Cyberpunk city at night, neon lights, rain reflections on wet streets, holographic billboards, blade runner atmosphere, cinematic wide angle",
+    providerId: "nano-banana",
+    subModelId: "banana-2",
+    aspect: "16:9",
+    quality: "2K",
+    quantity: 2,
+  },
+  {
+    Icon: Paintbrush,
+    title: "Арт и иллюстрация",
+    desc: "Художественная иллюстрация",
+    prompt: "Digital art illustration, fantasy landscape, magical forest with glowing mushrooms, ethereal light rays, detailed environment, concept art style",
+    providerId: "seedream",
+    subModelId: "seedream-5-lite",
+    aspect: "16:9",
+    quality: "2K",
+    quantity: 1,
+  },
 ];
 
 const DesignPage = () => {
@@ -192,7 +252,22 @@ const DesignPage = () => {
             modelName={provider?.name || "Изображения"}
             subModelName={subModel?.name}
             scenarios={welcomeScenarios}
-            onScenarioClick={(p) => setPrompt(p)}
+            onScenarioClick={(scenario) => {
+              setPrompt(scenario.prompt);
+              if (scenario.providerId) {
+                const prov = imageProviders.find(p => p.id === scenario.providerId);
+                if (prov) {
+                  setSelectedProviderId(prov.id);
+                  if (scenario.subModelId) {
+                    const sub = prov.subModels.find(s => s.id === scenario.subModelId);
+                    if (sub) setSelectedSubModelId(sub.id);
+                  }
+                }
+              }
+              if (scenario.aspect) setAspectRatio(scenario.aspect);
+              if (scenario.quality) setQuality(scenario.quality);
+              if (scenario.quantity) setQuantity(scenario.quantity);
+            }}
           />
         ) : (
           <>
