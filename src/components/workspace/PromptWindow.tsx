@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import {
-  Plus, ChevronDown, MoreHorizontal, Sparkles, Zap,
+  Plus, ChevronDown, Sparkles, Zap,
   FileText, Square, Hash,
   RectangleHorizontal, Clock, Monitor, Disc,
   MessageSquare, Image as ImageTab, Video as VideoTab, AudioLines,
@@ -159,30 +159,6 @@ function ParamPill({
   );
 }
 
-function MorePill() {
-  return (
-    <button
-      type="button"
-      className="inline-flex items-center justify-center w-9 h-9 rounded-full transition-colors shrink-0"
-      style={{
-        background: "var(--c-bg-2)",
-        border: "1px solid var(--c-line)",
-        color: "var(--c-fg-dim)",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "var(--c-line-2)";
-        e.currentTarget.style.color = "var(--c-fg)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "var(--c-line)";
-        e.currentTarget.style.color = "var(--c-fg-dim)";
-      }}
-      aria-label="Больше параметров"
-    >
-      <MoreHorizontal size={16} strokeWidth={1.8} />
-    </button>
-  );
-}
 
 /* ─── Per-type params row ─── */
 function ParamsRow({ type }: { type: GenType }) {
@@ -291,7 +267,7 @@ function ParamsRow({ type }: { type: GenType }) {
         />
         <ParamPill Icon={FileText} label="Системный промпт" value={textPrompt} onChange={setTextPrompt}
           options={["Без пресета", "Копирайтер", "Программист", "Учитель", "Переводчик"]} />
-        <MorePill />
+        
       </>
     );
   }
@@ -308,7 +284,7 @@ function ParamsRow({ type }: { type: GenType }) {
           options={["512×512", "1024×1024", "1536×1024", "1024×1536"]} mono />
         <ParamPill Icon={Hash} label="Варианты" value={imgVar} onChange={setImgVar}
           options={["1 вариант", "2 варианта", "4 варианта"]} />
-        <MorePill />
+        
       </>
     );
   }
@@ -327,7 +303,7 @@ function ParamsRow({ type }: { type: GenType }) {
           options={["3s", "5s", "8s", "10s"]} mono />
         <ParamPill Icon={Monitor} label="Разрешение" value={vidRes} onChange={setVidRes}
           options={["480p", "720p", "1080p"]} mono />
-        <MorePill />
+        
       </>
     );
   }
@@ -343,7 +319,7 @@ function ParamsRow({ type }: { type: GenType }) {
         options={["1 мин", "2 мин", "3 мин", "4 мин"]} mono />
       <ParamPill Icon={Disc} label="Жанр" value={audGenre} onChange={setAudGenre}
         options={["Поп", "Рок", "Электронная", "Lo-Fi", "Джаз", "Эмбиент"]} />
-      <MorePill />
+      
     </>
   );
 }
