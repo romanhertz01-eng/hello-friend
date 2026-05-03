@@ -5,7 +5,7 @@ import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 
 import { PromptBlock } from "@/components/workspace/ImagePromptBlock";
-import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
+
 import { PromptSuggestions } from "@/components/workspace/PromptSuggestions";
 import { ModelCarousel } from "@/components/workspace/ModelCarousel";
 import { ScenariosCarousel } from "@/components/workspace/ScenariosCarousel";
