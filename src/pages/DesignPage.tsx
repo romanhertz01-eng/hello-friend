@@ -214,9 +214,9 @@ const DesignPage = () => {
 
   return (
     <ErrorBoundary>
-    <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
+    <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))] mesh-background">
       {/* Scrollable area: chat (welcome OR feed) + catalog below */}
-      <div className="flex-1 overflow-y-auto w-full">
+      <div className="flex-1 overflow-y-auto w-full relative z-[1]">
         <div className="sticky top-0 z-20 flex justify-center py-2" style={{ background: "color-mix(in oklab, var(--c-bg) 85%, transparent)", backdropFilter: "blur(12px)" }}>
           <div className="relative" data-capsule-dropdown>
             <button onClick={() => setCapsuleOpen(!capsuleOpen)} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[13px] font-medium hover:opacity-90 transition-opacity" style={{ background: "var(--c-bg-1)", border: "1px solid var(--c-line)", color: "var(--c-fg)" }}>
