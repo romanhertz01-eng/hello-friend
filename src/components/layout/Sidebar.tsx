@@ -1,10 +1,35 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import {
   Home, Image, Video, MessageSquare, Mic, Bot, LayoutGrid, Layers,
-  CreditCard, History, ChevronLeft, X, ArrowRight, Gem,
+  CreditCard, History, ChevronLeft, X, ArrowRight, Gem, Plus,
 } from "lucide-react";
 import { StatusBadge } from "@/components/ui/era/StatusBadge";
+import { MOCK_HISTORY } from "@/data/mockHistory";
 import { cn } from "@/lib/utils";
+
+const recentChats = MOCK_HISTORY.slice(0, 8).map((h) => ({
+  id: h.id,
+  title: h.prompt.length > 35 ? h.prompt.slice(0, 35) + "…" : h.prompt,
+  type: h.type as "text" | "image" | "video" | "audio",
+  time: h.createdAt,
+}));
+
+const typeIcons: Record<"text" | "image" | "video" | "audio", React.ElementType> = {
+  text: MessageSquare,
+  image: Image,
+  video: Video,
+  audio: Mic,
+};
+
+const formatTime = (date: Date) => {
+  const diff = Date.now() - date.getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 60) return `${mins} мин`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours} ч`;
+  const days = Math.floor(hours / 24);
+  return `${days} д`;
+};
 
 interface SidebarProps {
   open: boolean;
@@ -115,14 +140,89 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
           </button>
         </div>
 
-        {/* Top: Home */}
+        {/* Top: Home + New chat */}
         <div className="px-0 pt-3 space-y-0.5">
           {renderItem({ icon: Home, label: "Главная", path: "/" })}
+          {!collapsed ? (
+            <Link
+              to="/text"
+              onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+              className="flex items-center gap-2 mx-2 mt-2 px-3 py-2.5 rounded-[14px] text-sm font-medium transition-all"
+              style={{
+                background: "rgba(232, 84, 32, 0.08)",
+                border: "1px solid rgba(232, 84, 32, 0.15)",
+                color: "hsl(var(--primary))",
+              }}
+            >
+              <Plus className="h-4 w-4" />
+              Новый чат
+            </Link>
+          ) : (
+            <Link
+              to="/text"
+              onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+              className="flex items-center justify-center mx-2 mt-2 h-9 rounded-full"
+              style={{ background: "rgba(232, 84, 32, 0.08)", border: "1px solid rgba(232, 84, 32, 0.15)", color: "hsl(var(--primary))" }}
+            >
+              <Plus className="h-4 w-4" />
+            </Link>
+          )}
         </div>
 
         {/* Scrollable nav */}
-        <div className="flex-1 overflow-y-auto space-y-0.5">
+        <div className="flex-1 overflow-y-auto space-y-0.5 scrollbar-thin">
           {renderSection("Генерация", genItems)}
+
+          {/* Секция: Недавние чаты */}
+          {!collapsed && (
+            <>
+              <div className="px-4 pt-5 pb-2 flex items-center justify-between">
+                <span className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-[hsl(var(--muted-foreground))]">
+                  Недавние
+                </span>
+                <Link to="/history" className="text-muted-foreground hover:text-foreground" onClick={() => { if (window.innerWidth < 1024) onClose(); }}>
+                  <History className="h-3 w-3" />
+                </Link>
+              </div>
+              <div className="space-y-0.5">
+                {recentChats.map((chat) => {
+                  const TypeIcon = typeIcons[chat.type] || MessageSquare;
+                  return (
+                    <Link
+                      key={chat.id}
+                      to="/history"
+                      onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                      className="flex items-center gap-2.5 mx-2 px-3 py-2 rounded-[8px] text-sm transition-colors hover:bg-secondary group"
+                    >
+                      <TypeIcon className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                      <span className="flex-1 truncate text-[13px] text-foreground/90 group-hover:text-foreground">
+                        {chat.title}
+                      </span>
+                      <span className="text-[10px] font-mono text-muted-foreground shrink-0">
+                        {formatTime(chat.time)}
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+              <Link
+                to="/history"
+                onClick={() => { if (window.innerWidth < 1024) onClose(); }}
+                className="flex items-center gap-2 mx-2 px-3 py-2 mt-1 text-[12px] text-muted-foreground hover:text-primary transition-colors"
+              >
+                <ArrowRight className="h-3 w-3" />
+                Вся история
+              </Link>
+            </>
+          )}
+          {collapsed && (
+            <div className="flex justify-center py-3">
+              <Link to="/history" className="p-2 rounded-full hover:bg-secondary transition-colors" onClick={() => { if (window.innerWidth < 1024) onClose(); }}>
+                <History className="h-4 w-4 text-muted-foreground" />
+              </Link>
+            </div>
+          )}
+
           {renderSection("Инструменты", toolItems)}
           {renderSection("", bottomItems)}
         </div>
