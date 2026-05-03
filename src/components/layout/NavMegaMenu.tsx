@@ -89,6 +89,8 @@ const TABS: TabConfig[] = [
       { name: "Hailuo", desc: "Minimax" },
       { name: "Wan", desc: "Alibaba" },
       { name: "Sora", desc: "От OpenAI" },
+      { name: "HeyGen", desc: "AI аватары" },
+      { name: "Hedra", desc: "Говорящие персонажи" },
     ],
   },
   {
