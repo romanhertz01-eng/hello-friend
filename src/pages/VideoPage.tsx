@@ -245,7 +245,7 @@ const VideoPage = () => {
                       {p.subModels.map((s) => (
                         <button
                           key={s.id}
-                          onClick={() => { handleModelSelect(p.id, s.id); setCapsuleOpen(false); }}
+                          onClick={() => { setCapsuleOpen(false); setTimeout(() => handleModelSelect(p.id, s.id), 50); }}
                           className={cn(
                             "w-full flex items-center gap-3 px-3 py-2.5 rounded-[8px] text-sm transition-colors text-left",
                             selectedSubModelId === s.id ? "bg-[rgba(232,84,32,0.12)]" : "hover:bg-secondary"
