@@ -45,10 +45,13 @@ const Index = () => {
       navigate({ to: "/auth" });
       return;
     }
-    navigate({
-      to: "/create",
-      search: { type: genType, model: "", prompt } as never,
-    });
+    const routeMap: Record<GenType, string> = {
+      text: "/text",
+      image: "/design",
+      video: "/video",
+      audio: "/audio",
+    };
+    navigate({ to: routeMap[genType] as never });
   };
 
   const handlePickPrompt = (preset: string) => {
@@ -75,10 +78,10 @@ const Index = () => {
         <motion.div className="relative max-w-3xl mx-auto text-center px-4 pt-20 pb-10 md:pt-28 md:pb-14" initial="hidden" animate="show" variants={stagger}>
           <motion.div variants={fadeUp} className="mb-5 inline-block"><Eyebrow>● ERA2 · AI AGGREGATOR</Eyebrow></motion.div>
           <motion.h1 variants={fadeUp} className="text-[32px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-6 text-balance">
-            All-in-One AI.<br />Все нейросети в одном месте.
+            Один ключ.<br />Все модели.
           </motion.h1>
           <motion.p variants={fadeUp} className="text-muted-foreground text-base md:text-lg max-w-xl mx-auto mb-6 leading-relaxed">
-            Единая подписка на ChatGPT, Claude, Midjourney, Sora, ElevenLabs и 90+ других нейросетей. Без VPN, оплата в рублях.
+            Подключайтесь к ChatGPT, Claude, Gemini, Midjourney, Sora и ещё 90+ нейросетям через единую подписку. Оплата в рублях, без VPN.
           </motion.p>
           <motion.div variants={fadeUp} className="flex items-center justify-center gap-1.5 text-sm text-muted-foreground">
             <div className="flex">
@@ -86,7 +89,7 @@ const Index = () => {
                 <Star key={i} className="h-4 w-4 fill-[#ffb27a] text-[#ffb27a]" />
               ))}
             </div>
-            <span>Trusted by 5,000+ пользователей</span>
+            <span>Бета-тестирование · Присоединяйтесь первыми</span>
             <span className="mx-2 opacity-40">·</span>
             <Link to={ctaLink} className="text-[hsl(var(--primary))] hover:underline font-medium">Начать бесплатно</Link>
           </motion.div>

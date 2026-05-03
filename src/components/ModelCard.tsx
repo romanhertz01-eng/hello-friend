@@ -16,11 +16,15 @@ const approxSeconds: Record<SearchableModel["type"], number> = {
 export function ModelCard({ model }: { model: SearchableModel }) {
   const navigate = useNavigate();
 
+  const routeMap: Record<SearchableModel["type"], string> = {
+    text: "/text",
+    image: "/design",
+    video: "/video",
+    audio: "/audio",
+  };
+
   const handleClick = () => {
-    navigate({
-      to: "/create",
-      search: { type: model.type, model: model.id, prompt: "" } as never,
-    });
+    navigate({ to: routeMap[model.type] as never });
   };
 
   const badgeVariant: "new" | "top" | "beta" | undefined = model.isNew ? "new" : undefined;

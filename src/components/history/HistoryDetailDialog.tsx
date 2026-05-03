@@ -55,10 +55,13 @@ export function HistoryDetailDialog({ item, open, onOpenChange }: Props) {
 
   const handleReuse = () => {
     onOpenChange(false);
-    navigate({
-      to: "/create",
-      search: { type, model: providerId, prompt } as never,
-    });
+    const routeMap: Record<typeof type, string> = {
+      text: "/text",
+      image: "/design",
+      video: "/video",
+      audio: "/audio",
+    };
+    navigate({ to: routeMap[type] as never });
   };
 
   return (

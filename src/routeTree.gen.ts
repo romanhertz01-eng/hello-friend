@@ -16,7 +16,6 @@ import { Route as StudiosRouteImport } from './routes/studios'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as DesignRouteImport } from './routes/design'
-import { Route as CreateRouteImport } from './routes/create'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AudioRouteImport } from './routes/audio'
 import { Route as AgentsRouteImport } from './routes/agents'
@@ -62,11 +61,6 @@ const HistoryRoute = HistoryRouteImport.update({
 const DesignRoute = DesignRouteImport.update({
   id: '/design',
   path: '/design',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CreateRoute = CreateRouteImport.update({
-  id: '/create',
-  path: '/create',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -130,7 +124,6 @@ export interface FileRoutesByFullPath {
   '/agents': typeof AgentsRoute
   '/audio': typeof AudioRoute
   '/auth': typeof AuthRoute
-  '/create': typeof CreateRoute
   '/design': typeof DesignRoute
   '/history': typeof HistoryRoute
   '/pricing': typeof PricingRoute
@@ -151,7 +144,6 @@ export interface FileRoutesByTo {
   '/agents': typeof AgentsRoute
   '/audio': typeof AudioRoute
   '/auth': typeof AuthRoute
-  '/create': typeof CreateRoute
   '/design': typeof DesignRoute
   '/history': typeof HistoryRoute
   '/pricing': typeof PricingRoute
@@ -173,7 +165,6 @@ export interface FileRoutesById {
   '/agents': typeof AgentsRoute
   '/audio': typeof AudioRoute
   '/auth': typeof AuthRoute
-  '/create': typeof CreateRoute
   '/design': typeof DesignRoute
   '/history': typeof HistoryRoute
   '/pricing': typeof PricingRoute
@@ -196,7 +187,6 @@ export interface FileRouteTypes {
     | '/agents'
     | '/audio'
     | '/auth'
-    | '/create'
     | '/design'
     | '/history'
     | '/pricing'
@@ -217,7 +207,6 @@ export interface FileRouteTypes {
     | '/agents'
     | '/audio'
     | '/auth'
-    | '/create'
     | '/design'
     | '/history'
     | '/pricing'
@@ -238,7 +227,6 @@ export interface FileRouteTypes {
     | '/agents'
     | '/audio'
     | '/auth'
-    | '/create'
     | '/design'
     | '/history'
     | '/pricing'
@@ -260,7 +248,6 @@ export interface RootRouteChildren {
   AgentsRoute: typeof AgentsRoute
   AudioRoute: typeof AudioRoute
   AuthRoute: typeof AuthRoute
-  CreateRoute: typeof CreateRoute
   DesignRoute: typeof DesignRoute
   HistoryRoute: typeof HistoryRoute
   PricingRoute: typeof PricingRoute
@@ -326,13 +313,6 @@ declare module '@tanstack/react-router' {
       path: '/design'
       fullPath: '/design'
       preLoaderRoute: typeof DesignRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/create': {
-      id: '/create'
-      path: '/create'
-      fullPath: '/create'
-      preLoaderRoute: typeof CreateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -420,7 +400,6 @@ const rootRouteChildren: RootRouteChildren = {
   AgentsRoute: AgentsRoute,
   AudioRoute: AudioRoute,
   AuthRoute: AuthRoute,
-  CreateRoute: CreateRoute,
   DesignRoute: DesignRoute,
   HistoryRoute: HistoryRoute,
   PricingRoute: PricingRoute,
@@ -439,3 +418,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
