@@ -6,6 +6,8 @@ import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { WelcomeBlock, type WelcomeScenario } from "@/components/workspace/WelcomeBlock";
 import { MediaChatFeed, type MediaGeneration } from "@/components/workspace/MediaChatFeed";
+import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
+import { GenerationLoader } from "@/components/shared/GenerationLoader";
 
 /* ─── Voice data ─── */
 const voices = [
@@ -82,6 +84,7 @@ const AudioPage = () => {
   const [sunoDuration, setSunoDuration] = useState("До 2 минут");
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [generations, setGenerations] = useState<MediaGeneration[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
   const feedEndRef = useRef<HTMLDivElement>(null);
   const inputAreaRef = useRef<HTMLDivElement>(null);
   
@@ -121,18 +124,22 @@ const AudioPage = () => {
 
   const handleGenerate = () => {
     const text = prompt.trim();
-    if (!text) return;
-    setGenerations((prev) => [...prev, {
-      id: Date.now().toString(),
-      prompt: text,
-      model: currentModelName,
-      subModel: currentSubName,
-      createdAt: new Date(),
-      type: "audio",
-      audioDuration: isEL ? "0:18" : sunoDuration === "До 1 минуты" ? "0:58" : sunoDuration === "До 2 минут" ? "1:54" : "3:42",
-    }]);
-    setPrompt("");
-    sessionStorage.removeItem("era2_draft_audio");
+    if (!text || isGenerating) return;
+    setIsGenerating(true);
+    setTimeout(() => {
+      setGenerations((prev) => [...prev, {
+        id: Date.now().toString(),
+        prompt: text,
+        model: currentModelName,
+        subModel: currentSubName,
+        createdAt: new Date(),
+        type: "audio",
+        audioDuration: isEL ? "0:18" : sunoDuration === "До 1 минуты" ? "0:58" : sunoDuration === "До 2 минут" ? "1:54" : "3:42",
+      }]);
+      setIsGenerating(false);
+      setPrompt("");
+      sessionStorage.removeItem("era2_draft_audio");
+    }, 2000 + Math.random() * 2000);
   };
 
   return (
