@@ -13,6 +13,8 @@ import { TwoPanelModelSelector } from "@/components/workspace/TwoPanelModelSelec
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 import { WelcomeBlock, type WelcomeScenario } from "@/components/workspace/WelcomeBlock";
 import { MediaChatFeed, type MediaGeneration } from "@/components/workspace/MediaChatFeed";
+import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
+import { GenerationLoader } from "@/components/shared/GenerationLoader";
 import {
   videoProviders,
   videoCarouselCards,
@@ -166,6 +168,7 @@ const VideoPage = () => {
   const [, setSelectedFunc] = useState("Текст в видео");
   const [moreOpen, setMoreOpen] = useState(false);
   const [generations, setGenerations] = useState<MediaGeneration[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
   const feedEndRef = useRef<HTMLDivElement>(null);
   const inputAreaRef = useRef<HTMLDivElement>(null);
   
@@ -199,20 +202,24 @@ const VideoPage = () => {
 
   const handleGenerate = () => {
     const text = prompt.trim();
-    if (!text) return;
-    setGenerations((prev) => [...prev, {
-      id: Date.now().toString(),
-      prompt: text,
-      model: provider?.name || "Video",
-      subModel: subModel?.name || "",
-      createdAt: new Date(),
-      type: "video",
-      aspect: aspectRatio,
-      duration,
-      resolution,
-    }]);
-    setPrompt("");
-    sessionStorage.removeItem("era2_draft_video");
+    if (!text || isGenerating) return;
+    setIsGenerating(true);
+    setTimeout(() => {
+      setGenerations((prev) => [...prev, {
+        id: Date.now().toString(),
+        prompt: text,
+        model: provider?.name || "Video",
+        subModel: subModel?.name || "",
+        createdAt: new Date(),
+        type: "video",
+        aspect: aspectRatio,
+        duration,
+        resolution,
+      }]);
+      setIsGenerating(false);
+      setPrompt("");
+      sessionStorage.removeItem("era2_draft_video");
+    }, 2000 + Math.random() * 2000);
   };
 
   const handleModelSelect = (providerId: string, subModelId: string) => {
@@ -267,6 +274,7 @@ const VideoPage = () => {
   };
 
   return (
+    <ErrorBoundary>
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
       {/* Scrollable area: chat (welcome OR feed) + catalog below */}
       <div className="flex-1 overflow-y-auto w-full">
@@ -316,6 +324,7 @@ const VideoPage = () => {
         ) : (
           <>
             <MediaChatFeed generations={generations} />
+            {isGenerating && <GenerationLoader type="video" model={subModel?.name} />}
             <div ref={feedEndRef} />
           </>
         )}
@@ -362,7 +371,7 @@ const VideoPage = () => {
 
               <button
                 onClick={handleGenerate}
-                disabled={!prompt.trim()}
+                disabled={!prompt.trim() || isGenerating}
                 className="ml-auto inline-flex items-center gap-1.5 px-5 h-10 rounded-full gradient-accent text-white text-[14px] font-semibold shadow-[0_10px_30px_-10px_rgba(232,84,32,0.55),inset_0_1px_0_rgba(255,255,255,0.25)] hover:opacity-90 transition-all disabled:opacity-50"
               >
                 <Sparkles className="w-3.5 h-3.5" /> Генерировать
@@ -392,6 +401,7 @@ const VideoPage = () => {
         qualityOptions={provider?.qualityOptions}
       />
     </div>
+    </ErrorBoundary>
   );
 };
 
