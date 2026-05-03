@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link } from "@tanstack/react-router";
-import { Check, X as XIcon } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { FAQ } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
-import { StatusBadge } from "@/components/ui/era";
 import { motion } from "framer-motion";
 
 const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
@@ -14,85 +11,114 @@ type Period = "year" | "month";
 
 const plans = [
   {
-    name: "Starter",
+    name: "Старт",
+    badge: "БЕСПЛАТНО",
+    oldPrice: null as string | null,
+    yearPrice: "0 ₽",
+    monthPrice: "0 ₽",
+    credits: "100 кредитов",
+    creditsNote: "единоразово",
+    features: [
+      "5 текстовых моделей (GPT 4.1 Mini, Claude 4 Sonnet, Gemini 2.5 Flash, DeepSeek V3, Qwen 3)",
+      "3 модели изображений (Nano Banana, Flux.1, Seedream 4)",
+      "1 видео-модель (Kling 1.5)",
+      "Базовые агенты",
+      "Качество до 1K",
+      "Очередь генерации",
+    ],
+    cta: "Начать бесплатно",
+    recommended: false,
+    popular: false,
+  },
+  {
+    name: "Базовый",
+    badge: "-30%",
     oldPrice: "38 100 ₽",
     yearPrice: "756 ₽/мес",
     monthPrice: "890 ₽/мес",
-    tokens: "3 120 токенов",
-    recommended: false,
+    credits: "3 000 кредитов",
+    creditsNote: "ежемесячно",
     features: [
-      "3 120 токенов",
-      "GPT-4o mini, Gemini Flash, DeepSeek, Haiku",
-      "Базовые модели изображений",
-      "Генерация текста без ограничений на базовых моделях",
+      "Все текстовые модели (30+)",
+      "Все модели изображений (10+)",
+      "5 видео-моделей",
+      "ElevenLabs озвучка",
+      "Качество до 2K",
+      "Приоритетная очередь",
+      "История генераций 30 дней",
     ],
-    unlimitedModels: [
-      "∞ Nano Banana 2 · FAST GENS",
-      "∞ Nano Banana Pro · FAST GENS",
-      "∞ Flux Schnell",
-    ],
+    cta: "Выбрать план",
+    recommended: false,
+    popular: false,
   },
   {
-    name: "Creator",
+    name: "Про",
+    badge: "ПОПУЛЯРНЫЙ",
     oldPrice: "66 200 ₽",
     yearPrice: "1 436 ₽/мес",
     monthPrice: "1 690 ₽/мес",
-    tokens: "8 160 токенов",
-    recommended: true,
-    badge: "САМЫЙ ВЫГОДНЫЙ",
+    credits: "8 000 кредитов",
+    creditsNote: "ежемесячно",
     features: [
-      "8 160 токенов",
-      "Все текстовые модели включая GPT 5, Claude Sonnet, Gemini Pro",
-      "Все модели изображений включая Midjourney, Nano Banana",
-      "ElevenLabs озвучка",
-      "История и библиотека",
+      "Все 90+ моделей без ограничений",
+      "Все видео-модели (Kling 3.0, Veo 3, Sora 2)",
+      "ElevenLabs + Suno",
+      "Качество до 4K",
+      "Быстрая генерация (без очереди)",
+      "Все 27 агентов",
+      "API-доступ",
+      "История генераций 90 дней",
     ],
-    unlimitedModels: [
-      "∞ Nano Banana 2 · FAST GENS",
-      "∞ Nano Banana Pro · FAST GENS",
-      "∞ Flux Schnell",
-      "∞ Seedream 5.0 Lite",
-      "∞ GPT Image 1.5",
-    ],
+    cta: "Выбрать план",
+    recommended: true,
+    popular: true,
   },
   {
-    name: "Pro",
+    name: "Бизнес",
+    badge: null as string | null,
     oldPrice: "66 200 ₽",
     yearPrice: "1 691 ₽/мес",
     monthPrice: "1 990 ₽/мес",
-    tokens: "∞ токенов",
-    recommended: false,
+    credits: "∞ Безлимит",
+    creditsNote: "без кредитов",
     features: [
-      "∞ безлимитные токены",
-      "Все модели текста, изображений, видео, аудио",
-      "GPT 5.2, Claude Opus, Gemini 3 Pro",
-      "Sora 2, Veo 3, Kling",
-      "Приоритетная генерация",
-      "API-доступ",
+      "∞ Все 90+ моделей без кредитов",
+      "Максимальное качество 4K+",
+      "Мгновенная генерация",
+      "Приоритетная поддержка",
+      "Команда до 5 человек",
+      "Выделенный API",
+      "Кастомные агенты",
+      "История генераций бессрочно",
     ],
-    unlimitedModels: [
-      "∞ Все 30+ моделей без кредитов",
-      "∞ Приоритетная очередь",
-    ],
+    cta: "Связаться",
+    recommended: false,
+    popular: false,
   },
 ];
 
-const compareRows = [
-  { label: "Токены", values: ["3 120", "8 160", "∞"] },
-  { label: "GPT 5.2", values: [false, false, true] },
-  { label: "Claude Opus", values: [false, false, true] },
-  { label: "Midjourney", values: [false, true, true] },
-  { label: "Nano Banana Pro", values: [false, true, true] },
-  { label: "Sora 2", values: [false, false, true] },
-  { label: "Veo 3", values: [false, false, true] },
-  { label: "ElevenLabs", values: [false, true, true] },
-  { label: "API-доступ", values: [false, false, true] },
-  { label: "Приоритет", values: [false, false, true] },
+const faqItems = [
+  {
+    q: "Что такое кредиты?",
+    a: "Каждая генерация стоит определённое количество кредитов. Текст: 6 cr, Изображение: 80–300 cr, Видео: 75–150 cr, Аудио: 30–60 cr.",
+  },
+  {
+    q: "Можно ли перейти на другой план?",
+    a: "Да, в любой момент. Остаток кредитов переносится.",
+  },
+  {
+    q: "Что будет когда кредиты закончатся?",
+    a: "Можно докупить пакет кредитов или дождаться обновления в начале месяца.",
+  },
+  {
+    q: "Есть ли API?",
+    a: "Да, на планах Про и Бизнес. Документация в личном кабинете.",
+  },
 ];
 
 const PricingPage = () => {
   const [period, setPeriod] = useState<Period>("year");
-  const [showCompare, setShowCompare] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => { document.title = "ERA2 — Тарифы"; }, []);
 
@@ -103,8 +129,8 @@ const PricingPage = () => {
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(232,84,32,0.12) 0%, rgba(255,122,61,0.04) 40%, transparent 70%)" }} />
         <motion.div className="relative max-w-4xl mx-auto text-center px-4 pt-16 pb-10 md:pt-20" initial="hidden" animate="show" variants={stagger}>
           <motion.p variants={fadeUp} className="text-xs uppercase tracking-[2px] text-primary font-semibold mb-4">Тарифы</motion.p>
-          <motion.h1 variants={fadeUp} className="text-[32px] md:text-[44px] font-bold mb-4">Выберите свой план</motion.h1>
-          <motion.p variants={fadeUp} className="text-muted-foreground mb-8">Одна подписка — доступ ко всем 90+ нейросетям. Без скрытых платежей.</motion.p>
+          <motion.h1 variants={fadeUp} className="text-[32px] md:text-[44px] font-bold mb-4">Простые тарифы для каждого</motion.h1>
+          <motion.p variants={fadeUp} className="text-muted-foreground mb-8">Одна подписка — доступ ко всем 90+ нейросетям. Начните бесплатно.</motion.p>
 
           {/* Period toggle */}
           <motion.div variants={fadeUp} className="inline-flex rounded-full border border-[hsl(var(--border))] p-1">
@@ -126,112 +152,115 @@ const PricingPage = () => {
       </section>
 
       {/* Plan cards */}
-      <section className="max-w-5xl mx-auto px-4 pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {plans.map((plan) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className={cn(
-                "relative bg-card border rounded-card p-8 text-left",
-                plan.recommended
-                  ? "border-primary glow-accent"
-                  : "border-border"
-              )}
-            >
-              {plan.badge && (
-                <div className="absolute -top-3 left-6">
-                  <StatusBadge variant="top">{plan.badge}</StatusBadge>
-                </div>
-              )}
-              <h3 className="text-xl font-bold mb-2 tracking-tight">{plan.name}</h3>
-              <div className="mb-2">
-                <span className="font-mono tabular-nums text-sm text-muted-foreground line-through mr-2">{plan.oldPrice}</span>
-              </div>
-              <div className="mb-4">
-                <span className="text-[32px] font-bold font-mono tabular-nums tracking-tight">{period === "year" ? plan.yearPrice : plan.monthPrice}</span>
-              </div>
-              <p className="text-sm text-primary font-semibold font-mono tabular-nums mb-6">{plan.tokens}</p>
-
-              <ul className="space-y-3 mb-6">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Unlimited models */}
-              <div className="mb-6">
-                <p className="text-xs font-semibold text-muted-foreground mb-2 uppercase tracking-wide">Безлимитный доступ:</p>
-                {plan.unlimitedModels.map((m) => (
-                  <p key={m} className="text-xs text-muted-foreground mb-1">{m}</p>
-                ))}
-              </div>
-
-              <button
+      <section className="max-w-7xl mx-auto px-4 pb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {plans.map((plan) => {
+            const isFree = plan.badge === "БЕСПЛАТНО";
+            const isPopular = plan.badge === "ПОПУЛЯРНЫЙ";
+            const isPrimaryCta = isFree || plan.recommended;
+            return (
+              <motion.div
+                key={plan.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 className={cn(
-                  "w-full py-3 rounded-button text-sm font-semibold transition-opacity",
-                  plan.recommended
-                    ? "gradient-accent text-white hover:opacity-90"
-                    : "border border-border hover:bg-muted"
+                  "relative bg-card border rounded-card p-6 text-left flex flex-col",
+                  plan.recommended ? "border-primary glow-accent" : "border-border"
                 )}
               >
-                Выбрать
+                {plan.badge && (
+                  <div className="absolute -top-3 left-6">
+                    <span
+                      className={cn(
+                        "inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide",
+                        isFree && "bg-emerald-500/15 text-emerald-400",
+                        isPopular && "bg-primary/15 text-primary",
+                        !isFree && !isPopular && "bg-muted text-foreground"
+                      )}
+                    >
+                      {plan.badge}
+                    </span>
+                  </div>
+                )}
+                <h3 className="text-xl font-bold mb-2 tracking-tight">{plan.name}</h3>
+                <div className="mb-2 min-h-[20px]">
+                  {plan.oldPrice && (
+                    <span className="font-mono tabular-nums text-sm text-muted-foreground line-through mr-2">{plan.oldPrice}</span>
+                  )}
+                </div>
+                <div className="mb-4">
+                  <span className="text-[28px] font-bold font-mono tabular-nums tracking-tight">
+                    {period === "year" ? plan.yearPrice : plan.monthPrice}
+                  </span>
+                </div>
+
+                <div className="mb-6">
+                  <div className="text-2xl font-bold text-foreground">{plan.credits}</div>
+                  <div className="text-xs text-muted-foreground font-mono">{plan.creditsNote}</div>
+                </div>
+
+                <ul className="space-y-3 mb-6 flex-1">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm">
+                      <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  className={cn(
+                    "w-full py-3 rounded-button text-sm font-semibold transition-all",
+                    isPrimaryCta
+                      ? "gradient-accent text-white hover:opacity-90"
+                      : "border border-border text-foreground hover:bg-muted"
+                  )}
+                >
+                  {plan.cta}
+                </button>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Trust block */}
+        <div className="text-center mt-12">
+          <p className="text-muted-foreground text-sm">Оплата через ЮKassa · Карты РФ · СБП · Рассрочка</p>
+          <p className="text-muted-foreground text-xs mt-2">Отмена подписки в любой момент · Возврат в течение 3 дней</p>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="max-w-3xl mx-auto px-4 py-16">
+        <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Частые вопросы</h2>
+        <div className="divide-y divide-border border-y border-border">
+          {faqItems.map((item, i) => (
+            <div key={i}>
+              <button
+                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                className="w-full flex items-center justify-between py-4 text-left font-medium text-foreground hover:text-primary transition-colors"
+              >
+                <span>{item.q}</span>
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 shrink-0 ml-4 text-muted-foreground transition-transform duration-200",
+                    openFaq === i && "rotate-180"
+                  )}
+                />
               </button>
-            </motion.div>
+              <div
+                className={cn(
+                  "overflow-hidden transition-all duration-200",
+                  openFaq === i ? "max-h-40 pb-4" : "max-h-0"
+                )}
+              >
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.a}</p>
+              </div>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* Compare toggle */}
-      <section className="max-w-5xl mx-auto px-4 pb-8 text-center">
-        <button
-          onClick={() => setShowCompare(!showCompare)}
-          className="px-6 py-3 rounded-button border border-border text-sm font-medium hover:border-primary/30 transition-colors"
-        >
-          {showCompare ? "Скрыть сравнение" : "Сравнить все тарифы"}
-        </button>
-      </section>
-
-      {/* Compare table */}
-      {showCompare && (
-        <section className="max-w-5xl mx-auto px-4 py-8">
-          <h2 className="text-2xl md:text-[28px] font-bold mb-8 text-center">Сравнение тарифов</h2>
-          <div className="overflow-x-auto scrollbar-hide">
-            <table className="w-full min-w-[500px] text-sm">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left py-3 px-4 font-semibold sticky left-0 bg-background z-10">Функция</th>
-                  {plans.map((p) => (
-                    <th key={p.name} className="text-center py-3 px-4 font-semibold">{p.name}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {compareRows.map((row, i) => (
-                  <tr key={row.label} className={cn("border-b border-border", i % 2 === 0 ? "bg-card/50" : "")}>
-                    <td className="py-3 px-4 sticky left-0 bg-inherit z-10">{row.label}</td>
-                    {row.values.map((v, j) => (
-                      <td key={j} className="text-center py-3 px-4">
-                        {typeof v === "boolean" ? (
-                          v ? <Check className="h-4 w-4 text-primary mx-auto" /> : <XIcon className="h-4 w-4 text-muted-foreground/40 mx-auto" />
-                        ) : (
-                          <span className="font-mono font-semibold">{v}</span>
-                        )}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      )}
-
-      <FAQ />
       <Footer />
     </div>
   );
