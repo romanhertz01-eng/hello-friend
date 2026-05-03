@@ -87,6 +87,23 @@ export function TwoPanelModelSelector({
   const ref = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
+  const providerHoverTimer = useRef<number | null>(null);
+
+  const clearProviderHoverTimer = () => {
+    if (providerHoverTimer.current !== null) {
+      window.clearTimeout(providerHoverTimer.current);
+      providerHoverTimer.current = null;
+    }
+  };
+
+  const scheduleProviderHover = (providerId: string) => {
+    if (providerId === activeProvider) return;
+    clearProviderHoverTimer();
+    providerHoverTimer.current = window.setTimeout(() => {
+      setActiveProvider((prev) => (prev === providerId ? prev : providerId));
+      providerHoverTimer.current = null;
+    }, 70);
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -128,6 +145,8 @@ export function TwoPanelModelSelector({
 
   useEffect(() => { setActiveProvider(selectedProviderId); }, [selectedProviderId]);
 
+  useEffect(() => clearProviderHoverTimer, []);
+
   const currentProvider = providers.find((p) => p.id === selectedProviderId);
   const currentSub = currentProvider?.subModels.find((s) => s.id === selectedSubModelId);
   const hoverProvider = providers.find((p) => p.id === activeProvider);
@@ -160,7 +179,7 @@ export function TwoPanelModelSelector({
             left: pos.left,
             ...(pos.top !== undefined ? { top: pos.top } : { bottom: pos.bottom }),
             width: 640,
-            maxHeight: 420,
+            height: "min(420px, calc(100vh - 16px))",
             background: "var(--bg-popup)",
             border: "1px solid var(--border-primary)",
             borderRadius: 12,
@@ -182,25 +201,20 @@ export function TwoPanelModelSelector({
                 return (
                   <button
                     key={p.id}
-                    onMouseEnter={() => setActiveProvider(p.id)}
+                    onMouseEnter={() => scheduleProviderHover(p.id)}
                     onClick={() => {
+                      clearProviderHoverTimer();
                       const def = p.subModels.find((s) => (s as any).isDefault) || p.subModels[0];
                       onSelect(p.id, def.id);
                       setOpen(false);
                     }}
-                    className="w-full flex items-center gap-[8px] text-left transition-colors"
+                    className="w-full flex items-center gap-[8px] text-left"
                     style={{
                       height: 36,
                       padding: "0 12px",
                       background: isActive ? "rgba(232, 84, 32,0.1)" : "transparent",
                       borderLeft: isSelected ? "2px solid hsl(var(--primary))" : "2px solid transparent",
                       color: isSelected ? "hsl(var(--primary))" : "var(--text-primary)",
-                    }}
-                    onMouseOver={(e) => {
-                      if (!isActive) (e.currentTarget.style.background = "var(--bg-card-hover)");
-                    }}
-                    onMouseOut={(e) => {
-                      if (!isActive) (e.currentTarget.style.background = "transparent");
                     }}
                   >
                     {(() => {
@@ -224,7 +238,7 @@ export function TwoPanelModelSelector({
             {/* Right: sub-models, scrollable */}
             <div
               className="flex-1 submodel-scroll-container"
-              style={{ maxHeight: 360, paddingTop: 8 }}
+              style={{ minHeight: 0, paddingTop: 8, overflowY: "auto" }}
             >
               {hoverProvider?.subModels.map((s, i) => {
                 const isSelected = selectedSubModelId === s.id && selectedProviderId === hoverProvider.id;
