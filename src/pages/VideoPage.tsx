@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { Zap, X, Sparkles, Square, Clock, Monitor, MoreHorizontal, Film, Music, User, Clapperboard, Smartphone, Heart, ChevronDown } from "lucide-react";
+import { Zap, Sparkles, Square, Clock, Monitor, Film, Music, User, Clapperboard, Smartphone, Heart, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
-import { SegmentedToolbar, SegmentedItem, AttachmentButton } from "@/components/ui/era";
+import { AttachmentButton } from "@/components/ui/era";
+import { InlinePillDropdown } from "@/components/workspace/InlinePillDropdown";
 
 import { PromptSuggestions } from "@/components/workspace/PromptSuggestions";
 import { ModelCarousel } from "@/components/workspace/ModelCarousel";
@@ -22,132 +23,6 @@ import {
   videoPromptSuggestions,
 } from "@/data/videoModels";
 
-/* ─── Aspect ratio icon ─── */
-function AspectIcon({ ratio, active }: { ratio: string; active: boolean }) {
-  const color = active ? "hsl(var(--primary))" : "#666";
-  const sizes: Record<string, [number, number]> = {
-    "16:9": [22, 14], "9:16": [14, 22], "1:1": [18, 18], "4:3": [20, 16],
-    "3:4": [16, 20], "3:2": [20, 14], "2:3": [14, 20], "21:9": [24, 10],
-  };
-  const [w, h] = sizes[ratio] || [18, 18];
-  return (
-    <svg width={24} height={24} viewBox="0 0 24 24">
-      <rect x={(24 - w) / 2} y={(24 - h) / 2} width={w} height={h} rx={2} fill="none" stroke={color} strokeWidth={1.5} />
-    </svg>
-  );
-}
-
-/* ─── More popup for video ─── */
-function VideoMorePopup({
-  open, onClose,
-  aspectRatio, onAspectSelect, aspectRatios,
-  duration, onDurationChange, durationOptions,
-  resolution, onResolutionChange, resolutionOptions,
-  quality, onQualityChange, qualityOptions,
-}: {
-  open: boolean; onClose: () => void;
-  aspectRatio: string; onAspectSelect: (r: string) => void; aspectRatios: string[];
-  duration: string; onDurationChange: (d: string) => void; durationOptions: string[];
-  resolution: string; onResolutionChange: (r: string) => void; resolutionOptions: string[];
-  quality?: string; onQualityChange?: (q: string) => void; qualityOptions?: string[];
-}) {
-  if (!open) return null;
-  return (
-    <div className="fixed inset-0 z-[100]" onClick={onClose}>
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] rounded-2xl p-5 space-y-5"
-        style={{ background: "var(--bg-popup)", border: "1px solid var(--border-primary)", boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>Параметры</span>
-          <button onClick={onClose} style={{ color: "var(--text-tertiary)" }} className="hover:opacity-80"><X size={16} /></button>
-        </div>
-
-        <div className="space-y-2">
-          <span className="text-[13px]" style={{ color: "var(--text-tertiary)" }}>Соотношение сторон</span>
-          <div className="grid grid-cols-5 gap-1.5">
-            {aspectRatios.map((r) => (
-              <button
-                key={r}
-                onClick={() => onAspectSelect(r)}
-                className={cn(
-                  "w-[52px] h-[52px] rounded-lg border flex flex-col items-center justify-center gap-1 text-[11px] transition-colors",
-                  aspectRatio === r
-                    ? "border-[hsl(var(--primary))] bg-[rgba(232, 84, 32,0.1)] text-[hsl(var(--primary))]"
-                    : ""
-                )}
-                style={aspectRatio !== r ? { borderColor: "var(--border-primary)", color: "var(--text-tertiary)" } : undefined}
-              >
-                <AspectIcon ratio={r} active={aspectRatio === r} />
-                <span>{r}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <span className="text-[13px]" style={{ color: "var(--text-tertiary)" }}>Длительность</span>
-          <div className="flex gap-1.5 flex-wrap">
-            {durationOptions.map((d) => (
-              <button
-                key={d}
-                onClick={() => onDurationChange(d)}
-                className={cn(
-                  "px-3 h-[36px] rounded-lg border text-sm font-medium transition-colors",
-                  duration === d ? "text-white border-transparent" : ""
-                )}
-                style={duration === d ? { background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" } : { borderColor: "var(--border-primary)", color: "var(--text-tertiary)" }}
-              >
-                {d}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <span className="text-[13px]" style={{ color: "var(--text-tertiary)" }}>Разрешение</span>
-          <div className="flex gap-1.5">
-            {resolutionOptions.map((r) => (
-              <button
-                key={r}
-                onClick={() => onResolutionChange(r)}
-                className={cn(
-                  "px-4 h-[36px] rounded-lg border text-sm font-medium transition-colors",
-                  resolution === r ? "text-white border-transparent" : ""
-                )}
-                style={resolution === r ? { background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" } : { borderColor: "var(--border-primary)", color: "var(--text-tertiary)" }}
-              >
-                {r}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {qualityOptions && onQualityChange && quality && (
-          <div className="space-y-2">
-            <span className="text-[13px]" style={{ color: "var(--text-tertiary)" }}>Качество</span>
-            <div className="flex gap-1.5">
-              {qualityOptions.map((q) => (
-                <button
-                  key={q}
-                  onClick={() => onQualityChange(q)}
-                  className={cn(
-                    "px-4 h-[36px] rounded-lg border text-sm font-medium transition-colors",
-                    quality === q ? "text-white border-transparent" : ""
-                  )}
-                  style={quality === q ? { background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" } : { borderColor: "var(--border-primary)", color: "var(--text-tertiary)" }}
-                >
-                  {q}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
 
 const welcomeScenarios: WelcomeScenario[] = [
   {
@@ -226,7 +101,7 @@ const VideoPage = () => {
   const [resolution, setResolution] = useState("720p");
   const [quality, setQuality] = useState("Стандарт");
   const [, setSelectedFunc] = useState("Текст в видео");
-  const [moreOpen, setMoreOpen] = useState(false);
+  
   const [generations, setGenerations] = useState<MediaGeneration[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const feedEndRef = useRef<HTMLDivElement>(null);
@@ -450,12 +325,54 @@ const VideoPage = () => {
                 onSelect={handleModelSelect}
               />
 
-              <SegmentedToolbar>
-                <SegmentedItem icon={<Square />} label={<span className="font-mono tabular-nums">{aspectRatio}</span>} onClick={() => setMoreOpen(true)} />
-                <SegmentedItem icon={<Clock />} label={<span className="font-mono tabular-nums">{duration}</span>} onClick={() => setMoreOpen(true)} />
-                <SegmentedItem icon={<Monitor />} label={<span className="font-mono tabular-nums">{resolution}</span>} onClick={() => setMoreOpen(true)} />
-                <SegmentedItem icon={<MoreHorizontal />} label={null} onClick={() => setMoreOpen(true)} trailing={null} />
-              </SegmentedToolbar>
+              <InlinePillDropdown
+                icon={<Square />}
+                value={aspectRatio}
+                options={(provider?.aspectRatios || []).map((r) => ({
+                  value: r,
+                  label: r,
+                  desc:
+                    r === "16:9" ? "Горизонтальный" :
+                    r === "9:16" ? "Вертикальный" :
+                    r === "1:1" ? "Квадрат" :
+                    r === "4:3" ? "Классический" :
+                    r === "3:4" ? "Портретный" :
+                    r === "21:9" ? "Кинематограф" : undefined,
+                }))}
+                onSelect={setAspectRatio}
+              />
+
+              <InlinePillDropdown
+                icon={<Clock />}
+                value={duration}
+                options={(provider?.durationOptions || []).map((d) => ({
+                  value: d,
+                  label: d,
+                }))}
+                onSelect={setDuration}
+              />
+
+              <InlinePillDropdown
+                icon={<Monitor />}
+                value={resolution}
+                options={(provider?.resolutionOptions || []).map((r) => ({
+                  value: r,
+                  label: r,
+                  desc:
+                    r === "480p" ? "Черновик" :
+                    r === "720p" ? "Стандарт" :
+                    r === "1080p" ? "Full HD" : undefined,
+                }))}
+                onSelect={setResolution}
+              />
+
+              {provider?.qualityOptions && provider.qualityOptions.length > 0 && (
+                <InlinePillDropdown
+                  value={quality}
+                  options={provider.qualityOptions.map((q) => ({ value: q, label: q }))}
+                  onSelect={setQuality}
+                />
+              )}
 
               <motion.button
                 whileHover={{ scale: 1.03 }}
@@ -474,23 +391,6 @@ const VideoPage = () => {
           </div>
         </div>
       </div>
-
-      <VideoMorePopup
-        open={moreOpen}
-        onClose={() => setMoreOpen(false)}
-        aspectRatio={aspectRatio}
-        onAspectSelect={setAspectRatio}
-        aspectRatios={provider?.aspectRatios || []}
-        duration={duration}
-        onDurationChange={setDuration}
-        durationOptions={provider?.durationOptions || []}
-        resolution={resolution}
-        onResolutionChange={setResolution}
-        resolutionOptions={provider?.resolutionOptions || []}
-        quality={quality}
-        onQualityChange={setQuality}
-        qualityOptions={provider?.qualityOptions}
-      />
     </div>
     </ErrorBoundary>
   );
