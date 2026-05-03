@@ -80,7 +80,7 @@ export function PromptBlock({
         />
       </div>
 
-      <div className="flex items-center gap-2 flex-wrap">
+      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar -mx-1 px-1 sm:overflow-visible sm:flex-wrap">
         <TwoPanelModelSelector
           providers={selectorProviders}
           selectedProviderId={selectedProviderId}
