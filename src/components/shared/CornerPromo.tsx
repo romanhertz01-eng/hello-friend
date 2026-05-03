@@ -42,7 +42,7 @@ export function CornerPromo() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.95 }}
           transition={{ duration: 0.25, ease: "easeOut" }}
-          className="fixed bottom-5 right-5 z-[60] w-[320px] rounded-2xl border border-border bg-card p-5 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.35)]"
+          className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-[60] w-[calc(100vw-24px)] sm:w-[320px] max-w-[340px] rounded-2xl border border-border bg-card p-4 sm:p-5 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.35)]"
           role="dialog"
           aria-label="Промо предложение"
         >
