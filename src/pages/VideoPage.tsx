@@ -453,7 +453,10 @@ const VideoPage = () => {
                 <SegmentedItem icon={<MoreHorizontal />} label={null} onClick={() => setMoreOpen(true)} trailing={null} />
               </SegmentedToolbar>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.15 }}
                 onClick={handleGenerate}
                 disabled={!prompt.trim() || isGenerating}
                 className="ml-auto inline-flex items-center gap-1.5 px-5 h-10 rounded-full gradient-accent text-white text-[14px] font-semibold shadow-[0_10px_30px_-10px_rgba(232,84,32,0.55),inset_0_1px_0_rgba(255,255,255,0.25)] hover:opacity-90 transition-all disabled:opacity-50"
@@ -462,7 +465,7 @@ const VideoPage = () => {
                 <span className="inline-flex items-center gap-1 ml-1 font-mono tabular-nums">
                   <Zap className="w-3 h-3" /> {credits}
                 </span>
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>
