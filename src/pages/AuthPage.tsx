@@ -12,7 +12,6 @@ const AuthPage = () => {
   const [name, setName] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const [showPassword, setShowPassword] = useState(false);
   const [timeLeft, setTimeLeft] = useState(3 * 24 * 3600);
 
   useEffect(() => {
