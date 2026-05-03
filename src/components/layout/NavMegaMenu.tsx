@@ -139,7 +139,7 @@ export function NavMegaMenu() {
   };
   const scheduleClose = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setActive(null), 120);
+    closeTimer.current = setTimeout(() => setActive(null), 200);
   };
 
   useEffect(() => () => {
@@ -179,11 +179,10 @@ export function NavMegaMenu() {
       <AnimatePresence>
         {activeTab && (
           <motion.div
-            key={activeTab.key}
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
             onMouseEnter={() => open(activeTab.key)}
             onMouseLeave={scheduleClose}
             className="absolute left-0 top-full z-50 mt-2"

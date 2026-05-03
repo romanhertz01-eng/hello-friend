@@ -79,8 +79,8 @@ export function DesignCreativitySection() {
             className="text-[13px] cursor-pointer transition-all px-4 py-1.5 rounded-lg"
             style={
               i === activeModel
-                ? { background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)", color: "#fff", border: "none" }
-                : { border: "1px solid var(--seo-pill-border)", color: "var(--seo-pill-text)" }
+                ? { background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)", color: "#fff", border: "1px solid transparent" }
+                : { background: "transparent", border: "1px solid var(--seo-pill-border)", color: "var(--seo-pill-text)" }
             }
           >
             {m.name}
