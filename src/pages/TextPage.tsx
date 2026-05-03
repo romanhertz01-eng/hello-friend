@@ -262,7 +262,7 @@ const TextPage = () => {
               style={{ color: c.textPrimary, fontFamily: '"DM Sans", sans-serif' }}
             />
 
-            <div className="flex items-center gap-2 mt-2 pt-2" style={{ borderTop: `1px solid ${c.divider}` }}>
+            <div className="flex items-center gap-2 mt-2 pt-2 overflow-x-auto no-scrollbar" style={{ borderTop: `1px solid ${c.divider}` }}>
               <button
                 className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
                 style={{ color: c.textSecondary }}
