@@ -56,14 +56,14 @@ export function DesignCreativitySection() {
         <div className="inline-flex gap-1 p-1 rounded-xl bg-muted/50 dark:bg-[rgba(255,255,255,0.06)]">
           <button
             onClick={() => handleTabChange("photo")}
-            className={cn("px-5 py-2 rounded-[8px] text-sm cursor-pointer transition-all", tab === "photo" ? "text-foreground font-medium" : "text-muted-foreground")}
+            className={cn("px-5 py-2 rounded-[8px] text-sm cursor-pointer", tab === "photo" ? "text-foreground font-medium" : "text-muted-foreground")}
             style={tab === "photo" ? { background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" } : undefined}
           >
             ИИ Фото
           </button>
           <button
             onClick={() => handleTabChange("video")}
-            className={cn("px-5 py-2 rounded-[8px] text-sm cursor-pointer transition-all", tab === "video" ? "text-foreground font-medium" : "text-muted-foreground")}
+            className={cn("px-5 py-2 rounded-[8px] text-sm cursor-pointer", tab === "video" ? "text-foreground font-medium" : "text-muted-foreground")}
             style={tab === "video" ? { background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" } : undefined}
           >
             ИИ Видео
@@ -76,7 +76,7 @@ export function DesignCreativitySection() {
           <button
             key={m.id}
             onClick={() => setActiveModel(i)}
-            className="text-[13px] cursor-pointer transition-all px-4 py-1.5 rounded-lg"
+            className="text-[13px] cursor-pointer px-4 py-1.5 rounded-lg"
             style={
               i === activeModel
                 ? { background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)", color: "#fff", border: "1px solid transparent" }
