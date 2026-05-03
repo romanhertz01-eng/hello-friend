@@ -103,7 +103,11 @@ const TextPage = () => {
   const c = useColors();
 
   useEffect(() => { document.title = "ERA2 — Текстовые нейросети"; }, []);
-  useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
+  useEffect(() => {
+    if (messages.length > 0) {
+      chatEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [messages]);
 
   useEffect(() => {
     const saved = sessionStorage.getItem("era2_draft_text");
