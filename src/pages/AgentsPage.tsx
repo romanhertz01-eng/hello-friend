@@ -1,10 +1,19 @@
 import { useState, useEffect } from "react";
-import { Search, ChevronDown, Bot, Sparkles, BarChart3, Mail, Target, Smartphone, Briefcase, GraduationCap, Scale, Boxes, type LucideIcon } from "lucide-react";
+import {
+  Search, ChevronDown, Bot, Sparkles,
+  Calculator, FlaskConical, GraduationCap, BookOpen, FileText, Award, Brain,
+  RefreshCw, BookMarked, Feather, Lightbulb, Clapperboard, Music, Megaphone,
+  TrendingUp, Receipt, Scale,
+  Code, Bug, ScanText,
+  Stethoscope, HeartPulse, Dumbbell, Apple, TestTube2,
+  Plane, Stars, Sun, Moon,
+  type LucideIcon,
+} from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const tabs = ["Популярные", "Для бизнеса", "Для контента", "Для учёбы", "Новинки"];
+const tabs = ["Все", "Образование", "Контент", "Бизнес", "Разработка", "Здоровье", "Лайфстайл"];
 
 interface Agent {
   Icon: LucideIcon;
@@ -14,30 +23,56 @@ interface Agent {
 }
 
 const agents: Agent[] = [
-  { Icon: Sparkles, title: "SEO-оптимизатор", desc: "Анализирует страницу и даёт рекомендации по SEO", tab: "Для бизнеса" },
-  { Icon: Mail, title: "Email-маркетолог", desc: "Создаёт цепочки писем для рассылок", tab: "Для бизнеса" },
-  { Icon: Target, title: "Таргетолог", desc: "Составляет аудитории и тексты для рекламы", tab: "Для бизнеса" },
-  { Icon: Smartphone, title: "SMM-менеджер", desc: "Контент-планы и посты для соцсетей", tab: "Для контента" },
-  { Icon: Briefcase, title: "HR-ассистент", desc: "Составляет вакансии и анализирует резюме", tab: "Для бизнеса" },
-  { Icon: BarChart3, title: "Аналитик данных", desc: "Интерпретирует данные и строит выводы", tab: "Для бизнеса" },
-  { Icon: GraduationCap, title: "Репетитор", desc: "Объясняет темы и проверяет знания", tab: "Для учёбы" },
-  { Icon: Scale, title: "Юрист-помощник", desc: "Анализирует документы и договоры", tab: "Для бизнеса" },
-  { Icon: Boxes, title: "Конструктор TG-ботов", desc: "Создаёт Telegram-ботов без кода", tab: "Новинки" },
+  // Образование (7)
+  { Icon: Calculator, title: "Математик", desc: "Решение задач, уравнений, доказательства теорем", tab: "Образование" },
+  { Icon: FlaskConical, title: "Химик", desc: "Формулы, реакции, молекулярные структуры", tab: "Образование" },
+  { Icon: GraduationCap, title: "Помощь в учёбе", desc: "Объяснение тем, подготовка к экзаменам", tab: "Образование" },
+  { Icon: BookOpen, title: "Сочинения", desc: "Эссе, изложения, аргументация", tab: "Образование" },
+  { Icon: FileText, title: "Реферат", desc: "Структура, источники, оформление", tab: "Образование" },
+  { Icon: Award, title: "Диплом", desc: "Дипломные и курсовые работы", tab: "Образование" },
+  { Icon: Brain, title: "Решение задач", desc: "Пошаговый разбор любых задач", tab: "Образование" },
+  // Контент (7)
+  { Icon: RefreshCw, title: "Рерайт", desc: "Перефразирование и уникализация текста", tab: "Контент" },
+  { Icon: BookMarked, title: "Сторителлинг", desc: "Увлекательные истории и нарративы", tab: "Контент" },
+  { Icon: Feather, title: "Написание книг", desc: "Главы, сюжеты, персонажи", tab: "Контент" },
+  { Icon: Lightbulb, title: "Генерация идей", desc: "Концепции, названия, слоганы", tab: "Контент" },
+  { Icon: Clapperboard, title: "Сценарист", desc: "Сценарии для видео и рекламы", tab: "Контент" },
+  { Icon: Music, title: "Песенник", desc: "Тексты песен, куплеты, припевы", tab: "Контент" },
+  { Icon: Megaphone, title: "Рекламный текст", desc: "Объявления, баннеры, слоганы", tab: "Контент" },
+  // Бизнес (3)
+  { Icon: TrendingUp, title: "Маркетолог", desc: "Стратегии продвижения и аналитика", tab: "Бизнес" },
+  { Icon: Receipt, title: "Бухгалтер", desc: "Учёт, налоги, финансовая отчётность", tab: "Бизнес" },
+  { Icon: Scale, title: "Юрист", desc: "Анализ документов, консультации", tab: "Бизнес" },
+  // Разработка (3)
+  { Icon: Code, title: "Генерация кода", desc: "Написание кода на любом языке", tab: "Разработка" },
+  { Icon: Bug, title: "Исправление кода", desc: "Дебаг, рефакторинг, оптимизация", tab: "Разработка" },
+  { Icon: ScanText, title: "Распознавание текста", desc: "OCR из изображений и PDF", tab: "Разработка" },
+  // Здоровье (5)
+  { Icon: Stethoscope, title: "Доктор", desc: "Общие медицинские консультации", tab: "Здоровье" },
+  { Icon: HeartPulse, title: "Психолог", desc: "Поддержка и рекомендации", tab: "Здоровье" },
+  { Icon: Dumbbell, title: "Фитнес-тренер", desc: "Программы тренировок и упражнения", tab: "Здоровье" },
+  { Icon: Apple, title: "Рацион питания", desc: "Меню, калории, рекомендации", tab: "Здоровье" },
+  { Icon: TestTube2, title: "Расшифровка анализов", desc: "Интерпретация результатов анализов", tab: "Здоровье" },
+  // Лайфстайл (4)
+  { Icon: Plane, title: "Путешествия", desc: "Маршруты, бюджет, достопримечательности", tab: "Лайфстайл" },
+  { Icon: Stars, title: "Таролог", desc: "Расклады и интерпретации карт", tab: "Лайфстайл" },
+  { Icon: Sun, title: "Гороскоп", desc: "Персональный астрологический прогноз", tab: "Лайфстайл" },
+  { Icon: Moon, title: "Толкование снов", desc: "Анализ символов и значений", tab: "Лайфстайл" },
 ];
 
 const textModels = ["ChatGPT", "Claude", "Gemini", "Grok", "Deepseek", "Perplexity", "Qwen"];
 
 const AgentsPage = () => {
   const [search, setSearch] = useState("");
-  const [activeTab, setActiveTab] = useState("Популярные");
+  const [activeTab, setActiveTab] = useState("Все");
   const [selectedTextModel, setSelectedTextModel] = useState("ChatGPT");
   const navigate = useNavigate();
 
-  useEffect(() => { document.title = "ERA2 — GPT Агенты"; }, []);
+  useEffect(() => { document.title = "ERA2 — ИИ Агенты и ассистенты"; }, []);
 
   const filtered = agents.filter((a) => {
     const matchesSearch = !search || a.title.toLowerCase().includes(search.toLowerCase()) || a.desc.toLowerCase().includes(search.toLowerCase());
-    const matchesTab = activeTab === "Популярные" || a.tab === activeTab;
+    const matchesTab = activeTab === "Все" || a.tab === activeTab;
     return matchesSearch && matchesTab;
   });
 
