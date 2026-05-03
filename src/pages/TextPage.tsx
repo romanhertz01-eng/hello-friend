@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
 
 import { ModelCarousel, type CarouselModel } from "@/components/workspace/ModelCarousel";
+import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 
 const textCarouselModels: CarouselModel[] = [
