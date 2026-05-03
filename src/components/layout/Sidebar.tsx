@@ -63,6 +63,7 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
   const location = useLocation();
   const copy = useCopyToast();
   const [recentOpen, setRecentOpen] = useState(true);
+  const [showReferral, setShowReferral] = useState(false);
   const isActive = (path: string) => location.pathname === path;
 
   const renderItem = (item: { icon: React.ElementType; label: string; path: string; badge?: "new" | "soon" }) => (
