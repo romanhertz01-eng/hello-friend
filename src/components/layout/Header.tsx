@@ -7,6 +7,7 @@ import { useCommandPalette } from "@/hooks/useCommandPalette";
 import { UserDropdown } from "./UserDropdown";
 import { NavMegaMenu } from "./NavMegaMenu";
 import { NotificationsDropdown } from "./NotificationsDropdown";
+import { PromoBanner } from "@/components/shared/PromoBanner";
 import { PROMO_ACTIVE, PROMO_LABEL, PROMO_TEXT } from "@/config/promo";
 
 interface HeaderProps {
@@ -23,7 +24,9 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
   const { setOpen } = useCommandPalette();
 
   return (
-    <header className="sticky top-0 z-40 h-16 flex items-center justify-between px-4 md:px-6 bg-background/85 backdrop-blur-md border-b border-border" style={{ height: "var(--header-height)" }}>
+    <>
+      {!isAuthed && <PromoBanner />}
+      <header className="sticky top-0 z-40 h-16 flex items-center justify-between px-4 md:px-6 bg-background/85 backdrop-blur-md border-b border-border" style={{ height: "var(--header-height)" }}>
       {/* Left: burger + logo */}
       <div className="flex items-center gap-3">
         {showBurger && isAuthed && (
@@ -129,6 +132,7 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
           </div>
         )}
       </div>
-    </header>
+      </header>
+    </>
   );
 }
