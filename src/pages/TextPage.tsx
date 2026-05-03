@@ -198,7 +198,7 @@ const TextPage = () => {
 
         {/* Каталог — только до первого сообщения */}
         {!hasMessages && (
-          <div className="px-4 lg:px-8 py-6 space-y-6 border-t mt-16" style={{ borderColor: c.divider }}>
+          <div className="px-3 sm:px-4 lg:px-8 py-6 space-y-6 border-t mt-8 sm:mt-16" style={{ borderColor: c.divider }}>
             <ModelCarousel
               models={textCarouselModels}
               onSelect={(name) => {
@@ -236,13 +236,13 @@ const TextPage = () => {
       </div>
 
       {/* ─── Input area ─── */}
-      <div className="shrink-0 px-4 pb-5 pt-2 relative z-[1]" style={{ background: c.bg }}>
+      <div className="shrink-0 px-3 sm:px-4 pb-[calc(env(safe-area-inset-bottom)+12px)] pt-2 relative z-[1]" style={{ background: c.bg }}>
         <div className="max-w-[780px] mx-auto">
           <WorkspaceTabs variant="attached" />
 
           <div className={isGenerating ? "glow-border-active" : "glow-border-idle"}>
           <div
-            className="rounded-[22px] rounded-tl-none p-4 transition-all duration-200"
+            className="rounded-[22px] rounded-tl-none p-3 sm:p-4 transition-all duration-200"
             style={{
               background: c.inputBg,
               border: inputFocused ? `1px solid ${c.inputBorderFocus}` : `1px solid ${c.inputBorder}`,
@@ -262,7 +262,7 @@ const TextPage = () => {
               style={{ color: c.textPrimary, fontFamily: '"DM Sans", sans-serif' }}
             />
 
-            <div className="flex items-center gap-2 mt-2 pt-2" style={{ borderTop: `1px solid ${c.divider}` }}>
+            <div className="flex items-center gap-2 mt-2 pt-2 overflow-x-auto no-scrollbar" style={{ borderTop: `1px solid ${c.divider}` }}>
               <button
                 className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
                 style={{ color: c.textSecondary }}

@@ -60,37 +60,44 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
         </Link>
       </div>
 
-      {/* Center: mega menu */}
-      <div className="flex-1 flex justify-center">
+      {/* Center: mega menu (desktop only) */}
+      <div className="hidden lg:flex flex-1 justify-center">
         <NavMegaMenu />
       </div>
 
       {/* Right: utility cluster */}
-      <div className="flex items-center gap-2">
-        {/* ⌘K search */}
+      <div className="flex items-center gap-1.5 sm:gap-2">
+        {/* ⌘K search — full on md+, icon-only on mobile */}
         <button
           onClick={() => setOpen(true)}
-          className="hidden sm:inline-flex items-center gap-2 h-9 px-3 bg-secondary border border-border rounded-full text-sm text-muted-foreground hover:text-foreground hover:bg-card transition-colors"
+          className="hidden md:inline-flex items-center gap-2 h-9 px-3 bg-secondary border border-border rounded-full text-sm text-muted-foreground hover:text-foreground hover:bg-card transition-colors"
         >
           <Search className="h-3.5 w-3.5" />
           <span>Поиск моделей</span>
           <span className="bg-card rounded-md px-1.5 py-0.5 text-[10px] font-mono text-muted-foreground">⌘K</span>
         </button>
+        <button
+          onClick={() => setOpen(true)}
+          className={cn(iconBtn, "md:hidden")}
+          aria-label="Поиск"
+        >
+          <Search className="h-4 w-4" />
+        </button>
 
-        {/* History */}
+        {/* History (desktop) */}
         <Link
           to="/history"
-          className="hidden md:inline-flex items-center gap-2 h-9 px-3 rounded-full text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+          className="hidden lg:inline-flex items-center gap-2 h-9 px-3 rounded-full text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
         >
           <Clock className="h-3.5 w-3.5" />
           История
         </Link>
 
-        {/* Promo */}
+        {/* Promo (desktop only) */}
         {PROMO_ACTIVE && (
           <Link
             to="/pricing"
-            className="hidden md:inline-flex items-center gap-2 h-9 px-3 bg-[hsl(var(--accent))] border border-primary/30 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors"
+            className="hidden xl:inline-flex items-center gap-2 h-9 px-3 bg-[hsl(var(--accent))] border border-primary/30 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors"
           >
             <span
               className="w-1.5 h-1.5 rounded-full bg-primary"
@@ -114,17 +121,17 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
         {isAuthed ? (
           <UserDropdown />
         ) : (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <Link
               to="/auth"
-              className="inline-flex items-center h-9 px-4 rounded-full text-sm font-medium border transition-colors"
+              className="hidden sm:inline-flex items-center h-9 px-4 rounded-full text-sm font-medium border transition-colors"
               style={{ borderColor: "var(--c-line)", color: "var(--c-fg)", background: "transparent" }}
             >
               Войти
             </Link>
             <Link
               to="/auth"
-              className="inline-flex items-center h-9 px-5 rounded-full text-sm font-medium text-white transition-colors"
+              className="inline-flex items-center h-9 px-4 sm:px-5 rounded-full text-sm font-medium text-white transition-colors"
               style={{ background: "var(--c-accent)", boxShadow: "0 4px 16px -4px rgba(232, 84, 32, 0.5)" }}
             >
               Начать

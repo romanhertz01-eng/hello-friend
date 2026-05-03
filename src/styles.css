@@ -433,3 +433,17 @@ body:not(.dark) {
     radial-gradient(ellipse at 80% 20%, rgba(255, 122, 61, 0.06) 0%, transparent 40%),
     radial-gradient(ellipse at 60% 80%, rgba(255, 176, 136, 0.04) 0%, transparent 45%);
 }
+
+/* Hide scrollbars (for horizontally scrollable toolbars on mobile) */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* iOS safe-area helper */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
