@@ -221,6 +221,7 @@ const TextPage = () => {
             </div>
           </div>
         </div>
+        )}
       </div>
 
       {/* ─── Input area ─── */}
