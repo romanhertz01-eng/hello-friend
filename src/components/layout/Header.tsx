@@ -100,8 +100,26 @@ export function Header({ onToggleSidebar, showBurger = true, onToggleRightPanel,
           </Link>
         )}
 
+        {/* Right Panel toggle — only on workspace pages */}
+        {onToggleRightPanel && (
+          <button
+            onClick={onToggleRightPanel}
+            className={cn(
+              "hidden xl:inline-flex w-9 h-9 rounded-full items-center justify-center transition-colors",
+              rightPanelOpen
+                ? "bg-primary/10 text-primary border border-primary/30"
+                : "bg-secondary border border-border text-muted-foreground hover:text-foreground hover:bg-card"
+            )}
+            title="Настройки модели"
+            aria-label="Настройки модели"
+          >
+            <SlidersHorizontal className="h-4 w-4" />
+          </button>
+        )}
+
         {/* Notifications */}
         {isAuthed && <NotificationsDropdown />}
+
 
         {/* Theme */}
         <button onClick={toggleTheme} className={iconBtn} aria-label="Переключить тему">
