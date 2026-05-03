@@ -6,6 +6,7 @@ import { Layout } from "@/components/layout/Layout";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 import { OnboardingTour } from "@/components/shared/OnboardingTour";
 import { CopyToastProvider } from "@/components/shared/CopyToast";
+import { CornerPromo } from "@/components/shared/CornerPromo";
 
 import appCss from "../styles.css?url";
 
