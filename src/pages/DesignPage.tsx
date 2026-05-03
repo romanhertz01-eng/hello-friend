@@ -14,6 +14,7 @@ import { WelcomeBlock, type WelcomeScenario } from "@/components/workspace/Welco
 import { MediaChatFeed, type MediaGeneration } from "@/components/workspace/MediaChatFeed";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 import { GenerationLoader } from "@/components/shared/GenerationLoader";
+import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 
 const ASPECT_TO_DIM: Record<string, [number, number]> = {
   "1:1": [1024, 1024], "16:9": [1280, 720], "9:16": [720, 1280],
