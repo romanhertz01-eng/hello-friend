@@ -45,7 +45,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
   const [versionDropdownOpen, setVersionDropdownOpen] = useState(false);
   const [funcDropdownOpen, setFuncDropdownOpen] = useState(false);
 
-  if (!open) return null;
+  // Panel always rendered; slides off-screen when closed
 
   const resetAll = () => {
     setSelectedModel(models[0]);
@@ -74,7 +74,12 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
   const currentAspectRatios = isVideo ? videoAspectRatios : imageAspectRatios;
 
   return (
-    <aside className="hidden xl:flex fixed top-14 right-0 bottom-0 w-72 border-l border-border bg-background flex-col z-30">
+    <aside
+      className={cn(
+        "hidden xl:flex fixed top-14 right-0 bottom-0 w-72 border-l border-border bg-background flex-col z-30 transition-transform duration-300 ease-out",
+        open ? "translate-x-0" : "translate-x-full"
+      )}
+    >
       <div className="flex items-center justify-between p-4 border-b border-border">
         <div className="flex items-center gap-2 text-sm font-semibold">
           <Settings2 className="h-4 w-4" />

@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, Menu, Moon, Search, Sun } from "lucide-react";
+import { Clock, Menu, Moon, Search, Sun, SlidersHorizontal } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCommandPalette } from "@/hooks/useCommandPalette";
@@ -11,12 +12,14 @@ import { PROMO_ACTIVE, PROMO_LABEL, PROMO_TEXT } from "@/config/promo";
 interface HeaderProps {
   onToggleSidebar: () => void;
   showBurger?: boolean;
+  onToggleRightPanel?: () => void;
+  rightPanelOpen?: boolean;
 }
 
 const iconBtn =
   "relative w-9 h-9 rounded-full bg-secondary border border-border text-muted-foreground hover:text-foreground hover:bg-card transition-colors flex items-center justify-center";
 
-export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
+export function Header({ onToggleSidebar, showBurger = true, onToggleRightPanel, rightPanelOpen }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
   const { isAuthed } = useAuth();
   const { setOpen } = useCommandPalette();
@@ -97,8 +100,26 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
           </Link>
         )}
 
+        {/* Right Panel toggle — only on workspace pages */}
+        {onToggleRightPanel && (
+          <button
+            onClick={onToggleRightPanel}
+            className={cn(
+              "hidden xl:inline-flex w-9 h-9 rounded-full items-center justify-center transition-colors",
+              rightPanelOpen
+                ? "bg-primary/10 text-primary border border-primary/30"
+                : "bg-secondary border border-border text-muted-foreground hover:text-foreground hover:bg-card"
+            )}
+            title="Настройки модели"
+            aria-label="Настройки модели"
+          >
+            <SlidersHorizontal className="h-4 w-4" />
+          </button>
+        )}
+
         {/* Notifications */}
         {isAuthed && <NotificationsDropdown />}
+
 
         {/* Theme */}
         <button onClick={toggleTheme} className={iconBtn} aria-label="Переключить тему">

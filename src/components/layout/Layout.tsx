@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
+import { RightPanel } from "./RightPanel";
 import { CommandPalette } from "./CommandPalette";
 import { CommandPaletteProvider } from "@/hooks/useCommandPalette";
 import { useAuth } from "@/contexts/AuthContext";
@@ -10,10 +11,12 @@ import { cn } from "@/lib/utils";
 
 const sidebarPages = ["/text", "/design", "/video", "/audio", "/agents", "/toolkit", "/history", "/pricing", "/create"];
 const workspacePages = ["/text", "/design", "/video", "/audio", "/create"];
+const rightPanelPages = ["/design", "/video"];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [rightPanelOpen, setRightPanelOpen] = useState(false);
   const { isAuthed } = useAuth();
   const { theme } = useTheme();
   const location = useLocation();
@@ -26,11 +29,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const showSidebar = isAuthed && sidebarPages.some((p) => location.pathname.startsWith(p));
   const isFullWidth = !showSidebar;
   const isWorkspace = workspacePages.includes(location.pathname);
+  const showRightPanel = rightPanelPages.some((p) => location.pathname.startsWith(p));
 
   return (
     <CommandPaletteProvider>
       <div className="min-h-screen bg-background">
-        <Header onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} showBurger={showSidebar} />
+        <Header
+          onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
+          showBurger={showSidebar}
+          onToggleRightPanel={showRightPanel ? () => setRightPanelOpen(!rightPanelOpen) : undefined}
+          rightPanelOpen={rightPanelOpen}
+        />
 
         {showSidebar && (
           <Sidebar
@@ -43,8 +52,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         <main
           className={cn(
-            "transition-all duration-200",
+            "transition-all duration-300",
             !isFullWidth && (sidebarCollapsed ? "lg:pl-14" : "lg:pl-[200px]"),
+            showRightPanel && rightPanelOpen && "xl:pr-72",
           )}
         >
           {isFullWidth ? (
@@ -55,6 +65,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <div className="p-4 md:p-6 max-w-full">{children}</div>
           )}
         </main>
+
+        {showRightPanel && (
+          <RightPanel open={rightPanelOpen} onClose={() => setRightPanelOpen(false)} />
+        )}
 
         <CommandPalette />
 
