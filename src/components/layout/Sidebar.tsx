@@ -59,6 +59,7 @@ const bottomItems = [
 
 export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarProps) {
   const location = useLocation();
+  const copy = useCopyToast();
   const isActive = (path: string) => location.pathname === path;
 
   const renderItem = (item: { icon: React.ElementType; label: string; path: string; badge?: "new" | "soon" }) => (
