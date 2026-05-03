@@ -242,7 +242,7 @@ const TextPage = () => {
 
           <div className={isGenerating ? "glow-border-active" : "glow-border-idle"}>
           <div
-            className="rounded-[22px] p-3 sm:p-4 transition-all duration-200"
+            className="rounded-[22px] rounded-tl-none p-3 sm:p-4 transition-all duration-200"
             style={{
               background: c.inputBg,
               border: inputFocused ? `1px solid ${c.inputBorderFocus}` : `1px solid ${c.inputBorder}`,
@@ -258,7 +258,7 @@ const TextPage = () => {
               onBlur={() => setInputFocused(false)}
               placeholder="Напишите сообщение..."
               rows={3}
-              className="w-full bg-transparent outline-none resize-none text-[15px] min-h-[80px] max-h-[240px]"
+              className="w-full bg-transparent outline-none resize-none text-[15px] min-h-[80px] max-h-[240px] py-3 px-1"
               style={{ color: c.textPrimary, fontFamily: '"DM Sans", sans-serif' }}
             />
 
