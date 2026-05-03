@@ -148,7 +148,11 @@ const DesignPage = () => {
   const hasGenerations = generations.length > 0;
 
   useEffect(() => { document.title = "ERA2 — Генерация изображений"; }, []);
-  useEffect(() => { feedEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [generations]);
+  useEffect(() => {
+    if (generations.length > 0) {
+      feedEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [generations]);
 
   // Restore draft on mount
   useEffect(() => {
