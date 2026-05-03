@@ -47,9 +47,9 @@
 :root {
   --background: 30 28% 95%;
   --foreground: 20 24% 7%;
-  --card: 30 26% 92%;
+  --card: 0 0% 100%;
   --card-foreground: 20 24% 7%;
-  --popover: 30 26% 92%;
+  --popover: 0 0% 100%;
   --popover-foreground: 20 24% 7%;
   --primary: 15 82% 52%;
   --primary-foreground: 0 0% 100%;
@@ -84,7 +84,7 @@
   --bg-card: #f0ebe6;
   --bg-card-hover: #eae4de;
   --bg-input: #f6f3f0;
-  --bg-pill: #eae4de;
+  --bg-pill: #e0d8cf;
   --bg-pill-hover: rgba(232, 84, 32, 0.08);
   --bg-sidebar: #f0ebe6;
   --bg-footer: #f0ebe6;
@@ -96,10 +96,10 @@
   --text-secondary: #4a3f37;
   --text-tertiary: #7a6f66;
   --text-muted: #a89e94;
-  --border-primary: #cfc2b3;
+  --border-primary: #c4b5a3;
   --border-secondary: #e3dacf;
   --border-hover: rgba(232, 84, 32, 0.3);
-  --shadow-card: 0 1px 2px rgba(20, 11, 5, 0.06), 0 4px 16px rgba(20, 11, 5, 0.08);
+  --shadow-card: 0 1px 3px rgba(20, 11, 5, 0.08), 0 6px 24px rgba(20, 11, 5, 0.1);
   --shadow-dropdown: 0 8px 32px rgba(20, 11, 5, 0.12);
   --seo-bg: var(--bg-primary);
   --seo-card-bg: var(--bg-card);
@@ -129,7 +129,7 @@
   --c-bg-1: #f0ebe6;
   --c-bg-2: #eae4de;
   --c-bg-3: #e3dacf;
-  --c-line: #cfc2b3;
+  --c-line: #c4b5a3;
   --c-line-2: #c4b6a4;
   --c-fg: #17110e;
   --c-fg-dim: #4a3f37;
@@ -360,4 +360,10 @@
 
 .animate-pulse-dot {
   animation: pulse-dot 1.2s ease-in-out infinite;
+}
+
+body:not(.dark) {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px;
 }
