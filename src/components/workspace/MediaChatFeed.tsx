@@ -99,6 +99,7 @@ function AudioResult({ gen }: { gen: MediaGeneration }) {
 }
 
 export function MediaChatFeed({ generations }: Props) {
+  const copy = useCopyToast();
   return (
     <div className="max-w-[780px] mx-auto py-6 px-4 space-y-6">
       {generations.map((gen) => (
