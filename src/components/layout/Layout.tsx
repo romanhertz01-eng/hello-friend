@@ -16,6 +16,7 @@ const rightPanelPages = ["/design", "/video"];
 export function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [rightPanelOpen, setRightPanelOpen] = useState(false);
   const { isAuthed } = useAuth();
   const { theme } = useTheme();
   const location = useLocation();
