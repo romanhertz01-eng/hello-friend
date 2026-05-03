@@ -121,17 +121,17 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
         {isAuthed ? (
           <UserDropdown />
         ) : (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <Link
               to="/auth"
-              className="inline-flex items-center h-9 px-4 rounded-full text-sm font-medium border transition-colors"
+              className="hidden sm:inline-flex items-center h-9 px-4 rounded-full text-sm font-medium border transition-colors"
               style={{ borderColor: "var(--c-line)", color: "var(--c-fg)", background: "transparent" }}
             >
               Войти
             </Link>
             <Link
               to="/auth"
-              className="inline-flex items-center h-9 px-5 rounded-full text-sm font-medium text-white transition-colors"
+              className="inline-flex items-center h-9 px-4 sm:px-5 rounded-full text-sm font-medium text-white transition-colors"
               style={{ background: "var(--c-accent)", boxShadow: "0 4px 16px -4px rgba(232, 84, 32, 0.5)" }}
             >
               Начать
