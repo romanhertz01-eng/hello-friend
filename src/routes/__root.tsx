@@ -85,6 +85,7 @@ function RootComponent() {
             </ErrorBoundary>
           </Layout>
           <OnboardingTour />
+          <CopyToastProvider />
         </TooltipProvider>
       </AuthProvider>
     </ThemeProvider>
