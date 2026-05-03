@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { flushSync } from "react-dom";
 import { Zap, Sparkles, Square, Clock, Monitor, Film, Music, User, Clapperboard, Smartphone, Heart, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
@@ -162,16 +163,18 @@ const VideoPage = () => {
   };
 
   const handleModelSelect = (providerId: string, subModelId: string) => {
-    setSelectedProviderId(providerId);
-    setSelectedSubModelId(subModelId);
-    const p = videoProviders.find((pr) => pr.id === providerId);
-    if (p) {
-      setAspectRatio(p.aspectRatios[0] || "16:9");
-      setDuration(p.durationOptions[0] || "5s");
-      setResolution(p.resolutionOptions[0] || "720p");
-      if (p.qualityOptions) setQuality(p.qualityOptions[0]);
-      if (p.functions) setSelectedFunc(p.functions[0]);
-    }
+    flushSync(() => {
+      setSelectedProviderId(providerId);
+      setSelectedSubModelId(subModelId);
+      const p = videoProviders.find((pr) => pr.id === providerId);
+      if (p) {
+        setAspectRatio(p.aspectRatios[0] || "16:9");
+        setDuration(p.durationOptions[0] || "5s");
+        setResolution(p.resolutionOptions[0] || "720p");
+        if (p.qualityOptions) setQuality(p.qualityOptions[0]);
+        if (p.functions) setSelectedFunc(p.functions[0]);
+      }
+    });
   };
 
   const selectorProviders = videoProviders.map((p) => ({
@@ -242,7 +245,7 @@ const VideoPage = () => {
                       {p.subModels.map((s) => (
                         <button
                           key={s.id}
-                          onClick={() => { handleModelSelect(p.id, s.id); setCapsuleOpen(false); }}
+                          onClick={() => { setCapsuleOpen(false); setTimeout(() => handleModelSelect(p.id, s.id), 50); }}
                           className={cn(
                             "w-full flex items-center gap-3 px-3 py-2.5 rounded-[8px] text-sm transition-colors text-left",
                             selectedSubModelId === s.id ? "bg-[rgba(232,84,32,0.12)]" : "hover:bg-secondary"
