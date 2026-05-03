@@ -164,11 +164,11 @@ const TextPage = () => {
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]" style={{ background: c.bg }}>
       {/* ─── Chat area ─── */}
       <div className="flex-1 overflow-y-auto">
-        <div className="sticky top-0 z-20 flex justify-center py-3" style={{ background: "color-mix(in oklab, var(--c-bg) 85%, transparent)", backdropFilter: "blur(12px)" }}>
+        <div className="sticky top-0 z-20 flex justify-center py-2" style={{ background: "color-mix(in oklab, var(--c-bg) 85%, transparent)", backdropFilter: "blur(12px)" }}>
           <div className="relative">
             <button
               onClick={() => setSelectorOpen(!selectorOpen)}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[13px] font-medium hover:opacity-90 transition-opacity"
               style={{ background: "var(--c-bg-1)", border: "1px solid var(--c-line)", color: c.textPrimary }}
             >
               <ModelGlyph name={provider.name} size={20} />
@@ -344,36 +344,27 @@ function WelcomeScreen({ providerId, providerName, subModelName, onQuickAction, 
   colors: ReturnType<typeof useColors>;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center h-full px-4">
+    <div className="flex flex-col items-center justify-center h-full px-4 py-6">
       <div className="flex flex-col items-center text-center max-w-xl">
-        <ModelIcon providerId={providerId} size={64} className="mb-5" />
+        <ModelIcon providerId={providerId} size={40} className="mb-3" />
         <h1
-          className="text-[28px] font-semibold mb-1 tracking-tight"
+          className="text-[22px] font-semibold mb-0.5 tracking-tight"
           style={{ color: c.textPrimary }}
         >
           {providerName}
         </h1>
-        <p className="text-[16px] mb-1 font-mono tabular-nums" style={{ color: c.textSecondary }}>{subModelName}</p>
-        <p className="text-[14px] mb-8" style={{ color: c.textTertiary }}>Единый доступ к 90+ нейросетям</p>
+        <p className="text-[13px] mb-0.5 font-mono tabular-nums" style={{ color: c.textSecondary }}>{subModelName}</p>
+        <p className="text-[13px] mb-5" style={{ color: c.textTertiary }}>Единый доступ к 90+ нейросетям</p>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 w-full">
+        <div className="flex flex-wrap justify-center gap-2 max-w-lg">
           {textQuickActions.map((action) => (
             <button
               key={action.title}
               onClick={() => onQuickAction(action.prompt)}
-              className="group p-4 rounded-[14px] text-left transition-all"
-              style={{ background: c.cardBg, border: `1px solid ${c.cardBorder}` }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = c.cardBorderHover; e.currentTarget.style.background = c.cardBgHover; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = c.cardBorder; e.currentTarget.style.background = c.cardBg; }}
+              className="px-4 py-2.5 rounded-full text-[13px] text-muted-foreground font-medium transition-all hover:text-foreground"
+              style={{ border: "1px solid hsl(var(--border))", background: "hsl(var(--secondary))" }}
             >
-              <div
-                className="w-9 h-9 rounded-full flex items-center justify-center mb-2.5"
-                style={{ background: "rgba(232, 84, 32, 0.12)" }}
-              >
-                <action.Icon className="w-[18px] h-[18px]" style={{ color: "hsl(var(--primary))" }} />
-              </div>
-              <div className="text-[15px] font-semibold mb-0.5" style={{ color: c.textPrimary }}>{action.title}</div>
-              <div className="text-[13px] leading-snug line-clamp-1" style={{ color: c.textSecondary }}>{action.description}</div>
+              {action.title}
             </button>
           ))}
         </div>
