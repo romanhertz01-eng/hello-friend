@@ -153,8 +153,10 @@ export function NavMegaMenu() {
       {TABS.map((tab) => {
         const isHot = active === tab.key && tab.features;
         const handleEnter = () => {
-          if (tab.features) open(tab.key);
-          else {
+          if (tab.features) {
+            if (closeTimer.current) clearTimeout(closeTimer.current);
+            closeTimer.current = setTimeout(() => open(tab.key), active ? 80 : 0);
+          } else {
             if (closeTimer.current) clearTimeout(closeTimer.current);
             setActive(null);
           }
