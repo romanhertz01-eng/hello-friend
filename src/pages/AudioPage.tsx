@@ -7,6 +7,7 @@ import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { WelcomeBlock, type WelcomeScenario } from "@/components/workspace/WelcomeBlock";
 import { MediaChatFeed, type MediaGeneration } from "@/components/workspace/MediaChatFeed";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
+import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 import { GenerationLoader } from "@/components/shared/GenerationLoader";
 
 /* ─── Voice data ─── */
