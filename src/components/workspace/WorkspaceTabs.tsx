@@ -24,11 +24,6 @@ const PATH_TO_ID: Record<string, TabId> = {
 };
 
 interface WorkspaceTabsProps {
-  /**
-   * "attached" сохраняется ради совместимости — больше не влияет на стили,
-   * так как табы теперь рендерятся как внутренний бар единой карточки
-   * (см. WorkspaceCard). Шов между табами и полем больше не возможен.
-   */
   variant?: "attached" | "standalone";
 }
 
@@ -39,9 +34,9 @@ export function WorkspaceTabs({ variant = "standalone" }: WorkspaceTabsProps) {
   return (
     <div
       className={cn(
-        "w-full flex items-center gap-1 px-2 sm:px-3 pt-2 overflow-x-auto no-scrollbar",
+        "w-full flex items-end gap-1 px-0 overflow-x-auto no-scrollbar relative z-10",
         variant === "attached"
-          ? "border-b border-[hsl(var(--border))]"
+          ? "-mb-px"
           : "",
       )}
     >
@@ -53,20 +48,14 @@ export function WorkspaceTabs({ variant = "standalone" }: WorkspaceTabsProps) {
             key={t.id}
             to={t.to}
             className={cn(
-              "shrink-0 inline-flex items-center gap-2 px-3 sm:px-4 h-9 text-[13px] sm:text-sm font-medium rounded-t-[10px] transition-colors duration-200 relative",
+              "shrink-0 inline-flex items-center gap-2 px-3 sm:px-4 h-12 text-[13px] sm:text-sm font-medium rounded-t-[18px] border transition-colors duration-200 relative",
               isActive
-                ? "text-[hsl(var(--primary))] bg-[hsl(var(--secondary))]"
-                : "text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--secondary))]/50",
+                ? "z-10 -mb-px text-[hsl(var(--primary))] bg-[hsl(var(--card))] border-[hsl(var(--border))] border-b-[hsl(var(--card))]"
+                : "text-muted-foreground border-transparent hover:text-foreground hover:bg-[hsl(var(--secondary))]/50",
             )}
           >
             <Icon size={15} strokeWidth={1.8} />
             <span>{t.label}</span>
-            {isActive && (
-              <span
-                aria-hidden
-                className="absolute left-2 right-2 -bottom-px h-[2px] rounded-full bg-[hsl(var(--primary))]"
-              />
-            )}
           </Link>
         );
       })}
