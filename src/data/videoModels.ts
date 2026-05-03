@@ -119,6 +119,31 @@ export const videoProviders: VideoProvider[] = [
     durationOptions: ["5s", "8s"],
     resolutionOptions: ["720p", "1080p"],
   },
+  {
+    id: "heygen",
+    name: "HeyGen",
+    icon: "",
+    badge: "NEW",
+    subModels: [
+      { id: "heygen-avatar", name: "HeyGen Avatar", credits: 120, isNew: true, isDefault: true, desc: "Реалистичные AI аватары", time: "120 сек" },
+      { id: "heygen-video-translate", name: "HeyGen Video Translate", credits: 150, desc: "Перевод видео с липсинком", time: "180 сек" },
+    ],
+    aspectRatios: ["16:9", "9:16", "1:1"],
+    durationOptions: ["15s", "30s", "60s"],
+    resolutionOptions: ["720p", "1080p"],
+  },
+  {
+    id: "hedra",
+    name: "Hedra",
+    icon: "",
+    badge: "NEW",
+    subModels: [
+      { id: "hedra-character", name: "Hedra Character-1", credits: 80, isNew: true, isDefault: true, desc: "Говорящие персонажи", time: "60 сек" },
+    ],
+    aspectRatios: ["16:9", "9:16", "1:1"],
+    durationOptions: ["5s", "10s", "15s"],
+    resolutionOptions: ["720p", "1080p"],
+  },
 ];
 
 // ─── Carousel promo cards ───
