@@ -195,7 +195,7 @@ const TextPage = () => {
         <div ref={chatEndRef} />
 
         {/* Каталог — всегда виден при скролле */}
-        <div className="px-4 lg:px-8 py-6 space-y-6 border-t mt-6" style={{ borderColor: c.divider }}>
+        <div className="px-4 lg:px-8 py-6 space-y-6 border-t mt-16" style={{ borderColor: c.divider }}>
           <ModelCarousel
             models={textCarouselModels}
             onSelect={(name) => {
