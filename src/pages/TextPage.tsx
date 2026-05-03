@@ -194,8 +194,7 @@ const TextPage = () => {
         )}
         <div ref={chatEndRef} />
 
-        {/* Каталог — только до первого сообщения */}
-        {!hasMessages && (
+        {/* Каталог — всегда виден */}
         <div className="px-4 lg:px-8 py-6 space-y-6 border-t mt-16" style={{ borderColor: c.divider }}>
           <ModelCarousel
             models={textCarouselModels}
