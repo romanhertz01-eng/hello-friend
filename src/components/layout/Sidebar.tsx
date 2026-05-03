@@ -8,6 +8,7 @@ import { useCopyToast } from "@/components/shared/CopyToast";
 import { StatusBadge } from "@/components/ui/era/StatusBadge";
 import { MOCK_HISTORY } from "@/data/mockHistory";
 import { cn } from "@/lib/utils";
+import { ReferralPopup } from "@/components/shared/ReferralPopup";
 
 const recentChats = MOCK_HISTORY.slice(0, 8).map((h) => ({
   id: h.id,
@@ -62,6 +63,7 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
   const location = useLocation();
   const copy = useCopyToast();
   const [recentOpen, setRecentOpen] = useState(true);
+  const [showReferral, setShowReferral] = useState(false);
   const isActive = (path: string) => location.pathname === path;
 
   const renderItem = (item: { icon: React.ElementType; label: string; path: string; badge?: "new" | "soon" }) => (
@@ -250,7 +252,7 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
                 Получите 100 кредитов за каждого приглашённого друга
               </p>
               <button
-                onClick={() => copy("https://era2.ai/ref/user123", "Реферальная ссылка скопирована")}
+                onClick={() => setShowReferral(true)}
                 className="w-full flex items-center justify-center gap-1.5 py-2 rounded-[8px] text-[12px] font-medium transition-colors"
                 style={{
                   background: "rgba(232, 84, 32, 0.1)",
@@ -292,6 +294,7 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
           <ChevronLeft className={cn("h-3 w-3 transition-transform", collapsed && "rotate-180")} />
         </button>
       </aside>
+      {showReferral && <ReferralPopup onClose={() => setShowReferral(false)} />}
     </>
   );
 }
