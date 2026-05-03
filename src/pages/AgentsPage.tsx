@@ -112,11 +112,11 @@ const AgentsPage = () => {
       <div className="flex-1 px-4 md:px-8 py-6 space-y-6 overflow-y-auto">
         {/* Hero */}
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-4">
-          <div className="w-14 h-14 rounded-2xl gradient-accent flex items-center justify-center text-white text-2xl shrink-0">
-            <Bot />
+          <div className="w-10 h-10 rounded-xl gradient-accent flex items-center justify-center text-white shrink-0">
+            <Bot size={20} />
           </div>
           <div>
-            <h1 className="text-2xl md:text-[28px] font-bold mb-1">Создайте и общайтесь со своим личным агентом</h1>
+            <h1 className="text-xl md:text-[22px] font-semibold mb-0.5">Создайте и общайтесь со своим личным агентом</h1>
             <p className="text-muted-foreground text-sm max-w-xl">
               44 ИИ-ассистента для любых задач
             </p>
@@ -195,21 +195,21 @@ const AgentsPage = () => {
         <motion.div
           initial="hidden" animate="show"
           variants={{ show: { transition: { staggerChildren: 0.05 } } }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5"
         >
           {filtered.map((a) => (
             <motion.div
               key={a.title}
               variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
               onClick={() => navigate({ to: "/text" })}
-              className="border border-border rounded-2xl p-5 cursor-pointer hover:border-primary/30 hover:shadow-md transition-all flex items-start gap-4 group bg-card"
+              className="border border-border rounded-[14px] p-4 cursor-pointer hover:border-primary/30 hover:shadow-sm transition-all flex items-start gap-3 group bg-card"
             >
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-[hsl(var(--primary))/0.18]" style={{ background: "rgba(232, 84, 32, 0.1)", border: "1px solid rgba(232, 84, 32, 0.2)" }}>
-                <a.Icon className="w-[22px] h-[22px]" style={{ color: "hsl(var(--primary))" }} strokeWidth={1.75} />
+              <div className="w-9 h-9 rounded-[8px] flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-[hsl(var(--primary))/0.18]" style={{ background: "rgba(232, 84, 32, 0.1)", border: "1px solid rgba(232, 84, 32, 0.2)" }}>
+                <a.Icon className="w-4 h-4" style={{ color: "hsl(var(--primary))" }} strokeWidth={1.75} />
               </div>
               <div className="min-w-0">
-                <h3 className="font-semibold group-hover:text-primary transition-colors">{a.title}</h3>
-                <p className="text-sm text-muted-foreground mt-0.5">{a.desc}</p>
+                <h3 className="text-[14px] font-medium group-hover:text-primary transition-colors">{a.title}</h3>
+                <p className="text-[12px] text-muted-foreground mt-0.5 line-clamp-1">{a.desc}</p>
               </div>
             </motion.div>
           ))}
