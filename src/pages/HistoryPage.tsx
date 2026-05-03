@@ -19,8 +19,14 @@ const HistoryPage = () => {
   }, []);
 
   const [filter, setFilter] = useState<HistoryFilter>("all");
+  const [assetFilter, setAssetFilter] = useState<"all" | "image" | "video" | "audio" | "favorites">("all");
   const [selected, setSelected] = useState<HistoryItem | null>(null);
   const [items, setItems] = useState<HistoryItem[]>(MOCK_HISTORY);
+
+  const handleAssetFilter = (id: "all" | "image" | "video" | "audio" | "favorites") => {
+    setAssetFilter(id);
+    setFilter(id);
+  };
 
   const filtered = useMemo(() => {
     if (filter === "all") return items;
