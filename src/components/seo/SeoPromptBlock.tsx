@@ -24,7 +24,7 @@ export function SeoPromptBlock({ placeholder, pills, actionLabel, actionCredits,
   return (
     <div className="relative z-10 max-w-[900px] mx-auto px-4" style={{ marginTop: -40 }}>
       <div
-        className="cursor-pointer bg-white dark:bg-[#16161f] border border-gray-200 dark:border-white/[0.06]"
+        className="cursor-pointer bg-background dark:bg-[#16161f] border border-gray-200 dark:border-white/[0.06]"
         style={{ borderRadius: 20, padding: 24, boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }}
         onClick={handleClick}
       >

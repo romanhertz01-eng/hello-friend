@@ -92,7 +92,7 @@ export function TextAssistantsSection() {
               className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
               style={{ background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" }}
             >
-              <Send className="w-4 h-4 text-white" />
+              <Send className="w-4 h-4 text-primary-foreground" />
             </button>
           </div>
         </div>
