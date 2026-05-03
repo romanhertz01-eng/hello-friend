@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Layout } from "@/components/layout/Layout";
+import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 
 import appCss from "../styles.css?url";
 
@@ -77,7 +78,9 @@ function RootComponent() {
       <AuthProvider>
         <TooltipProvider>
           <Layout>
-            <Outlet />
+            <ErrorBoundary>
+              <Outlet />
+            </ErrorBoundary>
           </Layout>
         </TooltipProvider>
       </AuthProvider>

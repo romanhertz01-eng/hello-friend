@@ -11,6 +11,8 @@ import { ScenariosCarousel } from "@/components/workspace/ScenariosCarousel";
 import { ModelsGrid3x3 } from "@/components/workspace/ModelsGrid3x3";
 import { WelcomeBlock, type WelcomeScenario } from "@/components/workspace/WelcomeBlock";
 import { MediaChatFeed, type MediaGeneration } from "@/components/workspace/MediaChatFeed";
+import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
+import { GenerationLoader } from "@/components/shared/GenerationLoader";
 
 const ASPECT_TO_DIM: Record<string, [number, number]> = {
   "1:1": [1024, 1024], "16:9": [1280, 720], "9:16": [720, 1280],
@@ -64,6 +66,7 @@ const DesignPage = () => {
   const [quality, setQuality] = useState("2K");
   const [turbo, setTurbo] = useState(false);
   const [generations, setGenerations] = useState<MediaGeneration[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
   const feedEndRef = useRef<HTMLDivElement>(null);
   const inputAreaRef = useRef<HTMLDivElement>(null);
   
@@ -98,22 +101,26 @@ const DesignPage = () => {
 
   const handleGenerate = () => {
     const text = prompt.trim();
-    if (!text) return;
+    if (!text || isGenerating) return;
     const [w, h] = ASPECT_TO_DIM[aspectRatio] || [1024, 1024];
     const imgs = Array.from({ length: Math.max(1, quantity) }, () => ({ width: w, height: h }));
-    setGenerations((prev) => [...prev, {
-      id: Date.now().toString(),
-      prompt: text,
-      model: provider?.name || "Image",
-      subModel: subModel?.name || "",
-      createdAt: new Date(),
-      type: "image",
-      images: imgs,
-      aspect: aspectRatio,
-      quality,
-    }]);
-    setPrompt("");
-    sessionStorage.removeItem("era2_draft_design");
+    setIsGenerating(true);
+    setTimeout(() => {
+      setGenerations((prev) => [...prev, {
+        id: Date.now().toString(),
+        prompt: text,
+        model: provider?.name || "Image",
+        subModel: subModel?.name || "",
+        createdAt: new Date(),
+        type: "image",
+        images: imgs,
+        aspect: aspectRatio,
+        quality,
+      }]);
+      setIsGenerating(false);
+      setPrompt("");
+      sessionStorage.removeItem("era2_draft_design");
+    }, 2000 + Math.random() * 2000);
   };
 
   const handleModelSelect = (providerId: string, subModelId: string) => {
@@ -140,6 +147,7 @@ const DesignPage = () => {
   };
 
   return (
+    <ErrorBoundary>
     <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
       {/* Scrollable area: chat (welcome OR feed) + catalog below */}
       <div className="flex-1 overflow-y-auto w-full">
@@ -189,6 +197,7 @@ const DesignPage = () => {
         ) : (
           <>
             <MediaChatFeed generations={generations} />
+            {isGenerating && <GenerationLoader type="image" model={subModel?.name} />}
             <div ref={feedEndRef} />
           </>
         )}
@@ -226,6 +235,7 @@ const DesignPage = () => {
         </div>
       </div>
     </div>
+    </ErrorBoundary>
   );
 };
 
