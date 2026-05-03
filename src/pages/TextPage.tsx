@@ -341,8 +341,8 @@ function WelcomeScreen({ providerId, providerName, subModelName, onQuickAction, 
   colors: ReturnType<typeof useColors>;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center h-full px-4 py-6">
-      <div className="flex flex-col items-center text-center max-w-xl">
+    <div className="flex flex-col items-center justify-center h-full px-4 py-4">
+      <div className="flex flex-col items-center text-center max-w-md">
         <ModelIcon providerId={providerId} size={40} className="mb-3" />
         <h1
           className="text-[22px] font-semibold mb-0.5 tracking-tight"
