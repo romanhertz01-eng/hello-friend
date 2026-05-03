@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Search, ChevronDown, Bot, Sparkles,
   Calculator, FlaskConical, GraduationCap, BookOpen, FileText, Award, Brain,
@@ -86,8 +86,19 @@ const AgentsPage = () => {
   const [activeTab, setActiveTab] = useState("Все");
   const [selectedTextModel, setSelectedTextModel] = useState("ChatGPT");
   const navigate = useNavigate();
+  const [agentDropdownOpen, setAgentDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { document.title = "ERA2 — ИИ Агенты и ассистенты"; }, []);
+
+  useEffect(() => {
+    if (!agentDropdownOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) setAgentDropdownOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [agentDropdownOpen]);
 
   const filtered = agents.filter((a) => {
     const matchesSearch = !search || a.title.toLowerCase().includes(search.toLowerCase()) || a.desc.toLowerCase().includes(search.toLowerCase());
@@ -113,12 +124,44 @@ const AgentsPage = () => {
         </motion.div>
 
         {/* Agent dropdown */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-card text-sm cursor-pointer hover:border-primary/30 transition-colors">
+        <div className="relative inline-block" ref={dropdownRef}>
+          <button
+            onClick={() => setAgentDropdownOpen(!agentDropdownOpen)}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-card text-sm cursor-pointer hover:border-primary/30 transition-colors"
+          >
             <Sparkles className="h-4 w-4 text-primary" />
             <span>Выберите агента из списка</span>
-            <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
-          </div>
+            <ChevronDown className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", agentDropdownOpen && "rotate-180")} />
+          </button>
+          {agentDropdownOpen && (
+            <div
+              className="absolute left-0 top-full mt-2 w-[360px] max-h-[400px] overflow-y-auto rounded-[14px] border p-1.5 shadow-2xl z-50"
+              style={{ background: "hsl(var(--popover))", borderColor: "hsl(var(--border))" }}
+            >
+              {agents.map((a) => (
+                <button
+                  key={a.title}
+                  onClick={() => {
+                    setAgentDropdownOpen(false);
+                    navigate({ to: "/text" });
+                  }}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-[8px] text-sm transition-colors text-left hover:bg-secondary"
+                >
+                  <div
+                    className="w-8 h-8 rounded-[8px] flex items-center justify-center shrink-0"
+                    style={{ background: "rgba(232,84,32,0.1)", color: "hsl(var(--primary))" }}
+                  >
+                    <a.Icon size={16} strokeWidth={1.75} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium text-foreground truncate">{a.title}</div>
+                    <div className="text-[11px] text-muted-foreground truncate">{a.desc}</div>
+                  </div>
+                  <span className="text-[10px] font-mono text-muted-foreground/60 shrink-0">{a.tab}</span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Search */}
