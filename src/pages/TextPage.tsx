@@ -194,7 +194,8 @@ const TextPage = () => {
         )}
         <div ref={chatEndRef} />
 
-        {/* Каталог — всегда виден при скролле */}
+        {/* Каталог — только до первого сообщения */}
+        {!hasMessages && (
         <div className="px-4 lg:px-8 py-6 space-y-6 border-t mt-16" style={{ borderColor: c.divider }}>
           <ModelCarousel
             models={textCarouselModels}
@@ -220,6 +221,7 @@ const TextPage = () => {
             </div>
           </div>
         </div>
+        )}
       </div>
 
       {/* ─── Input area ─── */}
