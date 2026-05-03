@@ -196,7 +196,7 @@ export function TwoPanelModelSelector({
           {/* Two columns */}
           <div className="flex flex-1 min-h-0">
             {/* Left: providers */}
-            <div className="flex-shrink-0 overflow-y-auto" style={{ width: 220, borderRight: "1px solid var(--border-primary)", paddingTop: 8 }}>
+            <div className="flex-shrink-0 overflow-y-auto w-[180px] sm:w-[220px]" style={{ borderRight: "1px solid var(--border-primary)", paddingTop: 8 }}>
               {providers.map((p) => {
                 const isActive = activeProvider === p.id;
                 const isSelected = selectedProviderId === p.id;
