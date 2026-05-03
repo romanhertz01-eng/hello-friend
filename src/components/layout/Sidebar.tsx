@@ -252,7 +252,7 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
                 Получите 100 кредитов за каждого приглашённого друга
               </p>
               <button
-                onClick={() => copy("https://era2.ai/ref/user123", "Реферальная ссылка скопирована")}
+                onClick={() => setShowReferral(true)}
                 className="w-full flex items-center justify-center gap-1.5 py-2 rounded-[8px] text-[12px] font-medium transition-colors"
                 style={{
                   background: "rgba(232, 84, 32, 0.1)",
