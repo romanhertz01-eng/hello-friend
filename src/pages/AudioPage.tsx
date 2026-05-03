@@ -440,6 +440,7 @@ const AudioPage = () => {
       {/* ─── Sticky input area ─── */}
       <div ref={inputAreaRef} className="shrink-0 px-4 lg:px-6 pb-4 pt-1.5 bg-[var(--bg-primary)]">
         <div className="max-w-[780px] mx-auto">
+          <WorkspaceTabs variant="attached" />
           <div
             className="rounded-[22px] rounded-tl-none p-5 border border-[hsl(var(--border))] bg-[hsl(var(--card))] transition-all duration-200 has-[textarea:focus]:border-[hsl(var(--primary))] has-[textarea:focus]:shadow-[0_0_0_3px_rgba(232,84,32,0.12),0_1px_4px_rgba(0,0,0,0.2)]"
           >
