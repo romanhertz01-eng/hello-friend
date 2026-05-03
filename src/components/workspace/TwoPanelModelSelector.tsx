@@ -118,6 +118,7 @@ export function TwoPanelModelSelector({
   }, [open]);
 
   // Position dropdown via fixed coords (escapes overflow:hidden parents)
+  const [width, setWidth] = useState(640);
   useEffect(() => {
     if (!open || !triggerRef.current) return;
     const compute = () => {
@@ -126,8 +127,9 @@ export function TwoPanelModelSelector({
       const spaceBelow = window.innerHeight - rect.bottom;
       const spaceAbove = rect.top;
       const upward = spaceBelow < dropdownH && spaceAbove > spaceBelow;
-      const width = 640;
-      const left = Math.min(Math.max(8, rect.left), window.innerWidth - width - 8);
+      const w = Math.min(640, window.innerWidth - 16);
+      setWidth(w);
+      const left = Math.min(Math.max(8, rect.left), window.innerWidth - w - 8);
       if (upward) {
         setPos({ left, bottom: window.innerHeight - rect.top + 4 });
       } else {
