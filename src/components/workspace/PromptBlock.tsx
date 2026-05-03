@@ -219,8 +219,6 @@ export function PromptBlock({
               </div>
             )}
 
-            {/* More */}
-            <SegmentedItem icon={<MoreHorizontal />} label={null} trailing={null} />
           </SegmentedToolbar>
 
           {extraPills}
