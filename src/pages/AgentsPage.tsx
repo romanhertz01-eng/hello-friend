@@ -88,7 +88,7 @@ const AgentsPage = () => {
           <div>
             <h1 className="text-2xl md:text-[28px] font-bold mb-1">Создайте и общайтесь со своим личным агентом</h1>
             <p className="text-muted-foreground text-sm max-w-xl">
-              Агенты запоминают инструкции, манеру речи, обучаются на ваших данных, умеют искать в интернете, выдавать файлы, запускать код, работать в нейросетях GPT Image, Veo 3.1, Suno.
+              27 ИИ-ассистентов для любых задач
             </p>
           </div>
         </motion.div>
