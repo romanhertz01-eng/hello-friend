@@ -325,12 +325,54 @@ const VideoPage = () => {
                 onSelect={handleModelSelect}
               />
 
-              <SegmentedToolbar>
-                <SegmentedItem icon={<Square />} label={<span className="font-mono tabular-nums">{aspectRatio}</span>} onClick={() => setMoreOpen(true)} />
-                <SegmentedItem icon={<Clock />} label={<span className="font-mono tabular-nums">{duration}</span>} onClick={() => setMoreOpen(true)} />
-                <SegmentedItem icon={<Monitor />} label={<span className="font-mono tabular-nums">{resolution}</span>} onClick={() => setMoreOpen(true)} />
-                <SegmentedItem icon={<MoreHorizontal />} label={null} onClick={() => setMoreOpen(true)} trailing={null} />
-              </SegmentedToolbar>
+              <InlinePillDropdown
+                icon={<Square />}
+                value={aspectRatio}
+                options={(provider?.aspectRatios || []).map((r) => ({
+                  value: r,
+                  label: r,
+                  desc:
+                    r === "16:9" ? "Горизонтальный" :
+                    r === "9:16" ? "Вертикальный" :
+                    r === "1:1" ? "Квадрат" :
+                    r === "4:3" ? "Классический" :
+                    r === "3:4" ? "Портретный" :
+                    r === "21:9" ? "Кинематограф" : undefined,
+                }))}
+                onSelect={setAspectRatio}
+              />
+
+              <InlinePillDropdown
+                icon={<Clock />}
+                value={duration}
+                options={(provider?.durationOptions || []).map((d) => ({
+                  value: d,
+                  label: d,
+                }))}
+                onSelect={setDuration}
+              />
+
+              <InlinePillDropdown
+                icon={<Monitor />}
+                value={resolution}
+                options={(provider?.resolutionOptions || []).map((r) => ({
+                  value: r,
+                  label: r,
+                  desc:
+                    r === "480p" ? "Черновик" :
+                    r === "720p" ? "Стандарт" :
+                    r === "1080p" ? "Full HD" : undefined,
+                }))}
+                onSelect={setResolution}
+              />
+
+              {provider?.qualityOptions && provider.qualityOptions.length > 0 && (
+                <InlinePillDropdown
+                  value={quality}
+                  options={provider.qualityOptions.map((q) => ({ value: q, label: q }))}
+                  onSelect={setQuality}
+                />
+              )}
 
               <motion.button
                 whileHover={{ scale: 1.03 }}
@@ -349,23 +391,6 @@ const VideoPage = () => {
           </div>
         </div>
       </div>
-
-      <VideoMorePopup
-        open={moreOpen}
-        onClose={() => setMoreOpen(false)}
-        aspectRatio={aspectRatio}
-        onAspectSelect={setAspectRatio}
-        aspectRatios={provider?.aspectRatios || []}
-        duration={duration}
-        onDurationChange={setDuration}
-        durationOptions={provider?.durationOptions || []}
-        resolution={resolution}
-        onResolutionChange={setResolution}
-        resolutionOptions={provider?.resolutionOptions || []}
-        quality={quality}
-        onQualityChange={setQuality}
-        qualityOptions={provider?.qualityOptions}
-      />
     </div>
     </ErrorBoundary>
   );
