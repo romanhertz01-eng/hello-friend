@@ -50,7 +50,7 @@ export function TextAssistantsSection() {
               <button
                 key={m}
                 onClick={() => setActiveModel(i)}
-                className="text-[13px] px-3 py-1.5 rounded-lg cursor-pointer transition-all"
+                className="text-[13px] px-3 py-1.5 rounded-lg cursor-pointer"
                 style={
                   i === activeModel
                     ? { background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)", color: "#fff" }

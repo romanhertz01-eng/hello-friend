@@ -153,8 +153,10 @@ export function NavMegaMenu() {
       {TABS.map((tab) => {
         const isHot = active === tab.key && tab.features;
         const handleEnter = () => {
-          if (tab.features) open(tab.key);
-          else {
+          if (tab.features) {
+            if (closeTimer.current) clearTimeout(closeTimer.current);
+            closeTimer.current = setTimeout(() => open(tab.key), active ? 80 : 0);
+          } else {
             if (closeTimer.current) clearTimeout(closeTimer.current);
             setActive(null);
           }
@@ -185,7 +187,7 @@ export function NavMegaMenu() {
             transition={{ duration: 0.15, ease: "easeOut" }}
             onMouseEnter={() => open(activeTab.key)}
             onMouseLeave={scheduleClose}
-            className="absolute left-0 top-full z-50 mt-2"
+            className="absolute left-0 top-full z-50 pt-1"
             style={{ width: "min(720px, 92vw)" }}
           >
             <div
