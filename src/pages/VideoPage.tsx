@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { Zap, X, Sparkles, Square, Clock, Monitor, MoreHorizontal, Film, Music, User, Clapperboard, Smartphone, Heart, ChevronDown } from "lucide-react";
+import { Zap, Sparkles, Square, Clock, Monitor, Film, Music, User, Clapperboard, Smartphone, Heart, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
-import { SegmentedToolbar, SegmentedItem, AttachmentButton } from "@/components/ui/era";
+import { AttachmentButton } from "@/components/ui/era";
+import { InlinePillDropdown } from "@/components/workspace/InlinePillDropdown";
 
 import { PromptSuggestions } from "@/components/workspace/PromptSuggestions";
 import { ModelCarousel } from "@/components/workspace/ModelCarousel";
