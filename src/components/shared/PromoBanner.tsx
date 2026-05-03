@@ -17,22 +17,23 @@ export function PromoBanner() {
 
   return (
     <div
-      className="relative w-full flex items-center justify-center gap-3 px-4 py-2 text-sm text-white"
+      className="relative w-full flex items-center justify-center gap-2 sm:gap-3 px-10 sm:px-4 py-2 text-xs sm:text-sm text-white"
       style={{
         background: "linear-gradient(90deg, #E85420, #ff7a3d)",
       }}
     >
       <Zap size={14} className="shrink-0" />
-      <span className="font-semibold">Первые 100 кредитов бесплатно</span>
-      <span className="opacity-70 hidden sm:inline">·</span>
-      <span className="opacity-90 hidden sm:inline">
+      <span className="font-semibold whitespace-nowrap">100 кредитов бесплатно</span>
+      <span className="opacity-70 hidden md:inline">·</span>
+      <span className="opacity-90 hidden md:inline">
         Попробуйте 90+ нейросетей без VPN
       </span>
       <Link
         to="/auth"
-        className="ml-2 inline-flex items-center h-7 px-3 rounded-full bg-white/15 hover:bg-white/25 transition-colors text-xs font-semibold backdrop-blur-sm"
+        className="ml-1 sm:ml-2 inline-flex items-center h-7 px-3 rounded-full bg-white/15 hover:bg-white/25 transition-colors text-xs font-semibold backdrop-blur-sm whitespace-nowrap"
       >
-        Начать бесплатно
+        <span className="hidden sm:inline">Начать бесплатно</span>
+        <span className="sm:hidden">Начать</span>
       </Link>
       <button
         onClick={handleDismiss}
