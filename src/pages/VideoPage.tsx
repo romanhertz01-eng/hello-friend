@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { flushSync } from "react-dom";
 import { Zap, Sparkles, Square, Clock, Monitor, Film, Music, User, Clapperboard, Smartphone, Heart, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
