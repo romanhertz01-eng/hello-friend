@@ -101,7 +101,7 @@ const VideoPage = () => {
   const [resolution, setResolution] = useState("720p");
   const [quality, setQuality] = useState("Стандарт");
   const [, setSelectedFunc] = useState("Текст в видео");
-  const [moreOpen, setMoreOpen] = useState(false);
+  
   const [generations, setGenerations] = useState<MediaGeneration[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const feedEndRef = useRef<HTMLDivElement>(null);
