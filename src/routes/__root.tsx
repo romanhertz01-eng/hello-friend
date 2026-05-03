@@ -88,6 +88,7 @@ function RootComponent() {
           </Layout>
           <OnboardingTour />
           <CopyToastProvider />
+          <DailyCheckIn />
           <CornerPromo />
         </TooltipProvider>
       </AuthProvider>
