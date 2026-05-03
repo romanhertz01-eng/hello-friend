@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Layout } from "@/components/layout/Layout";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 import { OnboardingTour } from "@/components/shared/OnboardingTour";
+import { CopyToastProvider } from "@/components/shared/CopyToast";
 
 import appCss from "../styles.css?url";
 
@@ -84,6 +85,7 @@ function RootComponent() {
             </ErrorBoundary>
           </Layout>
           <OnboardingTour />
+          <CopyToastProvider />
         </TooltipProvider>
       </AuthProvider>
     </ThemeProvider>

@@ -1,5 +1,6 @@
-import { Play } from "lucide-react";
+import { Play, Copy, Share2, Download, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import { useCopyToast } from "@/components/shared/CopyToast";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { Placeholder } from "@/components/ui/era";
 
@@ -98,6 +99,7 @@ function AudioResult({ gen }: { gen: MediaGeneration }) {
 }
 
 export function MediaChatFeed({ generations }: Props) {
+  const copy = useCopyToast();
   return (
     <div className="max-w-[780px] mx-auto py-6 px-4 space-y-6">
       {generations.map((gen) => (
@@ -139,6 +141,37 @@ export function MediaChatFeed({ generations }: Props) {
                 {gen.quality && <span>· {gen.quality}</span>}
                 {gen.resolution && <span>· {gen.resolution}</span>}
                 {gen.duration && gen.type !== "video" && <span>· {gen.duration}</span>}
+              </div>
+              <div className="flex items-center gap-1 mt-2 -ml-2">
+                <button
+                  onClick={() => copy(gen.prompt, "Промпт скопирован")}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-[8px] text-[12px] text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                  title="Копировать промпт"
+                >
+                  <Copy className="h-3.5 w-3.5" />
+                  Промпт
+                </button>
+                <button
+                  onClick={() => copy(`https://era2.ai/share/${gen.id}`, "Ссылка скопирована")}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-[8px] text-[12px] text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                  title="Поделиться"
+                >
+                  <Share2 className="h-3.5 w-3.5" />
+                  Поделиться
+                </button>
+                <button
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-[8px] text-[12px] text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                  title="Скачать"
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  Скачать
+                </button>
+                <button
+                  className="inline-flex items-center justify-center w-7 h-7 rounded-[8px] text-muted-foreground hover:text-primary hover:bg-secondary transition-colors"
+                  title="В избранное"
+                >
+                  <Heart className="h-3.5 w-3.5" />
+                </button>
               </div>
             </div>
           </motion.div>
