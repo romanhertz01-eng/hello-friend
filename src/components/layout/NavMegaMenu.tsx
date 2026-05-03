@@ -187,7 +187,7 @@ export function NavMegaMenu() {
             transition={{ duration: 0.15, ease: "easeOut" }}
             onMouseEnter={() => open(activeTab.key)}
             onMouseLeave={scheduleClose}
-            className="absolute left-0 top-full z-50 mt-2"
+            className="absolute left-0 top-full z-50 pt-1"
             style={{ width: "min(720px, 92vw)" }}
           >
             <div
