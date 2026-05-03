@@ -250,7 +250,11 @@ const VideoPage = () => {
   const hasGenerations = generations.length > 0;
 
   useEffect(() => { document.title = "ERA2 — Генерация видео"; }, []);
-  useEffect(() => { feedEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [generations]);
+  useEffect(() => {
+    if (generations.length > 0) {
+      feedEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [generations]);
 
   useEffect(() => {
     const saved = sessionStorage.getItem("era2_draft_video");
