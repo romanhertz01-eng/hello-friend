@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   MessageSquare, PenLine, Globe, FileSearch, Languages, Code, Lightbulb,
   Image as ImageIcon, Camera, Paintbrush, Eraser, Scissors, ZoomIn, RefreshCw,
@@ -173,89 +174,96 @@ export function NavMegaMenu() {
         );
       })}
 
-      {activeTab && (
-        <div
-          onMouseEnter={() => open(activeTab.key)}
-          onMouseLeave={scheduleClose}
-          className="absolute left-0 top-full z-50 mt-2"
-          style={{ width: "min(720px, 92vw)" }}
-        >
-          <div
-            className="grid grid-cols-2 gap-6 p-5"
-            style={{
-              background: "var(--c-bg-1)",
-              border: "1px solid var(--c-line)",
-              borderRadius: 22,
-              boxShadow: "0 30px 80px -30px rgba(0,0,0,0.6)",
-            }}
+      <AnimatePresence>
+        {activeTab && (
+          <motion.div
+            key={activeTab.key}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            onMouseEnter={() => open(activeTab.key)}
+            onMouseLeave={scheduleClose}
+            className="absolute left-0 top-full z-50 mt-2"
+            style={{ width: "min(720px, 92vw)" }}
           >
-            {/* Features */}
-            <div className="flex flex-col">
-              <div className="font-mono text-[11px] uppercase tracking-[0.14em] mb-3" style={{ color: "var(--c-fg-mute)" }}>
-                Возможности
-              </div>
-              <div className="flex flex-col gap-0.5">
-                {activeTab.features!.map((f) => (
-                  <button
-                    key={f.title}
-                    onClick={() => { setActive(null); navigate({ to: activeTab.route }); }}
-                    className="flex items-center gap-3 px-3 py-2 rounded-[8px] text-left transition-colors hover:bg-[var(--c-bg-2)]"
-                  >
-                    <span
-                      className="inline-flex items-center justify-center shrink-0"
-                      style={{ width: 36, height: 36, borderRadius: 10, background: "var(--c-bg-2)", color: "var(--c-fg-dim)" }}
+            <div
+              className="grid grid-cols-2 gap-6 p-5"
+              style={{
+                background: "var(--c-bg-1)",
+                border: "1px solid var(--c-line)",
+                borderRadius: 22,
+                boxShadow: "0 30px 80px -30px rgba(0,0,0,0.6)",
+              }}
+            >
+              {/* Features */}
+              <div className="flex flex-col">
+                <div className="font-mono text-[11px] uppercase tracking-[0.14em] mb-3" style={{ color: "var(--c-fg-mute)" }}>
+                  Возможности
+                </div>
+                <div className="flex flex-col gap-0.5">
+                  {activeTab.features!.map((f) => (
+                    <button
+                      key={f.title}
+                      onClick={() => { setActive(null); navigate({ to: activeTab.route }); }}
+                      className="flex items-center gap-3 px-3 py-2 rounded-[8px] text-left transition-colors hover:bg-[var(--c-bg-2)]"
                     >
-                      <f.icon size={18} strokeWidth={1.75} />
-                    </span>
-                    <span className="flex flex-col min-w-0">
-                      <span className="text-[14px] font-medium leading-tight truncate" style={{ color: "var(--c-fg)" }}>{f.title}</span>
-                      <span className="text-[12px] truncate" style={{ color: "var(--c-fg-mute)" }}>{f.desc}</span>
-                    </span>
-                  </button>
-                ))}
+                      <span
+                        className="inline-flex items-center justify-center shrink-0"
+                        style={{ width: 36, height: 36, borderRadius: 10, background: "var(--c-bg-2)", color: "var(--c-fg-dim)" }}
+                      >
+                        <f.icon size={18} strokeWidth={1.75} />
+                      </span>
+                      <span className="flex flex-col min-w-0">
+                        <span className="text-[14px] font-medium leading-tight truncate" style={{ color: "var(--c-fg)" }}>{f.title}</span>
+                        <span className="text-[12px] truncate" style={{ color: "var(--c-fg-mute)" }}>{f.desc}</span>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+                <Link
+                  to={activeTab.route}
+                  onClick={() => setActive(null)}
+                  className="mt-3 inline-flex items-center gap-1 text-[12px] font-medium px-3"
+                  style={{ color: "var(--c-accent)" }}
+                >
+                  Все возможности <ArrowRight size={12} />
+                </Link>
               </div>
-              <Link
-                to={activeTab.route}
-                onClick={() => setActive(null)}
-                className="mt-3 inline-flex items-center gap-1 text-[12px] font-medium px-3"
-                style={{ color: "var(--c-accent)" }}
-              >
-                Все возможности <ArrowRight size={12} />
-              </Link>
-            </div>
 
-            {/* Models */}
-            <div className="flex flex-col">
-              <div className="font-mono text-[11px] uppercase tracking-[0.14em] mb-3" style={{ color: "var(--c-fg-mute)" }}>
-                {activeTab.modelsTitle || "Модели"}
+              {/* Models */}
+              <div className="flex flex-col">
+                <div className="font-mono text-[11px] uppercase tracking-[0.14em] mb-3" style={{ color: "var(--c-fg-mute)" }}>
+                  {activeTab.modelsTitle || "Модели"}
+                </div>
+                <div className="flex flex-col gap-0.5">
+                  {activeTab.models!.map((m) => (
+                    <button
+                      key={m.name}
+                      onClick={() => { setActive(null); navigate({ to: activeTab.route }); }}
+                      className="flex items-center gap-3 px-3 py-2 rounded-[8px] text-left transition-colors hover:bg-[var(--c-bg-2)]"
+                    >
+                      <ModelGlyph name={m.name} size={32} />
+                      <span className="flex flex-col min-w-0">
+                        <span className="text-[14px] font-medium leading-tight truncate" style={{ color: "var(--c-fg)" }}>{m.name}</span>
+                        <span className="text-[12px] truncate" style={{ color: "var(--c-fg-mute)" }}>{m.desc}</span>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+                <Link
+                  to="/toolkit"
+                  onClick={() => setActive(null)}
+                  className="mt-3 inline-flex items-center gap-1 text-[12px] font-medium px-3"
+                  style={{ color: "var(--c-accent)" }}
+                >
+                  Все ИИ-модели <ArrowRight size={12} />
+                </Link>
               </div>
-              <div className="flex flex-col gap-0.5">
-                {activeTab.models!.map((m) => (
-                  <button
-                    key={m.name}
-                    onClick={() => { setActive(null); navigate({ to: activeTab.route }); }}
-                    className="flex items-center gap-3 px-3 py-2 rounded-[8px] text-left transition-colors hover:bg-[var(--c-bg-2)]"
-                  >
-                    <ModelGlyph name={m.name} size={32} />
-                    <span className="flex flex-col min-w-0">
-                      <span className="text-[14px] font-medium leading-tight truncate" style={{ color: "var(--c-fg)" }}>{m.name}</span>
-                      <span className="text-[12px] truncate" style={{ color: "var(--c-fg-mute)" }}>{m.desc}</span>
-                    </span>
-                  </button>
-                ))}
-              </div>
-              <Link
-                to="/toolkit"
-                onClick={() => setActive(null)}
-                className="mt-3 inline-flex items-center gap-1 text-[12px] font-medium px-3"
-                style={{ color: "var(--c-accent)" }}
-              >
-                Все ИИ-модели <ArrowRight size={12} />
-              </Link>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

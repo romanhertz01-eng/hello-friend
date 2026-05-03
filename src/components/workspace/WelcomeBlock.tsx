@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import { motion } from "framer-motion";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 
 export interface WelcomeScenario {
@@ -24,10 +25,6 @@ interface Props {
   onScenarioClick: (scenario: WelcomeScenario) => void;
 }
 
-/**
- * Unified welcome screen for /design /video /audio.
- * Mirrors the look-and-feel of TextPage WelcomeScreen so layout switches feel consistent.
- */
 export function WelcomeBlock({
   modelName,
   subModelName,
@@ -38,26 +35,64 @@ export function WelcomeBlock({
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-var(--header-height,64px)-180px)] px-4 py-12">
       <div className="flex flex-col items-center text-center max-w-2xl w-full">
-        <ModelGlyph name={modelName} size={64} className="mb-5" />
-        <h1
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+        >
+          <ModelGlyph name={modelName} size={64} className="mb-5" />
+        </motion.div>
+        <motion.h1
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.15 }}
           className="text-[28px] font-semibold mb-1 tracking-tight"
           style={{ color: "var(--text-primary)" }}
         >
           {modelName}
-        </h1>
+        </motion.h1>
         {subModelName && (
-          <p className="text-[16px] mb-1 font-mono tabular-nums" style={{ color: "var(--text-secondary)" }}>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: 0.2 }}
+            className="text-[16px] mb-1 font-mono tabular-nums"
+            style={{ color: "var(--text-secondary)" }}
+          >
             {subModelName}
-          </p>
+          </motion.p>
         )}
-        <p className="text-[14px] mb-8" style={{ color: "var(--text-tertiary)" }}>{description}</p>
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.25 }}
+          className="text-[14px] mb-8"
+          style={{ color: "var(--text-tertiary)" }}
+        >
+          {description}
+        </motion.p>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 w-full">
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-3 gap-3 w-full"
+          initial="hidden"
+          animate="show"
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.05, delayChildren: 0.3 } },
+          }}
+        >
           {scenarios.map((s) => (
-            <button
+            <motion.button
               key={s.title}
+              variants={{
+                hidden: { opacity: 0, y: 12 },
+                show: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => onScenarioClick(s)}
-              className="group p-4 rounded-[14px] text-left transition-all"
+              className="group p-4 rounded-[14px] text-left transition-colors"
               style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "var(--border-hover)";
@@ -76,9 +111,9 @@ export function WelcomeBlock({
               </div>
               <div className="text-[15px] font-semibold mb-0.5" style={{ color: "var(--text-primary)" }}>{s.title}</div>
               <div className="text-[13px] leading-snug line-clamp-2" style={{ color: "var(--text-secondary)" }}>{s.desc}</div>
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

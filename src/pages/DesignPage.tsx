@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Camera, Palette, Sparkles, Image as ImageIcon, Zap, Paintbrush, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 
@@ -220,31 +221,40 @@ const DesignPage = () => {
               <span className="font-mono tabular-nums text-xs" style={{ color: "var(--c-accent-2)" }}>{subModel?.name}</span>
               <ChevronDown size={14} className="text-muted-foreground" />
             </button>
-            {capsuleOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[320px] max-h-[400px] overflow-y-auto rounded-[14px] border p-1.5 shadow-2xl z-50" style={{ background: "hsl(var(--popover))", borderColor: "hsl(var(--border))" }}>
-                {imageProviders.map((p) => (
-                  <div key={p.id}>
-                    <div className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider text-muted-foreground">{p.name}</div>
-                    {p.subModels.map((s) => (
-                      <button
-                        key={s.id}
-                        onClick={() => { handleModelSelect(p.id, s.id); setCapsuleOpen(false); }}
-                        className={cn(
-                          "w-full flex items-center gap-3 px-3 py-2.5 rounded-[8px] text-sm transition-colors text-left",
-                          selectedSubModelId === s.id ? "bg-[rgba(232,84,32,0.12)]" : "hover:bg-secondary"
-                        )}
-                      >
-                        <ModelGlyph name={p.name} size={24} />
-                        <div className="flex-1 min-w-0">
-                          <div className="font-medium truncate" style={{ color: selectedSubModelId === s.id ? "hsl(var(--primary))" : "hsl(var(--foreground))" }}>{s.name}</div>
-                        </div>
-                        <span className="text-[11px] font-mono text-muted-foreground shrink-0">{s.credits} cr</span>
-                      </button>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            )}
+            <AnimatePresence>
+              {capsuleOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[320px] max-h-[400px] overflow-y-auto rounded-[14px] border p-1.5 shadow-2xl z-50"
+                  style={{ background: "hsl(var(--popover))", borderColor: "hsl(var(--border))" }}
+                >
+                  {imageProviders.map((p) => (
+                    <div key={p.id}>
+                      <div className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider text-muted-foreground">{p.name}</div>
+                      {p.subModels.map((s) => (
+                        <button
+                          key={s.id}
+                          onClick={() => { handleModelSelect(p.id, s.id); setCapsuleOpen(false); }}
+                          className={cn(
+                            "w-full flex items-center gap-3 px-3 py-2.5 rounded-[8px] text-sm transition-colors text-left",
+                            selectedSubModelId === s.id ? "bg-[rgba(232,84,32,0.12)]" : "hover:bg-secondary"
+                          )}
+                        >
+                          <ModelGlyph name={p.name} size={24} />
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium truncate" style={{ color: selectedSubModelId === s.id ? "hsl(var(--primary))" : "hsl(var(--foreground))" }}>{s.name}</div>
+                          </div>
+                          <span className="text-[11px] font-mono text-muted-foreground shrink-0">{s.credits} cr</span>
+                        </button>
+                      ))}
+                    </div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
         {!hasGenerations ? (
