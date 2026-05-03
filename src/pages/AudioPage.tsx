@@ -528,6 +528,7 @@ const AudioPage = () => {
               </motion.button>
             </div>
           </div>
+          </div>
         </div>
       </div>
     </div>
