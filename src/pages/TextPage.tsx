@@ -6,7 +6,7 @@ import { ModelIcon } from "@/components/text/ModelIcon";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
-import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
+
 import { ModelCarousel, type CarouselModel } from "@/components/workspace/ModelCarousel";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 
