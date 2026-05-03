@@ -1,5 +1,6 @@
-import { Play } from "lucide-react";
+import { Play, Copy, Share2, Download, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import { useCopyToast } from "@/components/shared/CopyToast";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { Placeholder } from "@/components/ui/era";
 
