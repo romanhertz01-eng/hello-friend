@@ -14,6 +14,7 @@ import { WelcomeBlock, type WelcomeScenario } from "@/components/workspace/Welco
 import { MediaChatFeed, type MediaGeneration } from "@/components/workspace/MediaChatFeed";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 import { GenerationLoader } from "@/components/shared/GenerationLoader";
+import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 
 const ASPECT_TO_DIM: Record<string, [number, number]> = {
   "1:1": [1024, 1024], "16:9": [1280, 720], "9:16": [720, 1280],
@@ -303,7 +304,8 @@ const DesignPage = () => {
       {/* Sticky input area */}
       <div ref={inputAreaRef} className="shrink-0 px-4 lg:px-6 pb-4 pt-1.5 bg-[var(--bg-primary)]">
         <div className="max-w-[780px] mx-auto">
-          
+          <WorkspaceTabs variant="attached" />
+
           <PromptBlock
             prompt={prompt}
             onPromptChange={setPrompt}

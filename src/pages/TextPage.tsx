@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
 
 import { ModelCarousel, type CarouselModel } from "@/components/workspace/ModelCarousel";
+import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 
 const textCarouselModels: CarouselModel[] = [
@@ -194,8 +195,7 @@ const TextPage = () => {
         )}
         <div ref={chatEndRef} />
 
-        {/* Каталог — только до первого сообщения */}
-        {!hasMessages && (
+        {/* Каталог — всегда виден */}
         <div className="px-4 lg:px-8 py-6 space-y-6 border-t mt-16" style={{ borderColor: c.divider }}>
           <ModelCarousel
             models={textCarouselModels}
@@ -221,13 +221,14 @@ const TextPage = () => {
             </div>
           </div>
         </div>
-        )}
+
       </div>
 
       {/* ─── Input area ─── */}
       <div className="shrink-0 px-4 pb-5 pt-2" style={{ background: c.bg }}>
         <div className="max-w-[780px] mx-auto">
-          
+          <WorkspaceTabs variant="attached" />
+
           <div
             className="rounded-[22px] rounded-tl-none p-4 transition-all duration-200"
             style={{
