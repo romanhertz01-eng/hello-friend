@@ -395,6 +395,7 @@ const VideoPage = () => {
               </motion.button>
             </div>
           </div>
+          </div>
         </div>
       </div>
     </div>
