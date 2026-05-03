@@ -14,6 +14,7 @@ import { TwoPanelModelSelector } from "@/components/workspace/TwoPanelModelSelec
 import { WelcomeBlock, type WelcomeScenario } from "@/components/workspace/WelcomeBlock";
 import { MediaChatFeed, type MediaGeneration } from "@/components/workspace/MediaChatFeed";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
+import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 import { GenerationLoader } from "@/components/shared/GenerationLoader";
 import {
   videoProviders,
