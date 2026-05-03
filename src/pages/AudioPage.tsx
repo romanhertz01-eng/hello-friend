@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { ChevronDown, Play, Plus, Zap, Settings2, Smartphone, Film, Mic, Megaphone, Headphones, Globe, Music, Volume2, Languages, AudioLines, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { PillDropdown } from "@/components/workspace/PillDropdown";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";

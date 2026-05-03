@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Zap, X, Sparkles, Square, Clock, Monitor, MoreHorizontal, Film, Music, User, Clapperboard, Smartphone, Heart, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 import { SegmentedToolbar, SegmentedItem, AttachmentButton } from "@/components/ui/era";
