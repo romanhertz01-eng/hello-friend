@@ -12,6 +12,25 @@ const AuthPage = () => {
   const [name, setName] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const [timeLeft, setTimeLeft] = useState(3 * 24 * 3600);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("era2_signup_timer_start");
+    if (!saved) {
+      localStorage.setItem("era2_signup_timer_start", String(Date.now()));
+    } else {
+      const elapsed = Math.floor((Date.now() - parseInt(saved)) / 1000);
+      setTimeLeft(Math.max(0, 3 * 24 * 3600 - elapsed));
+    }
+    const interval = setInterval(() => setTimeLeft((prev) => Math.max(0, prev - 1)), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const hours = Math.floor(timeLeft / 3600);
+  const mins = Math.floor((timeLeft % 3600) / 60);
+  const secs = timeLeft % 60;
+  const pad = (n: number) => String(n).padStart(2, "0");
+
   useEffect(() => {
     document.title = mode === "login" ? "ERA2 — Вход" : "ERA2 — Регистрация";
   }, [mode]);
@@ -81,6 +100,23 @@ const AuthPage = () => {
             ? "90+ нейросетей в одном месте"
             : "Получите 100 бесплатных кредитов при регистрации"}
         </p>
+
+        {mode === "register" && (
+          <div
+            className="rounded-[12px] p-3 text-center mb-4"
+            style={{
+              background: "rgba(232,84,32,0.1)",
+              border: "1px solid rgba(232,84,32,0.2)",
+            }}
+          >
+            <div className="text-[13px] font-medium" style={{ color: "hsl(var(--primary))" }}>
+              +100 кредитов на 3 дня для генерации!
+            </div>
+            <div className="text-xl font-mono font-bold mt-1 text-foreground">
+              {pad(hours)} : {pad(mins)} : {pad(secs)}
+            </div>
+          </div>
+        )}
 
         {/* Social buttons */}
         <div className="grid grid-cols-2 gap-2.5 mb-5">
