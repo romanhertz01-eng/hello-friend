@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
+import { RightPanel } from "./RightPanel";
 import { CommandPalette } from "./CommandPalette";
 import { CommandPaletteProvider } from "@/hooks/useCommandPalette";
 import { useAuth } from "@/contexts/AuthContext";
@@ -10,6 +11,7 @@ import { cn } from "@/lib/utils";
 
 const sidebarPages = ["/text", "/design", "/video", "/audio", "/agents", "/toolkit", "/history", "/pricing", "/create"];
 const workspacePages = ["/text", "/design", "/video", "/audio", "/create"];
+const rightPanelPages = ["/design", "/video"];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
