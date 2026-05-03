@@ -187,6 +187,7 @@ export function ModelPickerPill({
                   key={p.id}
                   type="button"
                   onMouseEnter={() => scheduleProviderHover(p.id)}
+                  onMouseLeave={clearProviderHoverTimer}
                   onClick={() => {
                     clearProviderHoverTimer();
                     if (p.subModels.length === 1) {
@@ -223,7 +224,7 @@ export function ModelPickerPill({
           </div>
 
           {/* Right: sub-models */}
-          <div className="flex-1 overflow-y-auto py-2 min-h-0">
+          <div className="flex-1 overflow-y-scroll py-2 min-h-0 [scrollbar-gutter:stable]">
             {expanded?.subModels.map((s) => {
               const isSelected =
                 selectedProviderId === expanded.id && selectedSubModelId === s.id;
