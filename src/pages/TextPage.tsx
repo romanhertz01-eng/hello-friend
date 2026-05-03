@@ -258,7 +258,7 @@ const TextPage = () => {
               onBlur={() => setInputFocused(false)}
               placeholder="Напишите сообщение..."
               rows={3}
-              className="w-full bg-transparent outline-none resize-none text-[16px] min-h-[72px] max-h-[240px]"
+              className="w-full bg-transparent outline-none resize-none text-[15px] min-h-[80px] max-h-[240px]"
               style={{ color: c.textPrimary, fontFamily: '"DM Sans", sans-serif' }}
             />
 
