@@ -335,3 +335,11 @@
   .era-ph-coal  { background: repeating-linear-gradient(135deg, #15120f 0 14px, #0c0a08 14px 28px); }
   .era-ph-ember { background: repeating-linear-gradient(135deg, #3a1a0a 0 14px, #210d04 14px 28px); }
 }
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+.scrollbar-thin::-webkit-scrollbar { width: 4px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 4px; }
