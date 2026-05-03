@@ -193,30 +193,39 @@ const AudioPage = () => {
               <span className="font-mono tabular-nums text-xs" style={{ color: "var(--c-accent-2)" }}>{currentSubName}</span>
               <ChevronDown size={14} className="text-muted-foreground" />
             </button>
-            {capsuleOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[320px] max-h-[400px] overflow-y-auto rounded-[14px] border p-1.5 shadow-2xl z-50" style={{ background: "hsl(var(--popover))", borderColor: "hsl(var(--border))" }}>
-                {[
-                  { id: "elevenlabs" as const, name: "ElevenLabs", desc: "Озвучка и голос", credits: 60 },
-                  { id: "suno" as const, name: "Suno", desc: "Генерация музыки", credits: 30 },
-                ].map((m) => (
-                  <button
-                    key={m.id}
-                    onClick={() => { setSelectedModel(m.id); setCapsuleOpen(false); }}
-                    className={cn(
-                      "w-full flex items-center gap-3 px-3 py-2.5 rounded-[8px] text-sm transition-colors text-left",
-                      selectedModel === m.id ? "bg-[rgba(232,84,32,0.12)]" : "hover:bg-secondary"
-                    )}
-                  >
-                    <ModelGlyph name={m.name} size={24} />
-                    <div className="flex-1 min-w-0">
-                      <div className="font-medium truncate" style={{ color: selectedModel === m.id ? "hsl(var(--primary))" : "hsl(var(--foreground))" }}>{m.name}</div>
-                      <div className="text-[11px] text-muted-foreground truncate">{m.desc}</div>
-                    </div>
-                    <span className="text-[11px] font-mono text-muted-foreground shrink-0">от {m.credits} cr</span>
-                  </button>
-                ))}
-              </div>
-            )}
+            <AnimatePresence>
+              {capsuleOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[320px] max-h-[400px] overflow-y-auto rounded-[14px] border p-1.5 shadow-2xl z-50"
+                  style={{ background: "hsl(var(--popover))", borderColor: "hsl(var(--border))" }}
+                >
+                  {[
+                    { id: "elevenlabs" as const, name: "ElevenLabs", desc: "Озвучка и голос", credits: 60 },
+                    { id: "suno" as const, name: "Suno", desc: "Генерация музыки", credits: 30 },
+                  ].map((m) => (
+                    <button
+                      key={m.id}
+                      onClick={() => { setSelectedModel(m.id); setCapsuleOpen(false); }}
+                      className={cn(
+                        "w-full flex items-center gap-3 px-3 py-2.5 rounded-[8px] text-sm transition-colors text-left",
+                        selectedModel === m.id ? "bg-[rgba(232,84,32,0.12)]" : "hover:bg-secondary"
+                      )}
+                    >
+                      <ModelGlyph name={m.name} size={24} />
+                      <div className="flex-1 min-w-0">
+                        <div className="font-medium truncate" style={{ color: selectedModel === m.id ? "hsl(var(--primary))" : "hsl(var(--foreground))" }}>{m.name}</div>
+                        <div className="text-[11px] text-muted-foreground truncate">{m.desc}</div>
+                      </div>
+                      <span className="text-[11px] font-mono text-muted-foreground shrink-0">от {m.credits} cr</span>
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
         {!hasGenerations ? (
