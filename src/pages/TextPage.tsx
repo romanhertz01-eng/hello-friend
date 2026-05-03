@@ -323,9 +323,6 @@ const TextPage = () => {
             </div>
           </div>
 
-          <p className="text-center text-[12px] mt-2" style={{ color: c.footerText }}>
-            ERA2.ai может допускать ошибки • 1000 cr
-          </p>
         </div>
       </div>
 
