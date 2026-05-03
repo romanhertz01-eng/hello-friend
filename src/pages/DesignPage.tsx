@@ -5,7 +5,7 @@ import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 
 import { PromptBlock } from "@/components/workspace/ImagePromptBlock";
-import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
+
 import { PromptSuggestions } from "@/components/workspace/PromptSuggestions";
 import { ModelCarousel } from "@/components/workspace/ModelCarousel";
 import { ScenariosCarousel } from "@/components/workspace/ScenariosCarousel";
@@ -303,7 +303,7 @@ const DesignPage = () => {
       {/* Sticky input area */}
       <div ref={inputAreaRef} className="shrink-0 px-4 lg:px-6 pb-4 pt-1.5 bg-[var(--bg-primary)]">
         <div className="max-w-[780px] mx-auto">
-          <WorkspaceTabs variant="attached" />
+          
           <PromptBlock
             prompt={prompt}
             onPromptChange={setPrompt}

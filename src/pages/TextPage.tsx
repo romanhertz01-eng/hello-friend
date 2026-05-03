@@ -6,7 +6,7 @@ import { ModelIcon } from "@/components/text/ModelIcon";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
-import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
+
 import { ModelCarousel, type CarouselModel } from "@/components/workspace/ModelCarousel";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 
@@ -39,7 +39,7 @@ interface Message {
   providerId?: string;
 }
 
-const demoReply = "Это демонстрационный ответ от AI-ассистента. В рабочей версии здесь будет реальный ответ от выбранной нейросети.\n\n**Markdown** поддерживается:\n- Списки\n- `Код`\n- И многое другое";
+const demoReply = "Конечно! Вот несколько идей:\n\n1. **Персонализация контента** — создавайте уникальные тексты для каждого сегмента аудитории\n2. **Автоматизация рутины** — делегируйте рутинные задачи нейросетям\n3. **Мультиформатность** — один промпт, несколько форматов: текст, изображение, видео\n\nХотите, чтобы я подробнее раскрыл какой-то из пунктов?";
 
 const systemPromptPresets = ["Копирайтер", "Программист", "Учитель", "Переводчик"];
 
@@ -195,7 +195,7 @@ const TextPage = () => {
         <div ref={chatEndRef} />
 
         {/* Каталог — всегда виден при скролле */}
-        <div className="px-4 lg:px-8 py-6 space-y-6 border-t mt-6" style={{ borderColor: c.divider }}>
+        <div className="px-4 lg:px-8 py-6 space-y-6 border-t mt-16" style={{ borderColor: c.divider }}>
           <ModelCarousel
             models={textCarouselModels}
             onSelect={(name) => {
@@ -225,7 +225,7 @@ const TextPage = () => {
       {/* ─── Input area ─── */}
       <div className="shrink-0 px-4 pb-5 pt-2" style={{ background: c.bg }}>
         <div className="max-w-[780px] mx-auto">
-          <WorkspaceTabs variant="attached" />
+          
           <div
             className="rounded-[22px] rounded-tl-none p-4 transition-all duration-200"
             style={{
@@ -323,9 +323,6 @@ const TextPage = () => {
             </div>
           </div>
 
-          <p className="text-center text-[12px] mt-2" style={{ color: c.footerText }}>
-            ERA2.ai может допускать ошибки • 1000 cr
-          </p>
         </div>
       </div>
 
@@ -344,8 +341,8 @@ function WelcomeScreen({ providerId, providerName, subModelName, onQuickAction, 
   colors: ReturnType<typeof useColors>;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center h-full px-4 py-6">
-      <div className="flex flex-col items-center text-center max-w-xl">
+    <div className="flex flex-col items-center justify-center h-full px-4 py-4">
+      <div className="flex flex-col items-center text-center max-w-md">
         <ModelIcon providerId={providerId} size={40} className="mb-3" />
         <h1
           className="text-[22px] font-semibold mb-0.5 tracking-tight"
