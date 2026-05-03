@@ -202,6 +202,7 @@ export function TwoPanelModelSelector({
                   <button
                     key={p.id}
                     onMouseEnter={() => scheduleProviderHover(p.id)}
+                    onMouseLeave={clearProviderHoverTimer}
                     onClick={() => {
                       clearProviderHoverTimer();
                       const def = p.subModels.find((s) => (s as any).isDefault) || p.subModels[0];
@@ -238,7 +239,7 @@ export function TwoPanelModelSelector({
             {/* Right: sub-models, scrollable */}
             <div
               className="flex-1 submodel-scroll-container"
-              style={{ minHeight: 0, paddingTop: 8, overflowY: "auto" }}
+              style={{ minHeight: 0, paddingTop: 8, overflowY: "scroll", scrollbarGutter: "stable" }}
             >
               {hoverProvider?.subModels.map((s, i) => {
                 const isSelected = selectedSubModelId === s.id && selectedProviderId === hoverProvider.id;
