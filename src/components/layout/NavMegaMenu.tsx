@@ -139,7 +139,7 @@ export function NavMegaMenu() {
   };
   const scheduleClose = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setActive(null), 120);
+    closeTimer.current = setTimeout(() => setActive(null), 200);
   };
 
   useEffect(() => () => {
