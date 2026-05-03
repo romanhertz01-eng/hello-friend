@@ -58,12 +58,48 @@ const sunoScenarios = [
 ];
 
 const welcomeScenarios: WelcomeScenario[] = [
-  { Icon: Mic, title: "Озвучка для ролика", desc: "Профессиональная озвучка текста", prompt: "Озвучка текста: " },
-  { Icon: Music, title: "Песня по описанию", desc: "Создать трек с вокалом", prompt: "Песня в стиле " },
-  { Icon: Headphones, title: "Подкаст", desc: "Голосовой контент для подкаста", prompt: "Озвучка для подкаста: " },
-  { Icon: Volume2, title: "Рекламный джингл", desc: "Короткая мелодия для рекламы", prompt: "Джингл для " },
-  { Icon: Languages, title: "Перевод голоса", desc: "Дубляж на другой язык", prompt: "Перевести голос на " },
-  { Icon: AudioLines, title: "Звуковые эффекты", desc: "Генерация SFX", prompt: "Звуковой эффект: " },
+  {
+    Icon: Mic,
+    title: "Озвучка для ролика",
+    desc: "Профессиональная озвучка текста",
+    prompt: "Добрый день! Представляем вам новый продукт, который изменит ваш подход к работе. Это инновационное решение создано для тех, кто ценит качество и эффективность.",
+    providerId: "elevenlabs",
+  },
+  {
+    Icon: Music,
+    title: "Песня по описанию",
+    desc: "Создать трек с вокалом",
+    prompt: "Энергичный поп-трек для рекламы, позитивное настроение, запоминающийся припев, современное звучание",
+    providerId: "suno",
+  },
+  {
+    Icon: Headphones,
+    title: "Подкаст",
+    desc: "Голосовой контент для подкаста",
+    prompt: "Сегодня мы поговорим о том, как искусственный интеллект меняет нашу повседневную жизнь. От рекомендаций в музыке до медицинских диагнозов — ИИ проникает во все сферы.",
+    providerId: "elevenlabs",
+  },
+  {
+    Icon: Volume2,
+    title: "Рекламный джингл",
+    desc: "Короткая мелодия для рекламы",
+    prompt: "Короткий запоминающийся джингл для бренда, 15 секунд, оптимистичный, с вокальным хуком",
+    providerId: "suno",
+  },
+  {
+    Icon: Languages,
+    title: "Перевод голоса",
+    desc: "Дубляж на другой язык",
+    prompt: "Hello everyone! Welcome to our new product presentation. Today we will show you something truly amazing.",
+    providerId: "elevenlabs",
+  },
+  {
+    Icon: AudioLines,
+    title: "Звуковые эффекты",
+    desc: "Генерация SFX",
+    prompt: "Атмосферный эмбиент для медитации, мягкие волны, пение птиц, лёгкий ветер",
+    providerId: "suno",
+  },
 ];
 
 const AudioPage = () => {
@@ -187,7 +223,14 @@ const AudioPage = () => {
             modelName={currentModelName}
             subModelName={currentSubName}
             scenarios={welcomeScenarios}
-            onScenarioClick={(p) => setPrompt(p)}
+            onScenarioClick={(scenario) => {
+              setPrompt(scenario.prompt);
+              if (scenario.providerId === "elevenlabs") {
+                setSelectedModel("elevenlabs");
+              } else if (scenario.providerId === "suno") {
+                setSelectedModel("suno");
+              }
+            }}
           />
         ) : (
           <>

@@ -6,6 +6,14 @@ export interface WelcomeScenario {
   title: string;
   desc: string;
   prompt: string;
+  // Preset fields (optional)
+  providerId?: string;
+  subModelId?: string;
+  aspect?: string;
+  quality?: string;
+  quantity?: number;
+  duration?: string;
+  resolution?: string;
 }
 
 interface Props {
@@ -13,7 +21,7 @@ interface Props {
   subModelName?: string;
   description?: string;
   scenarios: WelcomeScenario[];
-  onScenarioClick: (prompt: string) => void;
+  onScenarioClick: (scenario: WelcomeScenario) => void;
 }
 
 /**
@@ -48,7 +56,7 @@ export function WelcomeBlock({
           {scenarios.map((s) => (
             <button
               key={s.title}
-              onClick={() => onScenarioClick(s.prompt)}
+              onClick={() => onScenarioClick(s)}
               className="group p-4 rounded-[14px] text-left transition-all"
               style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}
               onMouseEnter={(e) => {
