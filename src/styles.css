@@ -47,9 +47,9 @@
 :root {
   --background: 30 28% 95%;
   --foreground: 20 24% 7%;
-  --card: 0 0% 100%;
+  --card: 30 30% 98%;
   --card-foreground: 20 24% 7%;
-  --popover: 0 0% 100%;
+  --popover: 30 30% 98%;
   --popover-foreground: 20 24% 7%;
   --primary: 15 82% 52%;
   --primary-foreground: 0 0% 100%;
