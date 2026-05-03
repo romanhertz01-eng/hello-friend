@@ -338,7 +338,7 @@ export function PromptWindow({ type, onTypeChange, prompt, onPromptChange, onGen
     <div className="w-full max-w-[780px] mx-auto">
       {/* ─── Folder tabs (anchor to card top) ─── */}
       <div
-        className="flex items-end gap-1 overflow-x-auto scrollbar-hide flex-nowrap justify-start pl-1"
+        className="flex items-end gap-1 overflow-x-auto scrollbar-hide flex-nowrap justify-start pl-0"
         style={{ marginBottom: -1, position: "relative", zIndex: 2 }}
       >
         {TABS.map((t) => {
@@ -392,7 +392,7 @@ export function PromptWindow({ type, onTypeChange, prompt, onPromptChange, onGen
 
       {/* ─── Prompt window ─── */}
       <div
-        className="rounded-[22px] rounded-tl-none p-5 transition-all duration-200 relative"
+        className="rounded-[22px] rounded-tl-none p-5 transition-all duration-200 relative h-[188px] flex flex-col justify-between"
         style={{
           background: "var(--c-bg-1)",
           border: `1px solid ${cardBorder}`,
@@ -441,8 +441,8 @@ export function PromptWindow({ type, onTypeChange, prompt, onPromptChange, onGen
         </div>
 
         {/* Row 2: params + CTA */}
-        <div className="flex items-center gap-2 mt-4">
-          <div className="flex items-center gap-2 flex-1 min-w-0 pb-0.5 flex-wrap">
+        <div className="flex items-center gap-2 mt-4 min-h-10">
+          <div className="flex items-center gap-2 flex-1 min-w-0 pb-0.5 overflow-x-auto no-scrollbar flex-nowrap">
             <ParamsRow type={type} />
           </div>
 

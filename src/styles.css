@@ -384,7 +384,7 @@ body:not(.dark) {
 }
 
 .glow-border-idle {
-  padding: 2px;
+  padding: 0;
   background: transparent;
   border-radius: var(--radius-lg, 22px);
   transition: background 0.5s ease;
