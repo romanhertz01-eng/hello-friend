@@ -163,16 +163,18 @@ const VideoPage = () => {
   };
 
   const handleModelSelect = (providerId: string, subModelId: string) => {
-    setSelectedProviderId(providerId);
-    setSelectedSubModelId(subModelId);
-    const p = videoProviders.find((pr) => pr.id === providerId);
-    if (p) {
-      setAspectRatio(p.aspectRatios[0] || "16:9");
-      setDuration(p.durationOptions[0] || "5s");
-      setResolution(p.resolutionOptions[0] || "720p");
-      if (p.qualityOptions) setQuality(p.qualityOptions[0]);
-      if (p.functions) setSelectedFunc(p.functions[0]);
-    }
+    flushSync(() => {
+      setSelectedProviderId(providerId);
+      setSelectedSubModelId(subModelId);
+      const p = videoProviders.find((pr) => pr.id === providerId);
+      if (p) {
+        setAspectRatio(p.aspectRatios[0] || "16:9");
+        setDuration(p.durationOptions[0] || "5s");
+        setResolution(p.resolutionOptions[0] || "720p");
+        if (p.qualityOptions) setQuality(p.qualityOptions[0]);
+        if (p.functions) setSelectedFunc(p.functions[0]);
+      }
+    });
   };
 
   const selectorProviders = videoProviders.map((p) => ({
