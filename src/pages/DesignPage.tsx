@@ -304,27 +304,28 @@ const DesignPage = () => {
       </div>
 
       {/* Sticky input area */}
-      <div ref={inputAreaRef} className="shrink-0 px-4 lg:px-6 pb-4 pt-1.5 bg-[var(--bg-primary)]">
+      <div className={cn("shrink-0 px-4 lg:px-6 pb-4 pt-1.5 bg-[var(--bg-primary)] relative z-[1]")}>
         <div className="max-w-[780px] mx-auto">
           <WorkspaceTabs variant="attached" />
-
-          <PromptBlock
-            prompt={prompt}
-            onPromptChange={setPrompt}
-            providers={imageProviders}
-            selectedProviderId={selectedProviderId}
-            selectedSubModelId={selectedSubModelId}
-            onModelSelect={handleModelSelect}
-            aspectRatio={aspectRatio}
-            onAspectSelect={setAspectRatio}
-            quantity={quantity}
-            onQuantityChange={setQuantity}
-            quality={quality}
-            onQualityChange={setQuality}
-            turbo={turbo}
-            onTurboToggle={() => setTurbo(!turbo)}
-            onGenerate={handleGenerate}
-          />
+          <div ref={inputAreaRef} className={isGenerating ? "glow-border-active" : "glow-border-idle"}>
+            <PromptBlock
+              prompt={prompt}
+              onPromptChange={setPrompt}
+              providers={imageProviders}
+              selectedProviderId={selectedProviderId}
+              selectedSubModelId={selectedSubModelId}
+              onModelSelect={handleModelSelect}
+              aspectRatio={aspectRatio}
+              onAspectSelect={setAspectRatio}
+              quantity={quantity}
+              onQuantityChange={setQuantity}
+              quality={quality}
+              onQualityChange={setQuality}
+              turbo={turbo}
+              onTurboToggle={() => setTurbo(!turbo)}
+              onGenerate={handleGenerate}
+            />
+          </div>
         </div>
       </div>
     </div>
