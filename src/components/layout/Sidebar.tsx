@@ -227,6 +227,30 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
 
           {renderSection("Инструменты", toolItems)}
           {renderSection("", bottomItems)}
+
+          {!collapsed && (
+            <div className="mx-3 mt-5 mb-3 p-3 rounded-[12px]" style={{ background: "rgba(232,84,32,0.06)", border: "1px solid rgba(232,84,32,0.15)" }}>
+              <div className="flex items-center gap-2 mb-1.5">
+                <Gift className="h-3.5 w-3.5" style={{ color: "hsl(var(--primary))" }} />
+                <span className="text-[12px] font-semibold text-foreground">Пригласите друга</span>
+              </div>
+              <p className="text-[11px] text-muted-foreground leading-snug mb-2.5">
+                Получите 100 кредитов за каждого приглашённого друга
+              </p>
+              <button
+                onClick={() => copy("https://era2.ai/ref/user123", "Реферальная ссылка скопирована")}
+                className="w-full flex items-center justify-center gap-1.5 py-2 rounded-[8px] text-[12px] font-medium transition-colors"
+                style={{
+                  background: "rgba(232, 84, 32, 0.1)",
+                  color: "hsl(var(--primary))",
+                  border: "1px solid rgba(232, 84, 32, 0.18)",
+                }}
+              >
+                <Copy className="h-3 w-3" />
+                Копировать ссылку
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Bottom CTA — ghost link */}
