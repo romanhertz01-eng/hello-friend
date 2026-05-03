@@ -33,7 +33,7 @@ export function WelcomeBlock({
   onScenarioClick,
 }: Props) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-var(--header-height,64px)-160px)] px-4 py-6">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-var(--header-height,64px)-200px)] px-4 py-4">
       <div className="flex flex-col items-center text-center max-w-2xl w-full">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
