@@ -1,4 +1,5 @@
 import { Play } from "lucide-react";
+import { motion } from "framer-motion";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { Placeholder } from "@/components/ui/era";
 
@@ -102,17 +103,27 @@ export function MediaChatFeed({ generations }: Props) {
       {generations.map((gen) => (
         <div key={gen.id} className="space-y-4">
           {/* User message */}
-          <div className="flex justify-end">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="flex justify-end"
+          >
             <div
               className="max-w-[75%] rounded-[14px] rounded-br-[4px] px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap"
               style={{ background: "hsl(var(--primary))", color: "#fff" }}
             >
               {gen.prompt}
             </div>
-          </div>
+          </motion.div>
 
           {/* Assistant response */}
-          <div className="flex gap-3">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
+            className="flex gap-3"
+          >
             <ModelGlyph name={gen.model} size={24} className="mt-1" />
             <div className="flex-1 min-w-0 max-w-[75%]">
               <div className="text-[11px] mb-1 font-medium flex items-center gap-1.5" style={{ color: "var(--text-muted)" }}>
@@ -130,7 +141,7 @@ export function MediaChatFeed({ generations }: Props) {
                 {gen.duration && gen.type !== "video" && <span>· {gen.duration}</span>}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       ))}
     </div>
