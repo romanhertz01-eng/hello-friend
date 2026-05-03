@@ -101,6 +101,23 @@ const AuthPage = () => {
             : "Получите 100 бесплатных кредитов при регистрации"}
         </p>
 
+        {mode === "register" && (
+          <div
+            className="rounded-[12px] p-3 text-center mb-4"
+            style={{
+              background: "rgba(232,84,32,0.1)",
+              border: "1px solid rgba(232,84,32,0.2)",
+            }}
+          >
+            <div className="text-[13px] font-medium" style={{ color: "hsl(var(--primary))" }}>
+              +100 кредитов на 3 дня для генерации!
+            </div>
+            <div className="text-xl font-mono font-bold mt-1 text-foreground">
+              {pad(hours)} : {pad(mins)} : {pad(secs)}
+            </div>
+          </div>
+        )}
+
         {/* Social buttons */}
         <div className="grid grid-cols-2 gap-2.5 mb-5">
           <SocialButton icon={<span className="text-base">✈️</span>} label="Telegram" />
