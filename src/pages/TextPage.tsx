@@ -162,9 +162,9 @@ const TextPage = () => {
 
   return (
     <ErrorBoundary>
-    <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]" style={{ background: c.bg }}>
+    <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))] mesh-background" style={{ background: c.bg }}>
       {/* ─── Chat area ─── */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto relative z-[1]">
         <div className="sticky top-0 z-20 flex justify-center py-2" style={{ background: "color-mix(in oklab, var(--c-bg) 85%, transparent)", backdropFilter: "blur(12px)" }}>
           <div className="relative">
             <button
@@ -227,10 +227,11 @@ const TextPage = () => {
       </div>
 
       {/* ─── Input area ─── */}
-      <div className="shrink-0 px-4 pb-5 pt-2" style={{ background: c.bg }}>
+      <div className="shrink-0 px-4 pb-5 pt-2 relative z-[1]" style={{ background: c.bg }}>
         <div className="max-w-[780px] mx-auto">
           <WorkspaceTabs variant="attached" />
 
+          <div className={isGenerating ? "glow-border-active" : "glow-border-idle"}>
           <div
             className="rounded-[22px] rounded-tl-none p-4 transition-all duration-200"
             style={{
@@ -326,6 +327,7 @@ const TextPage = () => {
                 <Send className="w-4 h-4" />
               </button>
             </div>
+          </div>
           </div>
 
         </div>

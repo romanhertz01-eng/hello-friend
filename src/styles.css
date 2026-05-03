@@ -367,3 +367,69 @@ body:not(.dark) {
   background-repeat: repeat;
   background-size: 256px;
 }
+
+/* ─── Animated border glow during generation ─── */
+@keyframes borderGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.glow-border-active {
+  padding: 2px;
+  background: linear-gradient(90deg, #E85420, #ff7a3d, #ffb088, #ff7a3d, #E85420);
+  background-size: 300% 100%;
+  animation: borderGlow 3s ease infinite;
+  border-radius: var(--radius-lg, 22px);
+}
+
+.glow-border-idle {
+  padding: 2px;
+  background: transparent;
+  border-radius: var(--radius-lg, 22px);
+  transition: background 0.5s ease;
+}
+
+/* ─── Generation progress ring ─── */
+@keyframes progressRing {
+  0% { stroke-dashoffset: 107; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.animate-progress-ring {
+  animation: progressRing 4s ease-in-out infinite;
+}
+
+/* ─── Gradient mesh background ─── */
+@keyframes meshFloat {
+  0% { background-position: 0% 0%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.mesh-background {
+  position: relative;
+}
+
+.mesh-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(232, 84, 32, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(255, 122, 61, 0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 60% 80%, rgba(255, 176, 136, 0.03) 0%, transparent 45%);
+  background-size: 200% 200%;
+  animation: meshFloat 15s ease infinite;
+}
+
+.dark .mesh-background::before {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(232, 84, 32, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(255, 122, 61, 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 60% 80%, rgba(255, 176, 136, 0.04) 0%, transparent 45%);
+}

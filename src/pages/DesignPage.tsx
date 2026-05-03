@@ -214,9 +214,9 @@ const DesignPage = () => {
 
   return (
     <ErrorBoundary>
-    <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))]">
+    <div className="flex flex-col h-[calc(100vh-var(--header-height,64px))] mesh-background">
       {/* Scrollable area: chat (welcome OR feed) + catalog below */}
-      <div className="flex-1 overflow-y-auto w-full">
+      <div className="flex-1 overflow-y-auto w-full relative z-[1]">
         <div className="sticky top-0 z-20 flex justify-center py-2" style={{ background: "color-mix(in oklab, var(--c-bg) 85%, transparent)", backdropFilter: "blur(12px)" }}>
           <div className="relative" data-capsule-dropdown>
             <button onClick={() => setCapsuleOpen(!capsuleOpen)} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[13px] font-medium hover:opacity-90 transition-opacity" style={{ background: "var(--c-bg-1)", border: "1px solid var(--c-line)", color: "var(--c-fg)" }}>
@@ -304,27 +304,28 @@ const DesignPage = () => {
       </div>
 
       {/* Sticky input area */}
-      <div ref={inputAreaRef} className="shrink-0 px-4 lg:px-6 pb-4 pt-1.5 bg-[var(--bg-primary)]">
+      <div className={cn("shrink-0 px-4 lg:px-6 pb-4 pt-1.5 bg-[var(--bg-primary)] relative z-[1]")}>
         <div className="max-w-[780px] mx-auto">
           <WorkspaceTabs variant="attached" />
-
-          <PromptBlock
-            prompt={prompt}
-            onPromptChange={setPrompt}
-            providers={imageProviders}
-            selectedProviderId={selectedProviderId}
-            selectedSubModelId={selectedSubModelId}
-            onModelSelect={handleModelSelect}
-            aspectRatio={aspectRatio}
-            onAspectSelect={setAspectRatio}
-            quantity={quantity}
-            onQuantityChange={setQuantity}
-            quality={quality}
-            onQualityChange={setQuality}
-            turbo={turbo}
-            onTurboToggle={() => setTurbo(!turbo)}
-            onGenerate={handleGenerate}
-          />
+          <div ref={inputAreaRef} className={isGenerating ? "glow-border-active" : "glow-border-idle"}>
+            <PromptBlock
+              prompt={prompt}
+              onPromptChange={setPrompt}
+              providers={imageProviders}
+              selectedProviderId={selectedProviderId}
+              selectedSubModelId={selectedSubModelId}
+              onModelSelect={handleModelSelect}
+              aspectRatio={aspectRatio}
+              onAspectSelect={setAspectRatio}
+              quantity={quantity}
+              onQuantityChange={setQuantity}
+              quality={quality}
+              onQualityChange={setQuality}
+              turbo={turbo}
+              onTurboToggle={() => setTurbo(!turbo)}
+              onGenerate={handleGenerate}
+            />
+          </div>
         </div>
       </div>
     </div>
