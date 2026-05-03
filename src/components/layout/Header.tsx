@@ -12,12 +12,14 @@ import { PROMO_ACTIVE, PROMO_LABEL, PROMO_TEXT } from "@/config/promo";
 interface HeaderProps {
   onToggleSidebar: () => void;
   showBurger?: boolean;
+  onToggleRightPanel?: () => void;
+  rightPanelOpen?: boolean;
 }
 
 const iconBtn =
   "relative w-9 h-9 rounded-full bg-secondary border border-border text-muted-foreground hover:text-foreground hover:bg-card transition-colors flex items-center justify-center";
 
-export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
+export function Header({ onToggleSidebar, showBurger = true, onToggleRightPanel, rightPanelOpen }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
   const { isAuthed } = useAuth();
   const { setOpen } = useCommandPalette();
