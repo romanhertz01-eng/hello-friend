@@ -222,6 +222,14 @@ const TextPage = () => {
                 ))}
               </div>
             </div>
+
+            <AssistantsList
+              onPick={(name) => {
+                setSystemPrompt(`Ты — ${name}. Отвечай в этой роли.`);
+                setInput("");
+                setTimeout(() => textareaRef.current?.focus(), 50);
+              }}
+            />
           </div>
         )}
 
