@@ -118,6 +118,7 @@ export function TwoPanelModelSelector({
   }, [open]);
 
   // Position dropdown via fixed coords (escapes overflow:hidden parents)
+  const [width, setWidth] = useState(640);
   useEffect(() => {
     if (!open || !triggerRef.current) return;
     const compute = () => {
@@ -126,8 +127,9 @@ export function TwoPanelModelSelector({
       const spaceBelow = window.innerHeight - rect.bottom;
       const spaceAbove = rect.top;
       const upward = spaceBelow < dropdownH && spaceAbove > spaceBelow;
-      const width = 640;
-      const left = Math.min(Math.max(8, rect.left), window.innerWidth - width - 8);
+      const w = Math.min(640, window.innerWidth - 16);
+      setWidth(w);
+      const left = Math.min(Math.max(8, rect.left), window.innerWidth - w - 8);
       if (upward) {
         setPos({ left, bottom: window.innerHeight - rect.top + 4 });
       } else {
@@ -178,7 +180,7 @@ export function TwoPanelModelSelector({
           style={{
             left: pos.left,
             ...(pos.top !== undefined ? { top: pos.top } : { bottom: pos.bottom }),
-            width: 640,
+            width,
             height: "min(420px, calc(100vh - 16px))",
             background: "var(--bg-popup)",
             border: "1px solid var(--border-primary)",
@@ -194,7 +196,7 @@ export function TwoPanelModelSelector({
           {/* Two columns */}
           <div className="flex flex-1 min-h-0">
             {/* Left: providers */}
-            <div className="flex-shrink-0 overflow-y-auto" style={{ width: 220, borderRight: "1px solid var(--border-primary)", paddingTop: 8 }}>
+            <div className="flex-shrink-0 overflow-y-auto w-[180px] sm:w-[220px]" style={{ borderRight: "1px solid var(--border-primary)", paddingTop: 8 }}>
               {providers.map((p) => {
                 const isActive = activeProvider === p.id;
                 const isSelected = selectedProviderId === p.id;
