@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown, Zap, Sparkles, Square, Gem, Clock, Monitor, MoreHorizontal, Video, Mic, Palette } from "lucide-react";
+import { ChevronDown, Zap, Sparkles, Square, Gem, Clock, Monitor, Video, Mic, Palette } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SegmentedToolbar, SegmentedItem, AttachmentButton } from "@/components/ui/era";
 
@@ -219,8 +219,6 @@ export function PromptBlock({
               </div>
             )}
 
-            {/* More */}
-            <SegmentedItem icon={<MoreHorizontal />} label={null} trailing={null} />
           </SegmentedToolbar>
 
           {extraPills}
