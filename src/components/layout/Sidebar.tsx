@@ -1,8 +1,9 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import {
   Home, Image, Video, MessageSquare, Mic, Bot, LayoutGrid, Layers,
-  CreditCard, History, ChevronLeft, X, ArrowRight, Gem, Plus,
+  CreditCard, History, ChevronLeft, X, ArrowRight, Gem, Plus, Gift, Copy,
 } from "lucide-react";
+import { useCopyToast } from "@/components/shared/CopyToast";
 import { StatusBadge } from "@/components/ui/era/StatusBadge";
 import { MOCK_HISTORY } from "@/data/mockHistory";
 import { cn } from "@/lib/utils";
