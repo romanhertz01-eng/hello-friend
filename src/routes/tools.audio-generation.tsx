@@ -5,8 +5,8 @@ export const Route = createFileRoute("/tools/audio-generation")({
   component: AudioGenerationPage,
   head: () => ({
     meta: [
-      { title: "Генерация аудио с помощью ИИ — ERA2.ai" },
-      { name: "description", content: "Синтез речи, озвучка, генерация музыки с ElevenLabs и Suno." },
+      { title: "Генерация аудио — ИИ нейросети | ERA2.ai" },
+      { name: "description", content: "ElevenLabs, Suno. Озвучка текста, создание музыки, клон голоса." },
     ],
   }),
 });
