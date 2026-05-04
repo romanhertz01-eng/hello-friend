@@ -266,6 +266,31 @@ export function NavMegaMenu() {
                 >
                   Все ИИ-модели <ArrowRight size={12} />
                 </Link>
+                {activeTab.key === "text" && (
+                  <Link to="/tools/text-generation" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
+                    Все текстовые нейросети →
+                  </Link>
+                )}
+                {activeTab.key === "design" && (
+                  <Link to="/tools/image-generation" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
+                    Все нейросети для изображений →
+                  </Link>
+                )}
+                {activeTab.key === "video" && (
+                  <Link to="/tools/video-generation" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
+                    Все видео нейросети →
+                  </Link>
+                )}
+                {activeTab.key === "audio" && (
+                  <Link to="/tools/audio-generation" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
+                    Все аудио нейросети →
+                  </Link>
+                )}
+                {activeTab.key === "agents" && (
+                  <Link to="/tools/agents" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
+                    Все ИИ-агенты →
+                  </Link>
+                )}
               </div>
             </div>
           </motion.div>

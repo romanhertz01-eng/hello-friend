@@ -119,6 +119,33 @@ const Index = () => {
 
       <DesignCreativitySection />
       <AllModelsSection />
+
+      {/* SEO category links */}
+      <section className="py-16 md:py-20 border-t border-border">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Нейросети по категориям</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {[
+              { label: "Генерация текста", to: "/tools/text-generation", emoji: "💬" },
+              { label: "Генерация изображений", to: "/tools/image-generation", emoji: "🎨" },
+              { label: "Генерация видео", to: "/tools/video-generation", emoji: "🎬" },
+              { label: "Генерация аудио", to: "/tools/audio-generation", emoji: "🎵" },
+              { label: "ИИ-агенты", to: "/tools/agents", emoji: "🤖" },
+              { label: "Nano Banana", to: "/tools/nano-banana", emoji: "🍌" },
+            ].map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="flex items-center gap-3 p-4 rounded-2xl border border-border bg-secondary hover:bg-card hover:border-primary/30 transition-all"
+              >
+                <span className="text-2xl">{item.emoji}</span>
+                <span className="text-sm font-medium text-foreground">{item.label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <TextAssistantsSection />
 
       <StartCreatingSection />
